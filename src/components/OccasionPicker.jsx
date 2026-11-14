@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { OCCASIONS } from '../utils/phrases';
-import { ChevronDown, Check } from 'lucide-react';
+import { OccasionIcon, ChevronDownIcon, CheckIcon } from './FontAwesomeIcons';
 
 export default function OccasionPicker({ activeOccasionId, onSelectOccasion, lang }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,11 +17,11 @@ export default function OccasionPicker({ activeOccasionId, onSelectOccasion, lan
       <button
         onClick={() => setIsOpen(!isOpen)}
         style={{ backgroundColor: active.tagColor }}
-        className="text-white px-5 py-2 rounded-full font-bold text-sm sm:text-base inline-flex items-center gap-2 shadow-sm transition-transform active:scale-95 hover:opacity-95"
+        className="text-white px-5 py-2 rounded-full font-bold text-sm sm:text-base inline-flex items-center gap-2 shadow-sm transition-transform active:scale-95 hover:opacity-95 cursor-pointer"
       >
-        <span>{active.icon}</span>
+        <OccasionIcon occasionId={active.id} className="text-sm" />
         <span>{lang === 'bn' ? active.nameBn : active.nameEn}</span>
-        <ChevronDown size={16} className={`transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
+        <ChevronDownIcon className={`text-xs transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
       {/* Subtitle */}
@@ -47,17 +47,17 @@ export default function OccasionPicker({ activeOccasionId, onSelectOccasion, lan
                   <button
                     key={occ.id}
                     onClick={() => handleSelect(occ.id)}
-                    className={`flex items-center justify-between px-3 py-2 rounded-xl text-left text-sm font-semibold transition-colors ${
+                    className={`flex items-center justify-between px-3 py-2 rounded-xl text-left text-sm font-semibold transition-colors cursor-pointer ${
                       isCurrent
                         ? 'bg-[#F2EAE1] text-[#8E1B3A]'
                         : 'text-[#2B1B17] hover:bg-[#F9F4ED]'
                     }`}
                   >
                     <div className="flex items-center gap-2.5">
-                      <span className="text-base">{occ.icon}</span>
+                      <OccasionIcon occasionId={occ.id} className="text-base text-[#8E1B3A]" />
                       <span>{lang === 'bn' ? occ.nameBn : occ.nameEn}</span>
                     </div>
-                    {isCurrent && <Check size={16} className="text-[#8E1B3A]" />}
+                    {isCurrent && <CheckIcon className="text-sm text-[#8E1B3A]" />}
                   </button>
                 );
               })}

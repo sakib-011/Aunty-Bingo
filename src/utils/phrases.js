@@ -15,7 +15,7 @@ export const OCCASIONS = {
     descBn: 'ঈদের সালামি জেরা, সেমাইয়ের স্বাদ আর পরিবারের অফুরন্ত আড্ডার মিষ্টি মুহূর্ত।',
     tagEn: 'Emerald & Gold',
     tagBn: 'পান্না ও সোনালী',
-    icon: '🌙'
+    iconKey: 'eid'
   },
   wedding: {
     id: 'wedding',
@@ -31,7 +31,7 @@ export const OCCASIONS = {
     descBn: 'বিয়ের দাওয়াতে ঘটকালি আন্টিদের জেরা, গয়না নিরীক্ষা আর কাচ্চির আলোচনা।',
     tagEn: 'Pink & Coral',
     tagBn: 'গোলাপী ও প্রবাল',
-    icon: '💍'
+    iconKey: 'wedding'
   },
   exam: {
     id: 'exam',
@@ -47,7 +47,7 @@ export const OCCASIONS = {
     descBn: 'গোল্ডেন এ প্লাসের জেরা, বিসিএস পরামর্শ আর পাশের বাসার ছেলের সাথে তুলনা!',
     tagEn: 'Blue & Purple',
     tagBn: 'নীল ও বেগুনী',
-    icon: '🎓'
+    iconKey: 'exam'
   },
   general: {
     id: 'general',
@@ -63,7 +63,7 @@ export const OCCASIONS = {
     descBn: 'ফোন আসক্তি নিয়ে আন্টির লেকচার, চাকরি-বাকরি আর ফেলে আসা দিনের স্মৃতিচারণ।',
     tagEn: 'Orange & Yellow',
     tagBn: 'কমলা ও হলুদ',
-    icon: '☕'
+    iconKey: 'general'
   }
 };
 

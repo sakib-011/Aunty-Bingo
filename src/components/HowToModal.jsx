@@ -1,6 +1,6 @@
 import React from 'react';
 import mascotPointingUrl from '../assets/mascots/mascot_pointing.png';
-import { X } from 'lucide-react';
+import { CloseIcon } from './FontAwesomeIcons';
 
 export default function HowToModal({ isOpen, onClose, lang }) {
   if (!isOpen) return null;
@@ -11,10 +11,10 @@ export default function HowToModal({ isOpen, onClose, lang }) {
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 w-8 h-8 rounded-full bg-[#F4E8D9] text-[#8E1B3A] flex items-center justify-center hover:bg-[#EBDDCB] transition-colors"
+          className="absolute top-4 right-4 w-8 h-8 rounded-full bg-[#F4E8D9] text-[#8E1B3A] flex items-center justify-center hover:bg-[#EBDDCB] transition-colors cursor-pointer"
           aria-label="Close"
         >
-          <X size={18} />
+          <CloseIcon className="text-sm" />
         </button>
 
         {/* Top Branding & Badge */}

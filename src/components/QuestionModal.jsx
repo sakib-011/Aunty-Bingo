@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Check, RotateCcw } from 'lucide-react';
+import { CloseIcon, CheckIcon, RotateLeftIcon } from './FontAwesomeIcons';
 import auntyAvatarUrl from '../assets/mascots/aunty_avatar_perfect.png';
 
 export default function QuestionModal({
@@ -21,7 +21,7 @@ export default function QuestionModal({
           className="absolute top-4 right-4 w-8 h-8 rounded-full bg-[#F4E8D9] text-[#8E1B3A] flex items-center justify-center hover:bg-[#EBDDCB] transition-colors cursor-pointer"
           aria-label="Close"
         >
-          <X size={18} />
+          <CloseIcon className="text-sm" />
         </button>
 
         {/* Small Mascot Avatar */}
@@ -45,7 +45,7 @@ export default function QuestionModal({
             {tile.bn}
           </p>
           {tile.en && (
-            <p className="text-xs sm:text-sm text-[#6E554D] mt-2 font-medium italic border-t border-[#D8C6B6]/60 pt-2">
+            <p className="text-xs sm:text-sm text-[#6E554D] mt-2 font-medium border-t border-[#D8C6B6]/60 pt-2">
               "{tile.en}"
             </p>
           )}
@@ -66,12 +66,12 @@ export default function QuestionModal({
           >
             {isMarked ? (
               <>
-                <RotateCcw size={16} />
+                <RotateLeftIcon className="text-sm" />
                 <span>{lang === 'bn' ? 'দাগ মুছে ফেলুন (Unmark)' : 'Unmark this Tile'}</span>
               </>
             ) : (
               <>
-                <Check size={18} />
+                <CheckIcon className="text-sm" />
                 <span>{lang === 'bn' ? 'ঘরে দাগ দিন (Mark Tile)' : 'Mark this Tile'}</span>
               </>
             )}

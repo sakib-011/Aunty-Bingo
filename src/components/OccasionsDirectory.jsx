@@ -1,6 +1,6 @@
 import React from 'react';
 import { OCCASIONS } from '../utils/phrases';
-import { ArrowLeft, Play } from 'lucide-react';
+import { ArrowLeftIcon, PlayIcon, OccasionIcon } from './FontAwesomeIcons';
 
 export default function OccasionsDirectory({ lang, onSelectAndPlay, onBack }) {
   const samplePhrases = {
@@ -38,7 +38,7 @@ export default function OccasionsDirectory({ lang, onSelectAndPlay, onBack }) {
           onClick={onBack}
           className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#8E1B3A] hover:underline cursor-pointer"
         >
-          <ArrowLeft size={16} />
+          <ArrowLeftIcon className="text-xs" />
           <span>{lang === 'bn' ? 'ফিরে যান' : 'Back'}</span>
         </button>
       </div>
@@ -47,13 +47,13 @@ export default function OccasionsDirectory({ lang, onSelectAndPlay, onBack }) {
         <span className="bg-[#F4E8D9] text-[#8E1B3A] text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
           {lang === 'bn' ? 'পারিবারিক আড্ডার ধরন' : 'Gathering Presets'}
         </span>
-        <h1 className="text-3xl sm:text-4xl font-black text-[#8E1B3A] font-serif mt-2">
+        <h1 className="text-3xl sm:text-4xl font-bold text-[#8E1B3A] mt-2">
           {lang === 'bn' ? 'অনুষ্ঠান পরিচিতি ও বিশেষ আড্ডা' : 'Explore All 4 Occasions'}
         </h1>
         <p className="text-xs sm:text-sm text-[#6E554D] font-medium mt-2 max-w-lg mx-auto">
           {lang === 'bn'
             ? 'প্রতিটি বাঙালি অনুষ্ঠানের রয়েছে নিজস্ব ধাঁচের প্রশ্ন ও মিষ্টি খোঁচা। যেকোনো একটি বেছে নিয়ে শুরু করুন খেলা।'
-            : 'Every Bengali gathering has its own unique flavor of repetitive, well-meaning questions. Choose one to start playing.'}
+            : 'Every Bengali gathering has its own unique flavor of repetitive questions. Choose one to start playing.'}
         </p>
       </div>
 
@@ -63,19 +63,24 @@ export default function OccasionsDirectory({ lang, onSelectAndPlay, onBack }) {
           return (
             <div
               key={occ.id}
-              className="bg-white rounded-3xl p-6 border-2 border-[#D8C6B6] shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow"
+              className="bg-white rounded-3xl p-6 border border-[#D8C6B6] shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow"
             >
               <div>
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-2.5">
-                    <span className="text-3xl">{occ.icon}</span>
-                    <h2 className="text-xl font-black text-[#2B1B17]">
+                    <div
+                      style={{ backgroundColor: occ.themeBg, color: occ.tagColor }}
+                      className="w-10 h-10 rounded-2xl flex items-center justify-center border border-[#D8C6B6]/50"
+                    >
+                      <OccasionIcon occasionId={occ.id} className="text-lg" />
+                    </div>
+                    <h2 className="text-xl font-bold text-[#2B1B17]">
                       {lang === 'bn' ? occ.nameBn : occ.nameEn}
                     </h2>
                   </div>
                   <span
                     style={{ color: occ.tagColor, backgroundColor: occ.themeBg }}
-                    className="text-[11px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider"
+                    className="text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wider"
                   >
                     {lang === 'bn' ? occ.tagBn : occ.tagEn}
                   </span>
@@ -87,7 +92,7 @@ export default function OccasionsDirectory({ lang, onSelectAndPlay, onBack }) {
 
                 {/* Sample Phrases */}
                 <div className="bg-[#FFF6E5] rounded-2xl p-3.5 mb-4 border border-[#D8C6B6]/60">
-                  <div className="text-[11px] font-bold text-[#8E1B3A] uppercase tracking-wider mb-2">
+                  <div className="text-xs font-bold text-[#8E1B3A] uppercase tracking-wider mb-2">
                     {lang === 'bn' ? 'নমুনাস্বরূপ কিছু প্রশ্ন:' : 'Sample Questions You Will Hear:'}
                   </div>
                   <ul className="space-y-1.5 text-xs text-[#2B1B17] font-semibold">
@@ -106,7 +111,7 @@ export default function OccasionsDirectory({ lang, onSelectAndPlay, onBack }) {
                 style={{ backgroundColor: occ.tagColor }}
                 className="w-full py-3 rounded-full text-white font-bold text-sm flex items-center justify-center gap-2 shadow-md hover:opacity-95 active:scale-95 transition-all cursor-pointer"
               >
-                <Play size={16} fill="white" />
+                <PlayIcon className="text-xs text-white" />
                 <span>
                   {lang === 'bn'
                     ? `${occ.nameBn}-এ বিঙ্গো খেলুন`

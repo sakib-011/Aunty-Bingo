@@ -1,5 +1,6 @@
 /**
  * Social Sharing and Clipboard Utilities for Aunty Bingo
+ * Clean copy without emojis.
  */
 
 export function toBengaliDigits(str) {
@@ -12,8 +13,8 @@ export function getShareDetails(lang, elapsedTime = '01:30') {
   const displayTime = lang === 'bn' ? toBengaliDigits(elapsedTime) : elapsedTime;
 
   const text = lang === 'bn'
-    ? `🎉 আন্টি বিঙ্গো! আমি মাত্র ${displayTime} মিনিটে আন্টির সব জেরার মুখে বিঙ্গো পেয়েছি! 😂 আপনিও টিকে থাকতে পারবেন তো? খেলুন:`
-    : `🎉 Aunty Bingo! I survived the family interrogation in ${displayTime}! 😂 Can you handle Aunty? Play here:`;
+    ? `আন্টি বিঙ্গো! আমি মাত্র ${displayTime} মিনিটে আন্টির সব জেরার মুখে বিঙ্গো পেয়েছি! আপনিও টিকে থাকতে পারবেন তো? খেলুন:`
+    : `Aunty Bingo! I survived the family interrogation in ${displayTime}! Can you handle Aunty? Play here:`;
 
   return { url, text, displayTime };
 }
@@ -55,8 +56,6 @@ export async function shareToSocial(platform, { lang, elapsedTime, dataUrl, onTo
     }
 
     case 'instagram': {
-      // Instagram Stories / Feed: Web Share on mobile with image if supported,
-      // otherwise download card and copy caption.
       if (dataUrl && navigator.share) {
         try {
           const blob = await (await fetch(dataUrl)).blob();
@@ -74,7 +73,6 @@ export async function shareToSocial(platform, { lang, elapsedTime, dataUrl, onTo
         }
       }
 
-      // Fallback: Copy caption and trigger image download if available
       if (dataUrl) {
         const a = document.createElement('a');
         a.href = dataUrl;
@@ -86,14 +84,14 @@ export async function shareToSocial(platform, { lang, elapsedTime, dataUrl, onTo
       try {
         await navigator.clipboard.writeText(`${text}\n${url}`);
       } catch {
-        // Ignore clipboard write failure
+        // Ignore clipboard error
       }
 
       if (onToast) {
         onToast(
           lang === 'bn'
-            ? '📸 কার্ড ডাউনলোড হয়েছে এবং ক্যাপশন কপি হয়েছে! ইনস্টাগ্রামে পোস্ট করুন।'
-            : '📸 Card downloaded & caption copied! Ready to post on Instagram.'
+            ? 'কার্ড ডাউনলোড হয়েছে এবং ক্যাপশন কপি হয়েছে! ইনস্টাগ্রামে পোস্ট করুন।'
+            : 'Card downloaded & caption copied! Ready to post on Instagram.'
         );
       }
       return;
@@ -103,7 +101,7 @@ export async function shareToSocial(platform, { lang, elapsedTime, dataUrl, onTo
       try {
         await navigator.clipboard.writeText(`${text}\n${url}`);
         if (onToast) {
-          onToast(lang === 'bn' ? '✓ লিংক এবং বার্তা কপি হয়েছে!' : '✓ Link & text copied!');
+          onToast(lang === 'bn' ? 'লিংক এবং বার্তা কপি হয়েছে!' : 'Link & text copied!');
         }
       } catch {
         if (onToast) {
@@ -131,10 +129,9 @@ export async function shareToSocial(platform, { lang, elapsedTime, dataUrl, onTo
           if (err.name === 'AbortError') return;
         }
       }
-      // Fallback to copy link
       await navigator.clipboard.writeText(`${text}\n${url}`);
       if (onToast) {
-        onToast(lang === 'bn' ? '✓ লিংক কপি হয়েছে!' : '✓ Link copied!');
+        onToast(lang === 'bn' ? 'লিংক কপি হয়েছে!' : 'Link copied!');
       }
     }
   }

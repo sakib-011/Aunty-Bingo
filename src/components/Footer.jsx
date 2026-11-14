@@ -1,4 +1,5 @@
 import React from 'react';
+import { HeartIcon } from './FontAwesomeIcons';
 import auntyAvatarUrl from '../assets/mascots/aunty_avatar_perfect.png';
 
 export default function Footer({ lang, onNavigate }) {
@@ -10,25 +11,31 @@ export default function Footer({ lang, onNavigate }) {
           <div className="w-9 h-9 rounded-full bg-[#F4E8D9] p-0.5 overflow-hidden flex items-center justify-center border border-[#D8C6B6]">
             <img src={auntyAvatarUrl} alt="Aunty Avatar" className="w-full h-full object-contain" />
           </div>
-          <span className="font-serif font-black text-xl text-[#8E1B3A]">Aunty Bingo</span>
+          <span className="font-bold text-xl text-[#8E1B3A]">Aunty Bingo</span>
         </div>
 
         {/* Love Note */}
         <p className="text-xs sm:text-sm font-semibold text-[#2B1B17] max-w-lg">
-          {lang === 'bn'
-            ? 'আন্টি বিঙ্গো — বিশ্বজুড়ে বাঙালি পরিবারগুলোর আনন্দময় আড্ডার জন্য তৈরি।'
-            : 'Aunty Bingo — Made with ❤️ for Bengali family gatherings everywhere.'}
+          {lang === 'bn' ? (
+            <span>
+              আন্টি বিঙ্গো <HeartIcon className="text-[#8E1B3A] text-xs inline mx-1" /> বিশ্বজুড়ে বাঙালি পরিবারগুলোর আনন্দময় আড্ডার জন্য তৈরি।
+            </span>
+          ) : (
+            <span>
+              Aunty Bingo <HeartIcon className="text-[#8E1B3A] text-xs inline mx-1" /> Made for Bengali family gatherings everywhere.
+            </span>
+          )}
         </p>
 
         {/* Cultural Disclaimer */}
-        <p className="text-[11px] sm:text-xs text-[#6E554D] max-w-xl mt-1.5 leading-relaxed">
+        <p className="text-xs text-[#6E554D] max-w-xl mt-1.5 leading-relaxed">
           {lang === 'bn'
-            ? 'সবগুলো প্রশ্ন আমাদের মিষ্টি সংস্কৃতির অংশ হিসেবে মজার ছলে পরিবেশন করা হয়েছে। কোনো অপমান বা অসম্মান উদ্দেশ্য নয়।'
-            : 'All phrases are lighthearted celebrations of Bengali family culture. No offence intended!'}
+            ? 'সবগুলো প্রশ্ন আমাদের মিষ্টি সংস্কৃতির অংশ হিসেবে মজার ছলে পরিবেশন করা হয়েছে। কোনো অপমান বা অসম্মান উদ্দেশ্য নয়।'
+            : 'All phrases are lighthearted celebrations of Bengali family culture. No offence intended.'}
         </p>
 
         {/* Navigation Links */}
-        <nav className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 my-4 text-xs font-bold text-[#8E1B3A]">
+        <nav className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 my-4 text-xs font-semibold text-[#8E1B3A]">
           <button
             onClick={() => onNavigate('home')}
             className="hover:underline transition-colors cursor-pointer"
@@ -51,15 +58,17 @@ export default function Footer({ lang, onNavigate }) {
             onClick={() => onNavigate('rules')}
             className="hover:underline transition-colors cursor-pointer"
           >
-            {lang === 'bn' ? 'নিয়মাবলী' : 'Rules & How to Play'}
+            {lang === 'bn' ? 'নিয়মাবলী' : 'Rules'}
           </button>
         </nav>
 
-        {/* Copyright */}
-        <div className="text-[11px] text-[#8A7268] font-medium pt-3 border-t border-[#EFE7DE] w-full max-w-md">
-          {lang === 'bn'
-            ? '© ২০২৬ আন্টি বিঙ্গো (Aunty Bingo)। সম্পূর্ণ ক্লায়েন্ট-সাইড ওয়েব অ্যাপ্লিকেশন।'
-            : '© 2026 Aunty Bingo. Pure client-side static web application.'}
+        {/* Legal & Privacy Links (per B10 ship requirement) */}
+        <div className="flex items-center gap-4 text-xs text-[#8A7268] mt-1 pt-3 border-t border-[#E8DCD0] w-full max-w-md justify-center">
+          <span>{lang === 'bn' ? 'গোপনীয়তা ১০০% ব্যক্তিগত' : '100% Client-side Private'}</span>
+          <span>•</span>
+          <span>{lang === 'bn' ? 'কপিরাইট ২০২৬' : 'Copyright 2026'}</span>
+          <span>•</span>
+          <span>{lang === 'bn' ? 'কোনো কুকি ট্র্যাকিং নেই' : 'No Tracking Cookies'}</span>
         </div>
       </div>
     </footer>

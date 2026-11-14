@@ -1,66 +1,60 @@
 import React from 'react';
-import auntyAvatarUrl from '../assets/mascots/aunty_avatar_perfect.png';
-import { Gamepad2, ArrowLeft } from 'lucide-react';
+import {
+  BullseyeIcon,
+  RulerIcon,
+  BoltIcon,
+  TrophyIcon,
+  SparklesIcon,
+  MobileIcon,
+  GamepadIcon,
+  BookOpenIcon
+} from './FontAwesomeIcons';
 
-export default function RulesPage({ lang, onStartPlaying, onBack }) {
+export default function RulesPage({ lang, onStartPlaying }) {
   return (
     <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
-      {/* Header Back Button */}
-      <div className="mb-6">
-        <button
-          onClick={onBack}
-          className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#8E1B3A] hover:underline cursor-pointer"
-        >
-          <ArrowLeft size={16} />
-          <span>{lang === 'bn' ? 'ফিরে যান' : 'Back'}</span>
-        </button>
-      </div>
-
-      {/* Hero Title & Avatar with Clear Hands */}
-      <div className="bg-[#FFFDF9] rounded-3xl p-6 sm:p-8 border border-[#D8C6B6] shadow-sm flex flex-col sm:flex-row items-center gap-6 mb-8">
-        <div className="w-28 h-28 sm:w-36 sm:h-36 flex-shrink-0">
-          <img src={auntyAvatarUrl} alt="Aunty Avatar" className="w-full h-full object-contain" />
+      {/* Header */}
+      <div className="text-center mb-8">
+        <div className="inline-flex items-center gap-1.5 bg-[#F4E8D9] text-[#8E1B3A] text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2">
+          <BookOpenIcon className="text-xs" />
+          <span>{lang === 'bn' ? 'খেলার নিয়মাবলী' : 'Rules & Guidelines'}</span>
         </div>
-        <div>
-          <span className="bg-[#F4E8D9] text-[#8E1B3A] text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-            {lang === 'bn' ? 'খেলার নিয়মাবলী ও নির্দেশিকা' : 'Official Rules & Guide'}
-          </span>
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-[#8E1B3A] font-serif mt-2">
-            {lang === 'bn' ? 'আন্টি বিঙ্গো কীভাবে খেলবেন?' : 'How to Play Aunty Bingo'}
-          </h1>
-          <p className="text-xs sm:text-sm text-[#6E554D] font-medium mt-2 leading-relaxed">
-            {lang === 'bn'
-              ? 'আমাদের বাঙালি পরিবারে যে কোনো আড্ডায় আন্টিদের জেরার হাত থেকে বাঁচার কোনো উপায় নেই—তবে এখন আপনি এই প্রশ্নগুলো দিয়েই বিঙ্গো জিতে নিতে পারেন!'
-              : 'Surviving intrusive family questions at weddings, Eid, and family addas made fun! Read the official rules and winning combinations.'}
-          </p>
-        </div>
+        <h1 className="text-3xl sm:text-4xl font-bold text-[#8E1B3A] tracking-tight">
+          {lang === 'bn' ? 'আন্টি বিঙ্গো কীভাবে খেলবেন?' : 'How to Play Aunty Bingo'}
+        </h1>
+        <p className="text-xs sm:text-sm text-[#6E554D] max-w-xl mx-auto mt-2 leading-relaxed">
+          {lang === 'bn'
+            ? 'পারিবারিক আড্ডায় আত্মীয়দের মধুর কিন্তু জটিল প্রশ্নগুলোকে মজার খেলায় পরিণত করার সম্পূর্ণ গাইড।'
+            : 'Your survival guide to turning awkward family interrogations into party fun.'}
+        </p>
       </div>
 
       {/* Rules Content Cards */}
       <div className="space-y-6">
         {/* Rule 1: The Objective */}
         <div className="bg-white rounded-2xl p-5 sm:p-6 border border-[#D8C6B6] shadow-sm">
-          <h2 className="text-lg sm:text-xl font-black text-[#8E1B3A] flex items-center gap-2 mb-2">
-            <span>🎯</span>
+          <h2 className="text-lg sm:text-xl font-bold text-[#8E1B3A] flex items-center gap-2 mb-2">
+            <BullseyeIcon className="text-[#8E1B3A] text-base" />
             <span>{lang === 'bn' ? '১. খেলার মূল উদ্দেশ্য' : '1. Game Objective'}</span>
           </h2>
           <p className="text-xs sm:text-sm text-[#2B1B17] leading-relaxed font-medium">
             {lang === 'bn'
-              ? 'আপনার নির্বাচিত অনুষ্ঠানের বোর্ডটিতে আত্মীয়দের করা প্রশ্নগুলো থাকবে। যে কোনো আত্মীয় কোনো প্রশ্ন জিজ্ঞেস করা মাত্রই সেই ঘরে ট্যাপ করে দাগ দিন। যে কোনো একটি পূর্ণ লাইন মিলালেই বিঙ্গো হবে!'
+              ? 'আপনার নির্বাচিত অনুষ্ঠানের বোর্ডটিতে আত্মীয়দের করা প্রশ্নগুলো থাকবে। যেকোনো আত্মীয় কোনো প্রশ্ন জিজ্ঞেস করা মাত্রই সেই ঘরে ট্যাপ করে দাগ দিন। যেকোনো একটি পূর্ণ লাইন মিলালেই বিঙ্গো হবে!'
               : 'Listen to the conversations around you during family gatherings. Whenever an aunty, uncle, or elder asks one of the questions on your board, tap the tile to stamp it. Complete any full line to trigger BINGO!'}
           </p>
         </div>
 
         {/* Rule 2: Board Modes (3x3 vs 5x5) */}
         <div className="bg-white rounded-2xl p-5 sm:p-6 border border-[#D8C6B6] shadow-sm">
-          <h2 className="text-lg sm:text-xl font-black text-[#8E1B3A] flex items-center gap-2 mb-2">
-            <span>📐</span>
+          <h2 className="text-lg sm:text-xl font-bold text-[#8E1B3A] flex items-center gap-2 mb-2">
+            <RulerIcon className="text-[#8E1B3A] text-base" />
             <span>{lang === 'bn' ? '২. দুটি বোর্ড মোড' : '2. Two Board Modes'}</span>
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
             <div className="p-4 rounded-xl bg-[#FFF6E5] border border-[#D8C6B6]/60">
-              <h3 className="font-bold text-sm text-[#8E1B3A]">
-                {lang === 'bn' ? '⚡ ৩×৩ কুইক ম্যাচ (Figma মোড)' : '⚡ 3×3 Quick Match'}
+              <h3 className="font-bold text-sm text-[#8E1B3A] flex items-center gap-1.5">
+                <BoltIcon className="text-xs" />
+                <span>{lang === 'bn' ? '৩×৩ কুইক ম্যাচ (Figma মোড)' : '3×3 Quick Match'}</span>
               </h3>
               <p className="text-xs text-[#6E554D] mt-1 leading-relaxed">
                 {lang === 'bn'
@@ -69,8 +63,9 @@ export default function RulesPage({ lang, onStartPlaying, onBack }) {
               </p>
             </div>
             <div className="p-4 rounded-xl bg-[#FFF6E5] border border-[#D8C6B6]/60">
-              <h3 className="font-bold text-sm text-[#0F7B5F]">
-                {lang === 'bn' ? '🏆 ৫×৫ ক্লাসিক গ্রিড (SRS মোড)' : '🏆 5×5 Classic Grid'}
+              <h3 className="font-bold text-sm text-[#0F7B5F] flex items-center gap-1.5">
+                <TrophyIcon className="text-xs text-amber-500" />
+                <span>{lang === 'bn' ? '৫×৫ ক্লাসিক গ্রিড (SRS মোড)' : '5×5 Classic Grid'}</span>
               </h3>
               <p className="text-xs text-[#6E554D] mt-1 leading-relaxed">
                 {lang === 'bn'
@@ -83,8 +78,8 @@ export default function RulesPage({ lang, onStartPlaying, onBack }) {
 
         {/* Rule 3: Winning Lines & Scoring */}
         <div className="bg-white rounded-2xl p-5 sm:p-6 border border-[#D8C6B6] shadow-sm">
-          <h2 className="text-lg sm:text-xl font-black text-[#8E1B3A] flex items-center gap-2 mb-2">
-            <span>✨</span>
+          <h2 className="text-lg sm:text-xl font-bold text-[#8E1B3A] flex items-center gap-2 mb-2">
+            <SparklesIcon className="text-[#8E1B3A] text-base" />
             <span>{lang === 'bn' ? '৩. জয়ের লাইনসমূহ' : '3. Winning Lines'}</span>
           </h2>
           <ul className="list-disc list-inside space-y-1.5 text-xs sm:text-sm text-[#2B1B17] font-medium leading-relaxed">
@@ -96,25 +91,25 @@ export default function RulesPage({ lang, onStartPlaying, onBack }) {
 
         {/* Rule 4: Sharing & Fair Play */}
         <div className="bg-white rounded-2xl p-5 sm:p-6 border border-[#D8C6B6] shadow-sm">
-          <h2 className="text-lg sm:text-xl font-black text-[#8E1B3A] flex items-center gap-2 mb-2">
-            <span>📱</span>
-            <span>{lang === 'bn' ? '৪. কার্ড এক্সপোর্ট ও শেয়ার' : '4. Card Export & Sharing'}</span>
+          <h2 className="text-lg sm:text-xl font-bold text-[#8E1B3A] flex items-center gap-2 mb-2">
+            <MobileIcon className="text-[#8E1B3A] text-base" />
+            <span>{lang === 'bn' ? '৪. কার্ড এক্সপোর্ট ও সোশ্যাল শেয়ার' : '4. Export & Social Sharing'}</span>
           </h2>
           <p className="text-xs sm:text-sm text-[#2B1B17] leading-relaxed font-medium">
             {lang === 'bn'
-              ? 'বিঙ্গো হওয়ার পর বা খেলার যে কোনো পর্যায়ে "কার্ড এক্সপোর্ট" বাটনে চাপ দিয়ে ১০৮০×১৩৫০ সাইজের হাই-রেজুলিউশন কার্ড ডাউনলোড করতে পারবেন। সরাসরি ইনস্টাগ্রাম স্টোরি, ফেসবুক ও মেসেঞ্জারে শেয়ার করুন।'
-              : 'Export your board at any time as a high-resolution 1080×1350 PNG card. Share directly to Instagram Stories, Facebook, and WhatsApp using your mobile share sheet.'}
+              ? 'বিঙ্গো হওয়ার সাথে সাথেই সুন্দর ১০৮০×১৩৫০ রেজ্যুলেশনের উৎসবমুখর কার্ড তৈরি হয়। ইনস্টাগ্রাম স্টোরি, ফেসবুক, হোয়াটসঅ্যাপ বা মেসেঞ্জারে এক-ক্লিকে বন্ধুদের সাথে শেয়ার করুন।'
+              : 'As soon as you achieve BINGO, generate a vibrant 1080×1350 PNG card to celebrate your win on Instagram Stories, Facebook, WhatsApp, or Messenger.'}
           </p>
         </div>
       </div>
 
-      {/* CTA at Bottom */}
-      <div className="mt-8 text-center">
+      {/* CTA Button */}
+      <div className="text-center mt-10">
         <button
           onClick={onStartPlaying}
-          className="px-8 py-3.5 rounded-full bg-[#8E1B3A] hover:bg-[#75142E] text-white font-bold text-base flex items-center justify-center gap-2 shadow-xl mx-auto active:scale-95 transition-all cursor-pointer"
+          className="px-8 py-3.5 rounded-full bg-[#8E1B3A] hover:bg-[#75142E] text-white font-bold text-base shadow-lg active:scale-95 transition-all inline-flex items-center gap-2 cursor-pointer"
         >
-          <Gamepad2 size={20} />
+          <GamepadIcon className="text-base" />
           <span>{lang === 'bn' ? 'এখনই খেলা শুরু করুন' : 'Start Playing Now'}</span>
         </button>
       </div>
