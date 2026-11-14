@@ -1,6 +1,13 @@
 import React from 'react';
-import { RotateCcw } from 'lucide-react';
-import { InstagramIcon, FacebookIcon, MessengerIcon, WhatsAppIcon } from './SocialIcons';
+import {
+  DownloadIcon,
+  ShuffleIcon,
+  RotateLeftIcon,
+  InstagramIcon,
+  FacebookIcon,
+  MessengerIcon,
+  WhatsAppIcon
+} from './FontAwesomeIcons';
 
 export default function ActionButtons({
   onShuffle,
@@ -11,78 +18,86 @@ export default function ActionButtons({
   isDesktop = false
 }) {
   return (
-    <div className="w-full max-w-[420px] sm:max-w-[460px] md:max-w-[480px] mx-auto flex flex-col gap-2.5 sm:gap-3 px-3 sm:px-4">
-      {/* Buttons Row: Shuffle & Reset */}
-      <div className="flex items-center gap-2">
+    <div className={`w-full flex flex-col gap-2.5 sm:gap-3 ${isDesktop ? 'px-0' : 'max-w-[420px] mx-auto px-3'}`}>
+      {/* 1. Primary Action: Full-width Export Card Button */}
+      <button
+        onClick={onExport}
+        className="w-full py-3 px-4 rounded-full bg-[#8E1B3A] hover:bg-[#75142E] text-white font-bold text-sm sm:text-base flex items-center justify-center gap-2 shadow-md active:scale-[0.99] transition-all cursor-pointer whitespace-nowrap"
+      >
+        <DownloadIcon className="text-sm" />
+        <span>{lang === 'bn' ? 'কার্ড এক্সপোর্ট' : 'Export Card'}</span>
+      </button>
+
+      {/* 2. Secondary Row: Equal 50/50 columns for Shuffle and Reset */}
+      <div className="grid grid-cols-2 gap-2">
         <button
           onClick={onShuffle}
-          className="flex-1 py-2.5 sm:py-3 rounded-full border-2 border-[#8E1B3A] text-[#8E1B3A] font-bold text-xs sm:text-sm hover:bg-[#8E1B3A]/5 active:scale-[0.99] transition-all text-center select-none shadow-sm cursor-pointer"
+          className="w-full py-2.5 px-2 rounded-full border-2 border-[#8E1B3A] text-[#8E1B3A] font-bold text-xs sm:text-sm hover:bg-[#8E1B3A]/5 active:scale-[0.99] transition-all flex items-center justify-center gap-1.5 shadow-sm cursor-pointer whitespace-nowrap"
+          title={lang === 'bn' ? 'নতুন প্রশ্ন দিয়ে বোর্ড সাজান' : 'Shuffle phrases and get new board'}
         >
-          {lang === 'bn' ? 'নতুন বোর্ড (Shuffle)' : 'Shuffle / New Board'}
+          <ShuffleIcon className="text-xs" />
+          <span>{lang === 'bn' ? 'নতুন বোর্ড' : 'Shuffle'}</span>
         </button>
 
         <button
           onClick={onReset}
-          className="py-2.5 sm:py-3 px-4 rounded-full border border-[#D8C6B6] bg-white text-[#2B1B17] font-bold text-xs sm:text-sm hover:bg-[#F2EAE1] active:scale-[0.99] transition-all flex items-center justify-center gap-1.5 shadow-sm cursor-pointer"
+          className="w-full py-2.5 px-2 rounded-full border border-[#D8C6B6] bg-white text-[#2B1B17] font-bold text-xs sm:text-sm hover:bg-[#F2EAE1] active:scale-[0.99] transition-all flex items-center justify-center gap-1.5 shadow-sm cursor-pointer whitespace-nowrap"
           title={lang === 'bn' ? 'প্রথম থেকে শুরু করুন' : 'Start over from beginning'}
         >
-          <RotateCcw size={15} />
+          <RotateLeftIcon className="text-xs" />
           <span>{lang === 'bn' ? 'প্রথম থেকে' : 'Start Over'}</span>
         </button>
       </div>
 
-      {/* Export Card & Social Row */}
-      <div className="flex items-center gap-1.5 sm:gap-2">
-        <button
-          onClick={onExport}
-          className="flex-1 py-2.5 sm:py-3 rounded-full bg-[#8E1B3A] hover:bg-[#75142E] text-white font-bold text-xs sm:text-base active:scale-[0.99] transition-all text-center select-none shadow-md cursor-pointer"
-        >
-          {lang === 'bn' ? 'কার্ড এক্সপোর্ট' : 'Export Card'}
-        </button>
+      {/* 3. Social Platform Share Row */}
+      <div className="pt-2 border-t border-[#E8DCD0] flex items-center justify-center gap-2">
+        <span className="text-xs font-bold text-[#6E554D] mr-0.5 whitespace-nowrap">
+          {lang === 'bn' ? 'শেয়ার:' : 'Share:'}
+        </span>
 
         {/* Instagram Share Button */}
         <button
           onClick={() => onSocialClick('instagram')}
-          className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl border border-[#D8C6B6] bg-white hover:bg-[#F9F4ED] text-[#8E1B3A] flex items-center justify-center transition-all shadow-sm active:scale-95 cursor-pointer"
+          className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl border border-[#D8C6B6] bg-white hover:bg-[#F9F4ED] text-[#8E1B3A] flex items-center justify-center transition-all shadow-sm active:scale-95 cursor-pointer"
           title="Share to Instagram"
           aria-label="Share to Instagram"
         >
-          <InstagramIcon size={19} />
+          <InstagramIcon className="text-base" />
         </button>
 
         {/* Facebook Share Button */}
         <button
           onClick={() => onSocialClick('facebook')}
-          className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl border border-[#D8C6B6] bg-white hover:bg-[#F9F4ED] text-[#1877F2] flex items-center justify-center transition-all shadow-sm active:scale-95 cursor-pointer"
+          className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl border border-[#D8C6B6] bg-white hover:bg-[#F9F4ED] text-[#1877F2] flex items-center justify-center transition-all shadow-sm active:scale-95 cursor-pointer"
           title="Share to Facebook"
           aria-label="Share to Facebook"
         >
-          <FacebookIcon size={19} />
+          <FacebookIcon className="text-base" />
         </button>
 
         {/* WhatsApp Share Button */}
         <button
           onClick={() => onSocialClick('whatsapp')}
-          className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl border border-[#D8C6B6] bg-white hover:bg-[#F9F4ED] text-[#25D366] flex items-center justify-center transition-all shadow-sm active:scale-95 cursor-pointer"
+          className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl border border-[#D8C6B6] bg-white hover:bg-[#F9F4ED] text-[#25D366] flex items-center justify-center transition-all shadow-sm active:scale-95 cursor-pointer"
           title="Share to WhatsApp"
           aria-label="Share to WhatsApp"
         >
-          <WhatsAppIcon size={19} />
+          <WhatsAppIcon className="text-base" />
         </button>
 
         {/* Messenger Share Button */}
         <button
           onClick={() => onSocialClick('messenger')}
-          className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl border border-[#D8C6B6] bg-white hover:bg-[#F9F4ED] text-[#0084FF] flex items-center justify-center transition-all shadow-sm active:scale-95 cursor-pointer"
+          className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl border border-[#D8C6B6] bg-white hover:bg-[#F9F4ED] text-[#0084FF] flex items-center justify-center transition-all shadow-sm active:scale-95 cursor-pointer"
           title="Share via Messenger"
           aria-label="Share via Messenger"
         >
-          <MessengerIcon size={19} />
+          <MessengerIcon className="text-base" />
         </button>
       </div>
 
-      {/* Microcopy below with clear double click instructions */}
-      <div className="text-center mt-0.5">
+      {/* 4. Microcopy below with clear instructions */}
+      <div className="text-center mt-1">
         {isDesktop ? (
           <>
             <p className="text-xs font-bold text-[#8E1B3A]">
@@ -90,17 +105,17 @@ export default function ActionButtons({
                 ? '৩ সারি • ৩ কলাম • ২ কোণাকুণি • ৮টি জয়ের লাইন'
                 : '3 rows • 3 columns • 2 diagonals • 8 winning lines'}
             </p>
-            <p className="text-[11px] text-[#6E554D] mt-0.5">
+            <p className="text-xs text-[#6E554D] mt-0.5 leading-tight">
               {lang === 'bn'
                 ? 'ট্যাপ করে দাগ দিন • ভুলে ক্লিক করলে ডাবল ক্লিকে আনমার্ক করুন • সম্পূর্ণ প্রশ্ন দেখতে (i) চাপুন'
-                : 'Click to mark • Double-click to unmark if clicked by mistake • Click (i) for full text'}
+                : 'Click to mark • Double-click to unmark • Click (i) for full text'}
             </p>
           </>
         ) : (
-          <p className="text-[11px] text-[#6E554D] font-medium">
+          <p className="text-xs text-[#6E554D] font-medium leading-tight">
             {lang === 'bn'
               ? 'ভুলে ক্লিক করলে ডাবল ক্লিকে আনমার্ক করুন • সম্পূর্ণ প্রশ্ন দেখতে (i) চাপুন'
-              : 'Double-tap to unmark if marked by mistake • Tap (i) to read full text'}
+              : 'Double-tap to unmark • Tap (i) to read full text'}
           </p>
         )}
       </div>

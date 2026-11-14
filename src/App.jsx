@@ -20,7 +20,7 @@ import { checkBingo, isOneAway } from './utils/bingo';
 import { generateBoardPhrases, OCCASIONS } from './utils/phrases';
 import { playStampSound, playUnstampSound, playBingoFanfare } from './utils/sound';
 import auntyAvatarUrl from './assets/mascots/aunty_avatar_perfect.png';
-import { ArrowLeft, LayoutGrid, Grid3X3 } from 'lucide-react';
+import { ArrowLeftIcon, Grid3x3Icon, Grid5x5Icon } from './components/FontAwesomeIcons';
 import { shareToSocial } from './utils/share';
 
 function formatTimer(totalSeconds) {
@@ -297,7 +297,7 @@ export default function App() {
               onClick={() => setActiveView('home')}
               className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#8E1B3A] hover:underline cursor-pointer"
             >
-              <ArrowLeft size={16} />
+              <ArrowLeftIcon className="text-xs" />
               <span>{lang === 'bn' ? 'হোমে ফিরে যান' : 'Back to Home'}</span>
             </button>
 
@@ -311,7 +311,7 @@ export default function App() {
                     : 'text-[#6E554D] hover:text-[#8E1B3A]'
                 }`}
               >
-                <Grid3X3 size={14} />
+                <Grid3x3Icon className="text-xs" />
                 <span>{lang === 'bn' ? '৩×৩ কুইক' : '3×3 Quick'}</span>
               </button>
               <button
@@ -322,14 +322,14 @@ export default function App() {
                     : 'text-[#6E554D] hover:text-[#8E1B3A]'
                 }`}
               >
-                <LayoutGrid size={14} />
+                <Grid5x5Icon className="text-xs" />
                 <span>{lang === 'bn' ? '৫×৫ ক্লাসিক' : '5×5 Classic'}</span>
               </button>
             </div>
           </div>
 
           {/* DESKTOP LAYOUT (3 Columns: Mascot Sidebar, Board, Controls Card) */}
-          <div className="hidden lg:grid grid-cols-[220px_1fr_260px] xl:grid-cols-[240px_1fr_280px] gap-6 items-center">
+          <div className="hidden lg:grid grid-cols-[200px_1fr_280px] xl:grid-cols-[220px_1fr_310px] 2xl:grid-cols-[240px_1fr_330px] gap-6 items-start">
             {/* Left Column: Mascot with Clear Hands */}
             <div className="flex flex-col items-center text-center p-4">
               <h3 className="font-serif font-black text-xl text-[#8E1B3A] mb-3 leading-snug">

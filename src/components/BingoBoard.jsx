@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Check, Star, Info } from 'lucide-react';
+import { StarIcon, CheckIcon, InfoIcon } from './FontAwesomeIcons';
 
 export default function BingoBoard({
   board,
@@ -103,7 +103,7 @@ export default function BingoBoard({
               {/* Center Free Tile Star */}
               {isFree ? (
                 <div className="flex flex-col items-center">
-                  <Star size={is5x5 ? 14 : 18} fill="#E69C24" stroke="#E69C24" className="animate-spin duration-3000" />
+                  <StarIcon className="text-[#E69C24] text-sm sm:text-base animate-spin" />
                   <span className="font-black text-[10px] sm:text-xs text-[#B84B12] mt-0.5 uppercase tracking-wider">
                     {lang === 'bn' ? tile.bn : tile.en}
                   </span>
@@ -125,7 +125,7 @@ export default function BingoBoard({
                       }`}
                       title={lang === 'bn' ? 'দাগ দেওয়া হয়েছে (ডাবল ক্লিকে মুছুন)' : 'Marked (Double-click to unmark)'}
                     >
-                      <Check size={is5x5 ? 10 : 13} strokeWidth={3.5} />
+                      <CheckIcon className={is5x5 ? 'text-[9px]' : 'text-[11px]'} />
                     </div>
                   )}
 
@@ -155,7 +155,7 @@ export default function BingoBoard({
                     title={lang === 'bn' ? 'সম্পূর্ণ প্রশ্ন দেখুন' : 'View full question'}
                     aria-label="View full question"
                   >
-                    <Info size={is5x5 ? 8 : 11} strokeWidth={2.5} />
+                    <InfoIcon className={is5x5 ? 'text-[8px]' : 'text-[10px]'} />
                   </button>
                 </>
               )}
