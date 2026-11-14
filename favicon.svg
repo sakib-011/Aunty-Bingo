@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="auntyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF4B2B" />
+      <stop offset="50%" stop-color="#FF416C" />
+      <stop offset="100%" stop-color="#FFB300" />
+    </linearGradient>
+  </defs>
+  <circle cx="50" cy="50" r="48" fill="url(#auntyGrad)" stroke="#FFF" stroke-width="4" />
+  <!-- Aunty Round Glasses -->
+  <circle cx="36" cy="48" r="14" fill="#FFF" fill-opacity="0.2" stroke="#FFF" stroke-width="3.5" />
+  <circle cx="64" cy="48" r="14" fill="#FFF" fill-opacity="0.2" stroke="#FFF" stroke-width="3.5" />
+  <path d="M50 48 H50" stroke="#FFF" stroke-width="3.5" stroke-linecap="round" />
+  <path d="M47 48 Q50 45 53 48" stroke="#FFF" stroke-width="3" fill="none" />
+  <!-- Red Bindi -->
+  <circle cx="50" cy="30" r="5" fill="#B71C1C" stroke="#FFD54F" stroke-width="1.5" />
+  <!-- Joyful Smile -->
+  <path d="M38 68 Q50 80 62 68" stroke="#FFF" stroke-width="4" stroke-linecap="round" fill="none" />
+</svg>
