@@ -1,0 +1,256 @@
+{
+  "en": {
+    "appName": "Aunty Bingo",
+    "appTagline": "Turning awkward family questions into a fun, interactive game for Bengali gatherings.",
+    "howToPlay": "How to Play",
+    "playNow": "Play Now",
+    "language": "English",
+    "switchLangText": "বাং",
+    "switchLangAria": "Switch to Bangla language",
+    "home": "Home",
+
+    "heroHeading": "Ready for the Aunty Questions?",
+    "heroDesc": "Turn those awkward family moments into a hilarious Bingo game! Survive the interrogation at your next gathering.",
+    "startPlayingBtn": "Start Playing",
+    "howToPlayBtn": "How to Play",
+
+    "speechBubble1": "Biye kobe?",
+    "speechBubble2": "Salary koto?",
+    "speechBubble3": "Chakri paiso?",
+    "speechBubble4": "Bidesh jaba kobe?",
+
+    "chooseOccasionTitle": "Choose Your Gathering",
+    "chooseOccasionSubtitle": "Pick the gathering you're attending to generate a tailored board.",
+
+    "occasions": {
+      "eid": {
+        "name": "Eid Reunion",
+        "tag": "Emerald & Gold",
+        "desc": "For all those Eid family questions, salami collections, and sweet overload.",
+        "icon": "moon"
+      },
+      "wedding": {
+        "name": "Wedding / Dawot",
+        "tag": "Pink & Coral",
+        "desc": "Survive the wedding interrogation, matchmaking aunts, and biryani debates.",
+        "icon": "heart"
+      },
+      "exam": {
+        "name": "Post-Exam Results",
+        "tag": "Blue & Purple",
+        "desc": "Ready for the GPA barrage, BCS advice, and comparison with Sharma ji's son?",
+        "icon": "graduation"
+      },
+      "general": {
+        "name": "General Family Adda",
+        "tag": "Orange & Yellow",
+        "desc": "Everyday family conversation classics, career checks, and nostalgic lectures.",
+        "icon": "coffee"
+      }
+    },
+
+    "howItWorksTitle": "How It Works",
+    "howItWorksSubtitle": "Simple, hilarious, and 100% relatable.",
+    "step1Title": "1. Pick an Occasion",
+    "step1Desc": "Choose your event: Eid, Wedding, Exam Results, or General Adda.",
+    "step2Title": "2. Listen & Mark",
+    "step2Desc": "Whenever an aunty or uncle asks one of the questions, tap the tile to stamp it.",
+    "step3Title": "3. Get BINGO!",
+    "step3Desc": "Complete 5 in a row, column, or diagonal. Export your victory card to share!",
+
+    "featuresTitle": "Why Everyone Loves Aunty Bingo",
+    "featuresSubtitle": "Made specifically for Bengali family culture.",
+    "feat1Title": "Zero Signup",
+    "feat1Desc": "No login, no installation. Open your mobile browser and start playing instantly.",
+    "feat2Title": "130+ Authentic Phrases",
+    "feat2Desc": "Every awkward, funny, and well-meaning question you have ever heard at home.",
+    "feat3Title": "HD Card Export",
+    "feat3Desc": "Download a crisp 1080×1350 PNG card perfect for Instagram Stories & WhatsApp.",
+    "feat4Title": "100% Private & Free",
+    "feat4Desc": "No tracking, no cookies, no personal data. Works fully offline in your browser.",
+
+    "boardHeading": "Your Bingo Card!",
+    "boardInstruction": "Tap a tile whenever you hear that question.",
+    "activeOccasionLabel": "Occasion:",
+    "changeOccasionBtn": "Change",
+    "freeTile": "FREE TILE",
+    "freeTileSub": "Family Immunity",
+    "markedCounter": "Marked: {count} / 25",
+    "linesCounter": "Bingos: {count}",
+
+    "timerLabel": "Timer",
+    "timerStart": "Start",
+    "timerPause": "Pause",
+    "timerResume": "Resume",
+    "timerReset": "Reset",
+
+    "shuffleBtn": "Shuffle / New Board",
+    "exportBtn": "Export My Card",
+
+    "newBoardConfirmTitle": "Start a Fresh Round?",
+    "newBoardConfirmMsg": "Your current progress and timer will be reset. Are you ready?",
+    "keepPlayingBtn": "Keep Playing",
+    "confirmNewBoardBtn": "Generate New Board",
+
+    "bingoModalTitle": "BINGO!",
+    "bingoModalSubtitle": "You survived the family interrogation!",
+    "bingoTimeStat": "Time elapsed",
+    "bingoLinesStat": "Lines completed",
+    "bingoExportBtn": "Export My Card",
+    "bingoPlayAgainBtn": "Play Again",
+    "bingoContinueBtn": "Keep Marking",
+
+    "howToPlayModalTitle": "How to Play Aunty Bingo",
+    "howToPlayStep1": "1. Choose Your Occasion — Select Eid, Wedding, Exam, or Family Adda.",
+    "howToPlayStep2": "2. Get Your Board — A 5×5 grid is randomized with 24 relatable questions plus 1 Free Tile in the center.",
+    "howToPlayStep3": "3. Mark Tiles — Tap a tile as soon as an elder or relative pops that question.",
+    "howToPlayStep4": "4. Complete a Line — Make 5 marks horizontally, vertically, or diagonally to hit BINGO!",
+    "howToPlayCloseBtn": "Got it, Let's Play!",
+
+    "exportModalTitle": "Your Aunty Bingo Card",
+    "exportModalSubtitle": "High-resolution 1080×1350 PNG ready to share with friends and family!",
+    "shareBtn": "Share Card",
+    "downloadBtn": "Download PNG",
+    "backToGameBtn": "Back to Game",
+    "generatingCard": "Rendering your card in high resolution...",
+
+    "shareFallbackMsg": "Sharing isn't supported on this browser. You can download your card instead.",
+    "shareSuccess": "Card shared successfully!",
+    "shareError": "Could not open share dialog. Downloading instead.",
+
+    "exportErrorTitle": "Oops! Something went wrong.",
+    "exportErrorMsg": "We couldn't create your Bingo card right now. Please try again.",
+    "tryAgainBtn": "Try Again",
+
+    "footerText": "Aunty Bingo — Made with ❤️ for Bengali family gatherings everywhere.",
+    "footerDisclaimer": "All phrases are lighthearted celebrations of Bengali culture. No offence intended!",
+    "footerCopyright": "© 2026 Aunty Bingo. Pure client-side static game."
+  },
+  "bn": {
+    "appName": "আন্টি বিঙ্গো",
+    "appTagline": "পারিবারিক আড্ডার চেনা প্রশ্নগুলোকে রূপ দিন একটি মজার বিঙ্গো খেলায়।",
+    "howToPlay": "নিয়মাবলী",
+    "playNow": "শুরু করুন",
+    "language": "বাংলা",
+    "switchLangText": "EN",
+    "switchLangAria": "ইংরেজিতে পরিবর্তন করুন",
+    "home": "হোম",
+
+    "heroHeading": "খালাম্মাদের প্রশ্নের মুখে পড়তে প্রস্তুত?",
+    "heroDesc": "পারিবারিক আড্ডার চেনা আর বিব্রতকর মুহূর্তগুলোকে রূপ দিন একটি দারুণ মজার বিঙ্গো খেলায়! দেখুন এবার কতক্ষণ টিকে থাকতে পারেন।",
+    "startPlayingBtn": "খেলা শুরু করুন",
+    "howToPlayBtn": "কীভাবে খেলবেন",
+
+    "speechBubble1": "বিয়ে কবে?",
+    "speechBubble2": "স্যালারি কত?",
+    "speechBubble3": "চাকরি পাইছো?",
+    "speechBubble4": "বিদেশ যাবা কবে?",
+
+    "chooseOccasionTitle": "আপনার অনুষ্ঠানটি বেছে নিন",
+    "chooseOccasionSubtitle": "যেকোনো একটি অনুষ্ঠান সিলেক্ট করে প্রাসঙ্গিক বিঙ্গো বোর্ড তৈরি করুন।",
+
+    "occasions": {
+      "eid": {
+        "name": "ঈদ পুনর্মিলনী",
+        "tag": "পান্না ও সোনালী",
+        "desc": "ঈদের দাওয়াত, সালামি সংগ্রহ এবং অতিরিক্ত মিষ্টি খাওয়ার চিরচেনা প্রশ্ন।",
+        "icon": "moon"
+      },
+      "wedding": {
+        "name": "বিয়ে / দাওয়াত",
+        "tag": "গোলাপী ও কোরাল",
+        "desc": "বিয়ের আসরের জেরা, ঘটক খালাম্মা এবং বিরিয়ানির নুন নিয়ে আলোচনা সামলান।",
+        "icon": "heart"
+      },
+      "exam": {
+        "name": "পরীক্ষার রেজাল্ট",
+        "tag": "নীল ও বেগুনি",
+        "desc": "জিপিএ, বিসিএস প্রস্তুতি এবং অমুকের ছেলের সাথে তুলনামূলক জেরা।",
+        "icon": "graduation"
+      },
+      "general": {
+        "name": "পারিবারিক আড্ডা",
+        "tag": "কমলা ও হলুদ",
+        "desc": "দৈনন্দিন পারিবারিক ড্রামা, ক্যারিয়ার উপদেশ এবং অতীতের স্মৃতিকথা।",
+        "icon": "coffee"
+      }
+    },
+
+    "howItWorksTitle": "কীভাবে খেলবেন",
+    "howItWorksSubtitle": "সহজ, আনন্দদায়ক এবং খাঁটি পারিবারিক বিনোদন।",
+    "step1Title": "১. অনুষ্ঠান বেছে নিন",
+    "step1Desc": "ঈদ, বিয়ে, পরীক্ষার রেজাল্ট বা পারিবারিক আড্ডা থেকে আপনার ইভেন্টটি সিলেক্ট করুন।",
+    "step2Title": "২. শুনলেই দাগ দিন",
+    "step2Desc": "কোনো আত্মীয় ওই চেনা প্রশ্নটি করলেই সাথে সাথে সেই ঘরে ট্যাপ করে দাগ দিন।",
+    "step3Title": "৩. বিঙ্গো জিতে নিন!",
+    "step3Desc": "যেকোনো ৫টি ঘরের সারি, কলাম বা কোণাকুণি পূর্ণ করলেই বিঙ্গো! কার্ডটি শেয়ার করুন।",
+
+    "featuresTitle": "আন্টি বিঙ্গো কেন অনন্য?",
+    "featuresSubtitle": "বাঙালি পারিবারিক সংস্কৃতির কথা মাথায় রেখে তৈরি।",
+    "feat1Title": "লগইন ছাড়াই সোজা খেলা",
+    "feat1Desc": "কোনো অ্যাপ ডাউনলোড বা অ্যাকাউন্ট করার ঝামেলা নেই। মোবাইলের ব্রাউজারেই সরাসরি খেলুন।",
+    "feat2Title": "১৩০+ বাস্তবধর্মী প্রশ্ন",
+    "feat2Desc": "বাঙালির জীবনের সবচেয়ে বেশি শোনা এবং পরিচিত প্রশ্নগুলোর মজাদার সংগ্রহ।",
+    "feat3Title": "এইচডি কার্ড এক্সপোর্ট",
+    "feat3Desc": "১০৮০×১৩৫০ রেজুলেশনের দারুণ পিএনজি কার্ড ডাউনলোড করে ইনস্টাগ্রাম বা হোয়াটসঅ্যাপে দিন।",
+    "feat4Title": "শতভাগ নিরাপদ ও উন্মুক্ত",
+    "feat4Desc": "কোনো ট্র্যাকিং বা তথ্য সংরক্ষণ ছাড়াই সম্পূর্ণ অফলাইনে খেলার উপযোগী।",
+
+    "boardHeading": "আপনার বিঙ্গো কার্ড!",
+    "boardInstruction": "যখনই কোনো আত্মীয় এই প্রশ্নটি করবেন, সেই ঘরে ট্যাপ করুন।",
+    "activeOccasionLabel": "অনুষ্ঠান:",
+    "changeOccasionBtn": "পরিবর্তন",
+    "freeTile": "ফ্রি ঘর",
+    "freeTileSub": "বোনাস ঘর",
+    "markedCounter": "চিহ্নিত: {count} / ২৫",
+    "linesCounter": "বিঙ্গো: {count}",
+
+    "timerLabel": "টাইমার",
+    "timerStart": "শুরু",
+    "timerPause": "থামুন",
+    "timerResume": "চালান",
+    "timerReset": "রিসেট",
+
+    "shuffleBtn": "নতুন বোর্ড তৈরি",
+    "exportBtn": "কার্ড এক্সপোর্ট করুন",
+
+    "newBoardConfirmTitle": "নতুন রাউন্ড শুরু করবেন?",
+    "newBoardConfirmMsg": "আপনার বর্তমান অগ্রগতি এবং টাইমার রিসেট হয়ে যাবে। আপনি কি নিশ্চিত?",
+    "keepPlayingBtn": "খেলা চালিয়ে যান",
+    "confirmNewBoardBtn": "নতুন বোর্ড তৈরি করুন",
+
+    "bingoModalTitle": "বিঙ্গো!",
+    "bingoModalSubtitle": "আপনি আত্মীয়দের জেরার হাত থেকে সফলভাবে বেঁচে গেলেন!",
+    "bingoTimeStat": "সময় লেগেছে",
+    "bingoLinesStat": "বিঙ্গো লাইন",
+    "bingoExportBtn": "কার্ড এক্সপোর্ট করুন",
+    "bingoPlayAgainBtn": "আবার খেলুন",
+    "bingoContinueBtn": "আরও খেলুন",
+
+    "howToPlayModalTitle": "আন্টি বিঙ্গো খেলার নিয়মাবলী",
+    "howToPlayStep1": "১. অনুষ্ঠান বেছে নিন — ঈদ, বিয়ে, পরীক্ষার রেজাল্ট বা পারিবারিক আড্ডা সিলেক্ট করুন।",
+    "howToPlayStep2": "২. বিঙ্গো বোর্ড পান — ৫×৫ গ্রিডে ২৪টি মজার প্রশ্ন এবং মাঝখানে ১টি ফ্রি ঘর থাকবে।",
+    "howToPlayStep3": "৩. ঘরে ট্যাপ করুন — কোনো আত্মীয় প্রশ্নটি জিজ্ঞেস করলেই ঘরে ট্যাপ করে দাগ দিন।",
+    "howToPlayStep4": "৪. লাইন মেলালেই বিঙ্গো — যেকোনো অনুভূমিক, উলম্ব বা কোণাকুণি ৫টি ঘর পূর্ণ করলেই বিঙ্গো হবে!",
+    "howToPlayCloseBtn": "বুঝেছি, খেলা শুরু করি!",
+
+    "exportModalTitle": "আপনার আন্টি বিঙ্গো কার্ড",
+    "exportModalSubtitle": "উচ্চ রেজুলেশনের ১০৮০×১৩৫০ পিএনজি কার্ড প্রস্তুত, বন্ধুদের সাথে শেয়ার করুন!",
+    "shareBtn": "কার্ড শেয়ার করুন",
+    "downloadBtn": "ডাউনলোড করুন",
+    "backToGameBtn": "গেমে ফিরে যান",
+    "generatingCard": "এইচডি কার্ড তৈরি হচ্ছে...",
+
+    "shareFallbackMsg": "এই ব্রাউজারে শেয়ার অপশন কাজ করছে না। আপনি সরাসরি কার্ডটি ডাউনলোড করতে পারেন।",
+    "shareSuccess": "কার্ডটি সফলভাবে শেয়ার করা হয়েছে!",
+    "shareError": "শেয়ার ডায়ালগ খোলা সম্ভব হয়নি। ডাউনলোড শুরু হচ্ছে।",
+
+    "exportErrorTitle": "কোথাও একটি সমস্যা হয়েছে!",
+    "exportErrorMsg": "এই মুহূর্তে বিঙ্গো কার্ড তৈরি করা যায়নি। অনুগ্রহ করে আবার চেষ্টা করুন।",
+    "tryAgainBtn": "আবার চেষ্টা করুন",
+
+    "footerText": "আন্টি বিঙ্গো — বিশ্বজুড়ে বাঙালি পরিবারগুলোর আনন্দময় আড্ডার জন্য তৈরি।",
+    "footerDisclaimer": "সবগুলো প্রশ্ন আমাদের মিষ্টি সংস্কৃতির অংশ হিসেবে মজার ছলে পরিবেশন করা হয়েছে।",
+    "footerCopyright": "© ২০২৬ আন্টি বিঙ্গো। সম্পূর্ণ ক্লায়েন্ট-সাইড স্ট্যাটিক ওয়েব গেম।"
+  }
+}

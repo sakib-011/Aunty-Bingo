@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-cream: #fff6e5;
+    --color-maroon: #8e1b3a;
+    --color-maroon-hover: #75142e;
+    --color-green: #0f7b5f;
+    --color-tile-marked: #fbe9df;
+    --color-tile-winning: #e2eee1;
+    --color-text-dark: #2b1b17;
+    --color-stamp: #cb3c3b;
+  }
+
+  body {
+    background-color: var(--color-cream);
+    color: var(--color-text-dark);
+    font-family: 'Plus Jakarta Sans', 'Noto Sans Bengali', 'Hind Siliguri', sans-serif;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+}
