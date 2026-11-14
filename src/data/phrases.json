@@ -1,0 +1,1265 @@
+[
+  {
+    "id": 9001,
+    "en": "When are you getting married?",
+    "bn": "বিয়ে কবে?",
+    "occasions": [
+      "eid",
+      "wedding",
+      "general"
+    ]
+  },
+  {
+    "id": 9002,
+    "en": "What is your monthly salary?",
+    "bn": "স্যালারি কত?",
+    "occasions": [
+      "eid",
+      "wedding",
+      "general",
+      "exam"
+    ]
+  },
+  {
+    "id": 9003,
+    "en": "Haven't you gotten a bit chubby?",
+    "bn": "একটু মোটা হয়ে গেছ না?",
+    "occasions": [
+      "eid",
+      "wedding",
+      "general"
+    ]
+  },
+  {
+    "id": 9004,
+    "en": "What is your exam result?",
+    "bn": "রেজাল্ট কী?",
+    "occasions": [
+      "exam",
+      "general",
+      "eid"
+    ]
+  },
+  {
+    "id": 9005,
+    "en": "Look at the boy next door!",
+    "bn": "পাশের বাসার ছেলেটাকে দেখো",
+    "occasions": [
+      "eid",
+      "wedding",
+      "exam",
+      "general"
+    ]
+  },
+  {
+    "id": 9006,
+    "en": "When are you having a baby?",
+    "bn": "বাচ্চা কবে নিচ্ছ?",
+    "occasions": [
+      "wedding",
+      "eid",
+      "general"
+    ]
+  },
+  {
+    "id": 9007,
+    "en": "Eat a little more, you've gotten thin!",
+    "bn": "আরেকটু খাও, শুকিয়ে গেছ",
+    "occasions": [
+      "eid",
+      "wedding",
+      "general"
+    ]
+  },
+  {
+    "id": 9008,
+    "en": "Have you found a job yet?",
+    "bn": "চাকরি হলো?",
+    "occasions": [
+      "eid",
+      "wedding",
+      "exam",
+      "general"
+    ]
+  },
+  {
+    "id": 9009,
+    "en": "How much taller will you grow?",
+    "bn": "আর কত বড় হবে?",
+    "occasions": [
+      "eid",
+      "wedding",
+      "general"
+    ]
+  },
+  {
+    "id": 1,
+    "en": "When are you getting married?",
+    "bn": "বিয়ে কবে করছ?",
+    "occasions": [
+      "eid",
+      "wedding",
+      "general"
+    ]
+  },
+  {
+    "id": 2,
+    "en": "You're not getting any younger, start looking!",
+    "bn": "বয়স তো থেমে নেই, বিয়ের কথা ভাবো!",
+    "occasions": [
+      "eid",
+      "wedding",
+      "general"
+    ]
+  },
+  {
+    "id": 3,
+    "en": "We found a perfect match for you in our circle!",
+    "bn": "আমাদের পরিচিতের মধ্যে তোমার জন্য ভালো পাত্র/পাত্রী আছে!",
+    "occasions": [
+      "wedding",
+      "general",
+      "eid"
+    ]
+  },
+  {
+    "id": 4,
+    "en": "Don't be so picky with proposals or you'll regret it!",
+    "bn": "এত পছন্দ-অপছন্দ করলে কিন্তু পরে ভালো প্রস্তাব পাবা না!",
+    "occasions": [
+      "wedding",
+      "general"
+    ]
+  },
+  {
+    "id": 5,
+    "en": "You ate everyone's wedding biryani, when is yours?",
+    "bn": "সবার বিয়ের দাওয়াত খাইলা, নিজেরটা কবে খাওয়াবা?",
+    "occasions": [
+      "wedding",
+      "eid",
+      "general"
+    ]
+  },
+  {
+    "id": 6,
+    "en": "Is there someone special you're hiding from us?",
+    "bn": "লুকিয়ে কোনো প্রেম করছ নাকি বলো তো?",
+    "occasions": [
+      "wedding",
+      "general",
+      "eid"
+    ]
+  },
+  {
+    "id": 7,
+    "en": "Will you agree if your family arranges the marriage?",
+    "bn": "পারিবারিক পছন্দে বিয়ে করতে কোনো আপত্তি আছে?",
+    "occasions": [
+      "wedding",
+      "general"
+    ]
+  },
+  {
+    "id": 8,
+    "en": "Look at your younger cousins, they are all settled!",
+    "bn": "তোমার ছোট কাজিনরাও তো সংসারী হয়ে গেল!",
+    "occasions": [
+      "eid",
+      "wedding",
+      "general"
+    ]
+  },
+  {
+    "id": 9,
+    "en": "Next big family wedding must be yours, promised?",
+    "bn": "পরিবারের পরের অনুষ্ঠানটা কিন্তু তোমার বিয়ে হতে হবে!",
+    "occasions": [
+      "wedding",
+      "eid"
+    ]
+  },
+  {
+    "id": 10,
+    "en": "Marriage will bring responsibility and discipline to your life.",
+    "bn": "বিয়ে করলেই দেখবা জীবনে সব দায়িত্ববোধ চলে আসবে।",
+    "occasions": [
+      "wedding",
+      "general"
+    ]
+  },
+  {
+    "id": 11,
+    "en": "Are you waiting to become a CEO before getting married?",
+    "bn": "বিয়ে করার জন্য কি কোম্পানি প্রধান হওয়ার অপেক্ষা করছ?",
+    "occasions": [
+      "wedding",
+      "general"
+    ]
+  },
+  {
+    "id": 12,
+    "en": "Whoever marries you will have to deal with your temper!",
+    "bn": "যে তোমারে বিয়ে করবে সে তোমার মেজাজ কেমনে সামলাবে!",
+    "occasions": [
+      "wedding",
+      "general"
+    ]
+  },
+  {
+    "id": 13,
+    "en": "You should learn to adjust with in-laws properly.",
+    "bn": "শ্বশুরবাড়ির সবাইকে আপন করে মানিয়ে চলতে শিখতে হবে!",
+    "occasions": [
+      "wedding",
+      "general"
+    ]
+  },
+  {
+    "id": 14,
+    "en": "We want to see your wedding stage before we get too old!",
+    "bn": "আমরা বেঁচে থাকতে থাকতে তোমার বিয়েটা দেখে যেতে চাই!",
+    "occasions": [
+      "wedding",
+      "eid",
+      "general"
+    ]
+  },
+  {
+    "id": 15,
+    "en": "When will you give the family some good news?",
+    "bn": "আমাদের পরিবারে নতুন কোনো সুখবর কবে দিচ্ছ?",
+    "occasions": [
+      "wedding",
+      "eid",
+      "general"
+    ]
+  },
+  {
+    "id": 16,
+    "en": "What is your monthly salary package now?",
+    "bn": "মাসে স্যালারি কত পাচ্ছ এখন?",
+    "occasions": [
+      "eid",
+      "wedding",
+      "general",
+      "exam"
+    ]
+  },
+  {
+    "id": 17,
+    "en": "Is it a permanent government job or private sector?",
+    "bn": "চাকরি কি সরকারি নাকি বেসরকারি?",
+    "occasions": [
+      "eid",
+      "general",
+      "exam"
+    ]
+  },
+  {
+    "id": 18,
+    "en": "Why haven't you sat for the BCS exams yet?",
+    "bn": "বিসিএস পরীক্ষার জন্য প্রিপারেশন নিচ্ছ না কেন?",
+    "occasions": [
+      "exam",
+      "general",
+      "eid"
+    ]
+  },
+  {
+    "id": 19,
+    "en": "When are they going to promote you to senior position?",
+    "bn": "কোম্পানি তোমাকে সিনিয়র পদে প্রমোশন কবে দেবে?",
+    "occasions": [
+      "general",
+      "eid"
+    ]
+  },
+  {
+    "id": 20,
+    "en": "Any plan to go to Canada, UK or USA soon?",
+    "bn": "বাইরে—কানাডা বা আমেরিকায় যাওয়ার কোনো চেষ্টা করছ?",
+    "occasions": [
+      "eid",
+      "exam",
+      "general",
+      "wedding"
+    ]
+  },
+  {
+    "id": 21,
+    "en": "So you just sit and type on a computer all day?",
+    "bn": "সারাদিন কম্পিউটারে বসে টাইপ করাই তোমার চাকরি?",
+    "occasions": [
+      "general",
+      "eid"
+    ]
+  },
+  {
+    "id": 22,
+    "en": "Are they giving you a proper festival bonus this Eid?",
+    "bn": "এই ঈদে অফিস থেকে বোনাস ঠিকঠাক দিল তো?",
+    "occasions": [
+      "eid",
+      "general"
+    ]
+  },
+  {
+    "id": 23,
+    "en": "Look at your uncle's son, he started at 1 lakh taka!",
+    "bn": "অমুকের ছেলে তো জয়েন করেই লাখ টাকা বেতন পাচ্ছে!",
+    "occasions": [
+      "eid",
+      "general",
+      "exam"
+    ]
+  },
+  {
+    "id": 24,
+    "en": "Can you arrange an internship or job for my nephew?",
+    "bn": "তোমার অফিসে আমার ভাগ্নের জন্য একটা ব্যবস্থা করতে পারবা?",
+    "occasions": [
+      "eid",
+      "general",
+      "wedding"
+    ]
+  },
+  {
+    "id": 25,
+    "en": "Is work from home actually real work or just relaxation?",
+    "bn": "বাসায় বসে কাজ করা কি সত্যি কাজ, নাকি খালি আরাম?",
+    "occasions": [
+      "general",
+      "eid"
+    ]
+  },
+  {
+    "id": 26,
+    "en": "Stop wasting money on coffee shops and save for a flat!",
+    "bn": "ক্যাফেতে টাকা না উড়িয়ে একটা ফ্ল্যাট কেনার জন্য টাকা জমাও!",
+    "occasions": [
+      "general",
+      "eid",
+      "wedding"
+    ]
+  },
+  {
+    "id": 27,
+    "en": "Did you buy any land or savings certificates yet?",
+    "bn": "কোনো সঞ্চয়পত্র বা জমি কিনেছো এ পর্যন্ত?",
+    "occasions": [
+      "eid",
+      "general"
+    ]
+  },
+  {
+    "id": 28,
+    "en": "Bank jobs give the most social prestige in society.",
+    "bn": "ব্যাংকের চাকরি করলে সমাজে একটা আলাদা মান-সম্মান থাকে।",
+    "occasions": [
+      "exam",
+      "general",
+      "eid"
+    ]
+  },
+  {
+    "id": 29,
+    "en": "Are you switching jobs again? Consistency is key!",
+    "bn": "আবার চাকরি বদলাচ্ছো? একটা জায়গায় থিতু হতে শেখো!",
+    "occasions": [
+      "general",
+      "eid"
+    ]
+  },
+  {
+    "id": 30,
+    "en": "Will this startup company even survive the year?",
+    "bn": "এই স্টার্টআপ কোম্পানি কি আদৌ আগামী বছর পর্যন্ত টিকবে?",
+    "occasions": [
+      "general",
+      "eid"
+    ]
+  },
+  {
+    "id": 31,
+    "en": "What was your final GPA? Did you get Golden A+?",
+    "bn": "রেজাল্ট কেমন হলো? গোল্ডেন এ প্লাস আসছে তো?",
+    "occasions": [
+      "exam",
+      "eid",
+      "general"
+    ]
+  },
+  {
+    "id": 32,
+    "en": "Why did you lose marks in Math? Math is everything!",
+    "bn": "অংকে এত কম পেলে কেন? অংকই তো আসল!",
+    "occasions": [
+      "exam",
+      "general"
+    ]
+  },
+  {
+    "id": 33,
+    "en": "Are you preparing for Dhaka Medical or Engineering?",
+    "bn": "মেডিকেল ভর্তি পরীক্ষা দিবা নাকি বুয়েটের প্রিপারেশন?",
+    "occasions": [
+      "exam",
+      "general",
+      "eid"
+    ]
+  },
+  {
+    "id": 34,
+    "en": "If you don't get into a public university, what will people say?",
+    "bn": "পাবলিক বিশ্ববিদ্যালয়ে চান্স না পেলে মানুষ কী বলবে?",
+    "occasions": [
+      "exam",
+      "general"
+    ]
+  },
+  {
+    "id": 35,
+    "en": "Private university tuition is so expensive, why not study harder?",
+    "bn": "প্রাইভেট বিশ্ববিদ্যালয়ে তো খালি টাকার শ্রাদ্ধ!",
+    "occasions": [
+      "exam",
+      "general"
+    ]
+  },
+  {
+    "id": 36,
+    "en": "When is your graduation convocation finally taking place?",
+    "bn": "তোমার কনভোকেশন আর সার্টিফিকেট তোলা কবে শেষ হবে?",
+    "occasions": [
+      "exam",
+      "general",
+      "eid"
+    ]
+  },
+  {
+    "id": 37,
+    "en": "What kind of career can you even build with this subject?",
+    "bn": "এই অদ্ভুত বিষয় নিয়ে পড়ে ভবিষ্যতে কী চাকরি করবা?",
+    "occasions": [
+      "exam",
+      "general"
+    ]
+  },
+  {
+    "id": 38,
+    "en": "You studied with so many private tutors, what went wrong?",
+    "bn": "এতগুলো প্রাইভেট টিউটর রেখেও রেজাল্ট এমন হলো কেন?",
+    "occasions": [
+      "exam",
+      "general"
+    ]
+  },
+  {
+    "id": 39,
+    "en": "Who stood first in your department? How much did they score?",
+    "bn": "তোমার ডিপার্টমেন্টে ফার্স্ট কে হলো? সে কত পেয়েছে?",
+    "occasions": [
+      "exam",
+      "general"
+    ]
+  },
+  {
+    "id": 40,
+    "en": "Study hard now so you can relax for the rest of your life!",
+    "bn": "এখন কষ্ট করে পড়ো, বাকি জীবন আরাম করে বসে খেতে পারবা!",
+    "occasions": [
+      "exam",
+      "general"
+    ]
+  },
+  {
+    "id": 41,
+    "en": "Are you appearing for IELTS? What band score do you need?",
+    "bn": "আইইএলটিএস পরীক্ষা কবে দিচ্ছ? স্কোর কত লাগবে?",
+    "occasions": [
+      "exam",
+      "eid",
+      "general"
+    ]
+  },
+  {
+    "id": 42,
+    "en": "My friend's daughter studies 14 hours every single day!",
+    "bn": "আমার বান্ধবীর মেয়ে তো দিনে ১৪ ঘণ্টা টেবিল ছেড়ে ওঠে না!",
+    "occasions": [
+      "exam",
+      "general"
+    ]
+  },
+  {
+    "id": 43,
+    "en": "Your handwriting is so messy, examiners cut marks for that!",
+    "bn": "হাতের লেখা এত খারাপ হলে তো স্যাররা নম্বর কেটে দেবে!",
+    "occasions": [
+      "exam",
+      "general"
+    ]
+  },
+  {
+    "id": 44,
+    "en": "Did you clear the viva board interview round?",
+    "bn": "চাকরির মৌখিক ভাইভায় কেমন উত্তর দিয়ে আসলা?",
+    "occasions": [
+      "exam",
+      "general"
+    ]
+  },
+  {
+    "id": 45,
+    "en": "Are you planning to do a Master's degree abroad or here?",
+    "bn": "মাস্টার্স কি দেশে করবা নাকি স্কলারশিপ নিয়ে বাইরে যাবা?",
+    "occasions": [
+      "exam",
+      "eid",
+      "general"
+    ]
+  },
+  {
+    "id": 46,
+    "en": "Have you started writing your thesis paper yet?",
+    "bn": "থিসিস পেপার জমা দেওয়া শুরু করছো নাকি দেরি আছে?",
+    "occasions": [
+      "exam",
+      "general"
+    ]
+  },
+  {
+    "id": 47,
+    "en": "Don't hang out with friends until the exams are over!",
+    "bn": "পরীক্ষা শেষ না হওয়া পর্যন্ত বন্ধুদের সাথে আড্ডা বন্ধ রাখো!",
+    "occasions": [
+      "exam",
+      "general"
+    ]
+  },
+  {
+    "id": 48,
+    "en": "In our time, SSC first division meant the whole village celebrated!",
+    "bn": "আমাদের সময় ফার্স্ট ডিভিশন পেলে পুরো গ্রামে মিষ্টি বিলি হতো!",
+    "occasions": [
+      "exam",
+      "general",
+      "eid"
+    ]
+  },
+  {
+    "id": 49,
+    "en": "Why have you become so skinny? Does your mother not feed you?",
+    "bn": "এত শুকিয়ে গেছো কেন? মা কি বাসায় রান্না করে খাওয়ায় না?",
+    "occasions": [
+      "eid",
+      "wedding",
+      "general"
+    ]
+  },
+  {
+    "id": 50,
+    "en": "You've put on quite a bit of weight recently, start jogging!",
+    "bn": "চেহারাটা বেশ গোলগাল হয়ে গেছে, একটু সকালে দৌড়াদৌড়ি করো!",
+    "occasions": [
+      "eid",
+      "wedding",
+      "general"
+    ]
+  },
+  {
+    "id": 51,
+    "en": "Look at the dark circles under your eyes! What time do you sleep?",
+    "bn": "চোখের নিচে এত কালি পড়েছে কেন? রাতে ঘুমাও না?",
+    "occasions": [
+      "eid",
+      "general",
+      "exam"
+    ]
+  },
+  {
+    "id": 52,
+    "en": "Take another plate of Biryani! One piece of meat isn't enough!",
+    "bn": "আরেকটু বিরিয়ানি নাও! এক পিস মাংসে কিছু হয় নাকি?",
+    "occasions": [
+      "eid",
+      "wedding",
+      "general"
+    ]
+  },
+  {
+    "id": 53,
+    "en": "Why are you touching your phone instead of eating sweets?",
+    "bn": "প্লেটের মিষ্টি ফেলে রেখে ফোনে কী এত দেখছো?",
+    "occasions": [
+      "eid",
+      "wedding",
+      "general"
+    ]
+  },
+  {
+    "id": 54,
+    "en": "Your complexion looked so bright when you were a kid!",
+    "bn": "ছোটবেলায় তো গায়ের রঙটা দুধের মতো ফর্সা ছিল তোমার!",
+    "occasions": [
+      "wedding",
+      "general",
+      "eid"
+    ]
+  },
+  {
+    "id": 55,
+    "en": "Apply some mustard oil to your hair, it's looking so rough!",
+    "bn": "মাথায় একটু খাঁটি সরিষার তেল দাও, চুলগুলো রুক্ষ হয়ে গেছে!",
+    "occasions": [
+      "general",
+      "eid"
+    ]
+  },
+  {
+    "id": 56,
+    "en": "Stop drinking cold soda, it ruins your digestion completely!",
+    "bn": "এত কোমল পানীয় খেয়ো না, লিভার আর পেট নষ্ট হয়ে যাবে!",
+    "occasions": [
+      "wedding",
+      "eid",
+      "general"
+    ]
+  },
+  {
+    "id": 57,
+    "en": "Why are you skipping rice? Bengalis must eat rice every day!",
+    "bn": "ভাত না খেলে শরীরে বল পাবা কোথা থেকে? বাঙালি তো ভাত খাবেই!",
+    "occasions": [
+      "general",
+      "eid",
+      "wedding"
+    ]
+  },
+  {
+    "id": 58,
+    "en": "Have some Borhani, it will digest all the heavy food!",
+    "bn": "এক গ্লাস বোরহানি খেয়ে নাও, সব ভারি খাবার হজম হয়ে যাবে!",
+    "occasions": [
+      "wedding",
+      "eid"
+    ]
+  },
+  {
+    "id": 59,
+    "en": "You have no stamina at all! When we were young, we walked miles!",
+    "bn": "একটুতেই হাঁপিয়ে যাও! আমরা এই বয়সে মাইলের পর মাইল হাঁটতাম!",
+    "occasions": [
+      "general",
+      "eid"
+    ]
+  },
+  {
+    "id": 60,
+    "en": "Eating outside food all the time will land you in the hospital!",
+    "bn": "রেস্টুরেন্টের খাবার খাওয়া বন্ধ করো, পেটের বারোটা বেজে যাবে!",
+    "occasions": [
+      "general",
+      "eid"
+    ]
+  },
+  {
+    "id": 61,
+    "en": "Do you even recognize me? Tell me who I am!",
+    "bn": "আমাকে চিনতে পারছ? বলো তো আমি তোমার কোন খালা/চাচা?",
+    "occasions": [
+      "eid",
+      "general",
+      "wedding"
+    ]
+  },
+  {
+    "id": 62,
+    "en": "I held you in my lap when you were just a tiny baby!",
+    "bn": "তুমি তো এতটুকু ছিলা যখন আমার কোলে কোলে ঘুরতা!",
+    "occasions": [
+      "eid",
+      "wedding",
+      "general"
+    ]
+  },
+  {
+    "id": 63,
+    "en": "You never visit our house anymore, have you forgotten us?",
+    "bn": "তোমরা তো আর আমাদের বাসায় আসোই না, ভুলে গেছো বুঝি?",
+    "occasions": [
+      "eid",
+      "general",
+      "wedding"
+    ]
+  },
+  {
+    "id": 64,
+    "en": "Why pay money to buy ripped jeans? We threw those away!",
+    "bn": "টাকা দিয়ে ছেঁড়া জিন্স কেনার কী বুদ্ধি? আমরা তো ফেলে দিতাম!",
+    "occasions": [
+      "general",
+      "eid"
+    ]
+  },
+  {
+    "id": 65,
+    "en": "Always looking down into that little glowing glass screen!",
+    "bn": "সারাক্ষণ ওই চারকোনা স্ক্রিনের ভেতর কী এত মধুর সন্ধান পাও?",
+    "occasions": [
+      "general",
+      "eid",
+      "wedding"
+    ]
+  },
+  {
+    "id": 66,
+    "en": "Do you know how to cook even simple dal and bhat?",
+    "bn": "নিজের জন্য ডাল-ভাত রান্না করতে পারো কিছু?",
+    "occasions": [
+      "general",
+      "wedding"
+    ]
+  },
+  {
+    "id": 67,
+    "en": "In our days, children never spoke back to their elders!",
+    "bn": "আমাদের জামানায় বড়দের মুখের ওপর কথা বলার সাহস কারো ছিল না!",
+    "occasions": [
+      "general",
+      "eid"
+    ]
+  },
+  {
+    "id": 68,
+    "en": "Look at Auntie's daughter, she wakes up at 6 AM every morning!",
+    "bn": "পাশের বাসার মেয়েটাকে দেখো, সকাল ছয়টায় ঘুম থেকে ওঠে!",
+    "occasions": [
+      "general",
+      "exam"
+    ]
+  },
+  {
+    "id": 69,
+    "en": "Why don't you ever reply to our messages on WhatsApp or Facebook?",
+    "bn": "হোয়াটসঅ্যাপ বা ফেসবুকে আমাদের মেসেজের উত্তর দাও না কেন?",
+    "occasions": [
+      "general",
+      "eid",
+      "wedding"
+    ]
+  },
+  {
+    "id": 70,
+    "en": "Kids today have no patience; everything has to be instant!",
+    "bn": "আজকালকার ছেলেমেয়েদের কোনো ধৈর্য নেই, সব ইনস্ট্যান্ট চাই!",
+    "occasions": [
+      "general",
+      "exam"
+    ]
+  },
+  {
+    "id": 71,
+    "en": "Who taught you to wear sunglasses indoors like a movie star?",
+    "bn": "ঘরের ভেতর সানগ্লাস পরে ঘুরতে কে শিখিয়েছে তোমারে?",
+    "occasions": [
+      "general",
+      "wedding"
+    ]
+  },
+  {
+    "id": 72,
+    "en": "Sit down properly and greet everyone who walked through the door!",
+    "bn": "উঠে দাঁড়িয়ে ঘরে আসা মুরুব্বিদের সালাম/আদাব দিয়েছো?",
+    "occasions": [
+      "eid",
+      "general",
+      "wedding"
+    ]
+  },
+  {
+    "id": 73,
+    "en": "You kids know all the world news but don't know your second cousins!",
+    "bn": "দুনিয়ার খবর রাখো, অথচ নিজের খালাতো ভাই-বোনের খবর জানো না!",
+    "occasions": [
+      "eid",
+      "general"
+    ]
+  },
+  {
+    "id": 74,
+    "en": "Drink your milk, calcium is essential for your bones!",
+    "bn": "দুধের গ্লাসটা শেষ করো, হাড় মজবুত রাখতে দুধ খেতেই হবে!",
+    "occasions": [
+      "general"
+    ]
+  },
+  {
+    "id": 75,
+    "en": "Why is your hair dyed that strange yellow-brown color?",
+    "bn": "মাথার চুলে ওসব কী রঙ লাগাইছো? পাকনা পাকা দেখাচ্ছে!",
+    "occasions": [
+      "general",
+      "wedding"
+    ]
+  },
+  {
+    "id": 76,
+    "en": "Don't roam around outside after 8 PM, stay safe at home!",
+    "bn": "রাত আটটার পর আর রাস্তায় ঘোরাঘুরি করবা না, সোজা বাসায় ফিরবা!",
+    "occasions": [
+      "general",
+      "exam"
+    ]
+  },
+  {
+    "id": 77,
+    "en": "We walked 5 miles in the rain just to go to high school!",
+    "bn": "আমরা তো বৃষ্টি-বাদলের দিনে পাঁচ মাইল হেঁটে স্কুলে যেতাম!",
+    "occasions": [
+      "general",
+      "exam"
+    ]
+  },
+  {
+    "id": 78,
+    "en": "Have a cup of hot milk tea with Marie biscuits!",
+    "bn": "এক কাপ গরম দুধ-চা আর বিস্কুট খেয়ে নাও, ক্লান্তি দূর হবে!",
+    "occasions": [
+      "general",
+      "eid"
+    ]
+  },
+  {
+    "id": 79,
+    "en": "Turn down the fan speed, you'll catch a cold and cough!",
+    "bn": "ফ্যানের স্পিড কমাও, বুক বসে গিয়ে ঠান্ডা লাগবে তো!",
+    "occasions": [
+      "general"
+    ]
+  },
+  {
+    "id": 80,
+    "en": "Are you still awake playing video games at 2 AM?",
+    "bn": "রাত দুইটার সময়ও গেম খেলা নিয়ে বসে আছো? সকালের খবর আছে!",
+    "occasions": [
+      "general",
+      "exam"
+    ]
+  },
+  {
+    "id": 81,
+    "en": "Where did you buy your Eid outfit from? New Market or Bashundhara?",
+    "bn": "ঈদের জামা কোথা থেকে কিনলা? নিউ মার্কেট না বসুন্ধরা?",
+    "occasions": [
+      "eid"
+    ]
+  },
+  {
+    "id": 82,
+    "en": "How much total Eidi did you collect today from all the uncles?",
+    "bn": "আজকে চাচা-মামাদের কাছ থেকে মোট কত সেলামি তুললা?",
+    "occasions": [
+      "eid"
+    ]
+  },
+  {
+    "id": 83,
+    "en": "You are earning now, why are you asking for Eidi? Give us Eidi!",
+    "bn": "এখন তো চাকরি করো, সেলামি চাওয়া বাদ দিয়ে আমাদের সেলামি দাও!",
+    "occasions": [
+      "eid"
+    ]
+  },
+  {
+    "id": 84,
+    "en": "Did you go to your village home this Eid? How bad was the highway traffic?",
+    "bn": "ঈদে গ্রামের বাড়ি গেছিলা? মহাসড়কে জ্যাম কেমন ছিল?",
+    "occasions": [
+      "eid"
+    ]
+  },
+  {
+    "id": 85,
+    "en": "How much did you pay for this year's Qurbani cow? How many maunds?",
+    "bn": "কোরবানির গরু কত দিয়ে কিনলা? কয় মণ গোশত হবে?",
+    "occasions": [
+      "eid"
+    ]
+  },
+  {
+    "id": 86,
+    "en": "Taste our special Shemai! Aunty made it with special pure ghee!",
+    "bn": "আমাদের স্পেশাল লাচ্ছা সেমাইটা খেয়ে দেখো, খাঁটি গাওয়া ঘিয়ে ভাজা!",
+    "occasions": [
+      "eid"
+    ]
+  },
+  {
+    "id": 87,
+    "en": "How many days of Eid holiday did your office officially approve?",
+    "bn": "ঈদের ছুটি কয়দিন মঞ্জুর করলো অফিস থেকে?",
+    "occasions": [
+      "eid"
+    ]
+  },
+  {
+    "id": 88,
+    "en": "How many houses have you visited for Eid feast since morning?",
+    "bn": "সকাল থেকে কয়টা বাসায় গিয়ে ঈদের দাওয়াত খাইলা?",
+    "occasions": [
+      "eid"
+    ]
+  },
+  {
+    "id": 89,
+    "en": "Did you perform the Eid prayer at the National Eidgah ground?",
+    "bn": "জাতীয় ঈদগাহ ময়দানে নামাজ পড়তে গেছিলা নাকি মহল্লার মসজিদে?",
+    "occasions": [
+      "eid"
+    ]
+  },
+  {
+    "id": 90,
+    "en": "Your Panjabi looks very elegant, is it designer or tailor-made?",
+    "bn": "পাঞ্জাবিটা তো খুব সুন্দর, ব্র্যান্ডের নাকি দর্জি দিয়ে বানাইছো?",
+    "occasions": [
+      "eid",
+      "wedding"
+    ]
+  },
+  {
+    "id": 91,
+    "en": "Don't eat so much beef in one sitting, think about your cholesterol!",
+    "bn": "একবারে এত গরুর মাংস খেয়ো না, কোলেস্টেরলের কথা ভাবো!",
+    "occasions": [
+      "eid"
+    ]
+  },
+  {
+    "id": 92,
+    "en": "Come back tomorrow for lunch, we cooked special rezala and pulao!",
+    "bn": "কাল দুপুরে আমাদের বাসায় আসবা, স্পেশাল খাসির রেজালা রান্না হবে!",
+    "occasions": [
+      "eid"
+    ]
+  },
+  {
+    "id": 93,
+    "en": "Remember how excited we used to be for Eid when we were young?",
+    "bn": "আমাদের ছোটবেলার ঈদের আনন্দের সাথে কি আজকের ঈদের তুলনা হয়?",
+    "occasions": [
+      "eid"
+    ]
+  },
+  {
+    "id": 94,
+    "en": "Did you put Mehendi on your hands? Show me the design!",
+    "bn": "হাতে মেহেদি দিয়েছো? দেখি তো কেমন ডিজাইন করেছো!",
+    "occasions": [
+      "eid",
+      "wedding"
+    ]
+  },
+  {
+    "id": 95,
+    "en": "Don't just sleep all day on Eid, go out and meet your relatives!",
+    "bn": "ঈদের দিন দুপুরবেলা ঘুমালে চলে? আত্মীয়দের বাসায় যাও!",
+    "occasions": [
+      "eid"
+    ]
+  },
+  {
+    "id": 96,
+    "en": "Crispy Jorda or Zarda rice, which one do you prefer after meat?",
+    "bn": "মাংসের পর কোনটা খাবা? স্পেশাল জর্দা নাকি ফিরনি?",
+    "occasions": [
+      "eid",
+      "wedding"
+    ]
+  },
+  {
+    "id": 97,
+    "en": "The cow market price was completely unreasonable this year!",
+    "bn": "এই বছর পশুর হাটে গরুর যে দাম হাঁকাইছে, বলার বাইরে!",
+    "occasions": [
+      "eid"
+    ]
+  },
+  {
+    "id": 98,
+    "en": "Pack some Shami Kabab in a box to take home for your father!",
+    "bn": "টিফিন বক্সে কিছু শামি কাবাব নিয়ে যাও, তোমার বাবার জন্য দিলাম!",
+    "occasions": [
+      "eid"
+    ]
+  },
+  {
+    "id": 99,
+    "en": "How many tolas of gold did the groom's side gift the bride?",
+    "bn": "বরের বাড়ি থেকে কনেকে কয় ভরি গয়না দিল জানো?",
+    "occasions": [
+      "wedding"
+    ]
+  },
+  {
+    "id": 100,
+    "en": "The roast chicken piece tastes a little too salty today, don't you think?",
+    "bn": "আজকের রোস্টটা একটু নোনতা হইছে না? লবণটা বেশি লাগছে!",
+    "occasions": [
+      "wedding"
+    ]
+  },
+  {
+    "id": 101,
+    "en": "Who booked this community center? The stage decor is too flashy!",
+    "bn": "এই কমিউনিটি সেন্টার কে পছন্দ করছে? স্টেজটা বেশি জমকালো লাগছে!",
+    "occasions": [
+      "wedding"
+    ]
+  },
+  {
+    "id": 102,
+    "en": "The groom's family looks very strict and demanding!",
+    "bn": "বরের বাড়ির লোকজন একটু বেশিই কড়া মেজাজের মনে হচ্ছে!",
+    "occasions": [
+      "wedding"
+    ]
+  },
+  {
+    "id": 103,
+    "en": "You should have dressed up with a richer silk saree for this event!",
+    "bn": "বিয়ের অনুষ্ঠানে আরেকটু কাতান বা সিল্কের শাড়ি পরে আসতে পারতে!",
+    "occasions": [
+      "wedding"
+    ]
+  },
+  {
+    "id": 104,
+    "en": "Where are they hosting the Grand Boubhat Reception next week?",
+    "bn": "বৌভাতের অনুষ্ঠানটা কোন হোটেলে করছে আগামী সপ্তাহে?",
+    "occasions": [
+      "wedding"
+    ]
+  },
+  {
+    "id": 105,
+    "en": "Did you notice what heavy saree the groom's aunt is wearing?",
+    "bn": "বরের খালাম্মা কী ভারী শাড়ি আর গয়না পরেছে দেখেছো?",
+    "occasions": [
+      "wedding"
+    ]
+  },
+  {
+    "id": 106,
+    "en": "Catch the bride's flower garland, and your wedding will be next!",
+    "bn": "মালাটা তোমার দিকেই যেন আসে, পরের বিয়ের সানাই তোমারই বাজবে!",
+    "occasions": [
+      "wedding"
+    ]
+  },
+  {
+    "id": 107,
+    "en": "The Kacchi Biryani rice isn't fragrant enough like old Dhaka style!",
+    "bn": "কাচ্চির সুগন্ধটা ঠিক পুরান ঢাকার বাবুর্চিদের মতো খোলে নাই!",
+    "occasions": [
+      "wedding"
+    ]
+  },
+  {
+    "id": 108,
+    "en": "How did the bride and groom meet? Love or arranged match?",
+    "bn": "পাত্র-পাত্রীর পরিচয় হলো কীভাবে? প্রেম নাকি দুই পরিবারের দেখাশোনা?",
+    "occasions": [
+      "wedding"
+    ]
+  },
+  {
+    "id": 109,
+    "en": "Don't just eat salad, this is a wedding banquet, eat mutton!",
+    "bn": "বিয়ের অনুষ্ঠানে এসে শুধু সালাদ খেলে চলবে? খাসির মাংস নাও!",
+    "occasions": [
+      "wedding"
+    ]
+  },
+  {
+    "id": 110,
+    "en": "The photography crew is blinding everyone with those huge spotlights!",
+    "bn": "ফটোগ্রাফারদের লাইটের আলোয় তো চোখ ধাঁধিয়ে যাওয়ার অবস্থা!",
+    "occasions": [
+      "wedding"
+    ]
+  },
+  {
+    "id": 111,
+    "en": "Take a picture of us aunties together and send it on Viber!",
+    "bn": "আমাদের সব খালাদের একসাথে একটা সুন্দর ছবি তুলে ভাইবারে পাঠাবা!",
+    "occasions": [
+      "wedding",
+      "eid",
+      "general"
+    ]
+  },
+  {
+    "id": 112,
+    "en": "Did they arrange a proper gateway gate money negotiation ceremony?",
+    "bn": "গেট ধরার সময় দুলাভাইয়ের কাছ থেকে কত টাকা আদায় করলা?",
+    "occasions": [
+      "wedding"
+    ]
+  },
+  {
+    "id": 113,
+    "en": "The bride's makeup artist did too much foundation, didn't they?",
+    "bn": "কনের মেকআপটা কি একটু বেশি বেশি সাদা করে ফেলেছে না?",
+    "occasions": [
+      "wedding"
+    ]
+  },
+  {
+    "id": 114,
+    "en": "Eat quickly or the dessert counter will run out of sweet curd!",
+    "bn": "তাড়াতাড়ি খাও, মিষ্টির কাউন্টারে কিন্তু বগুড়ার দই শেষ হয়ে যাবে!",
+    "occasions": [
+      "wedding"
+    ]
+  },
+  {
+    "id": 115,
+    "en": "You've been hovering around the catering line for three rounds!",
+    "bn": "তোমারে তো ক্যাটারিং লাইনে তিনবার চক্কর দিতে দেখলাম!",
+    "occasions": [
+      "wedding"
+    ]
+  },
+  {
+    "id": 116,
+    "en": "Look at the groom smiling, he's so happy he finally got married!",
+    "bn": "বরের মুখের হাসি দেখো, বিয়ে করে কী যে আনন্দ ওর!",
+    "occasions": [
+      "wedding"
+    ]
+  },
+  {
+    "id": 117,
+    "en": "Are you attending all three days of Haldi, Wedding and Reception?",
+    "bn": "গায়ে হলুদ, বিয়ে আর বৌভাত—তিন দিনই অনুষ্ঠানে আসবা তো?",
+    "occasions": [
+      "wedding"
+    ]
+  },
+  {
+    "id": 118,
+    "en": "The wedding card box was so extravagant, full of dry fruits!",
+    "bn": "বিয়ের কার্ডের বক্সটা তো দারুণ ছিল, সাথে ড্রাই ফ্রুটসও দিল!",
+    "occasions": [
+      "wedding"
+    ]
+  },
+  {
+    "id": 119,
+    "en": "Why take Arts or Humanities? Science is the only true future!",
+    "bn": "আর্টস নিয়ে পড়লে সমাজে কী দাম? সায়েন্সই হলো আসল ভবিষ্যৎ!",
+    "occasions": [
+      "exam",
+      "general"
+    ]
+  },
+  {
+    "id": 120,
+    "en": "Did you memorize all 100 physics equations before the exam?",
+    "bn": "পদার্থবিজ্ঞানের সব সূত্র মুখস্থ করেছো তো পরীক্ষার আগে?",
+    "occasions": [
+      "exam"
+    ]
+  },
+  {
+    "id": 121,
+    "en": "Don't waste time on sports; books will feed you in life!",
+    "bn": "খেলাধুলা করে পেট ভরবে না, বইয়ের পাতাতেই জীবনের ভবিষ্যৎ!",
+    "occasions": [
+      "exam",
+      "general"
+    ]
+  },
+  {
+    "id": 122,
+    "en": "If you don't become a doctor or engineer, what will you tell relatives?",
+    "bn": "ডাক্তার বা ইঞ্জিনিয়ার না হলে আত্মীয়দের সামনে মুখ দেখাবা কীভাবে?",
+    "occasions": [
+      "exam",
+      "general"
+    ]
+  },
+  {
+    "id": 123,
+    "en": "You spent the whole study leave watching dramas on Netflix!",
+    "bn": "পরীক্ষার ছুটির পুরো সময়টা নেটফ্লিক্সে সিরিজ দেখে নষ্ট করলা!",
+    "occasions": [
+      "exam",
+      "general"
+    ]
+  },
+  {
+    "id": 124,
+    "en": "Did you apply for Chevening or Fulbright foreign scholarship?",
+    "bn": "বাইরের সরকারি স্কলারশিপের জন্য দরখাস্ত জমা দিয়েছো?",
+    "occasions": [
+      "exam",
+      "general"
+    ]
+  },
+  {
+    "id": 125,
+    "en": "Your school principal used to be so proud of our family batch!",
+    "bn": "তোমাদের স্কুলের প্রধান শিক্ষক তো আমাদের সময়কার কথা এখনও মনে রাখেন!",
+    "occasions": [
+      "exam",
+      "general"
+    ]
+  },
+  {
+    "id": 126,
+    "en": "Why do you have only 3.5 CGPA? Where did the other 0.5 go?",
+    "bn": "৩.৫ সিজিপিএ পাইলা কেন? বাকি ০.৫ নম্বর কোথায় হারাইলা?",
+    "occasions": [
+      "exam"
+    ]
+  },
+  {
+    "id": 127,
+    "en": "Have you started taking bank job coaching classes on weekends?",
+    "bn": "শুক্র-শনিবারে ব্যাংক জব কোচিংয়ে ক্লাস করা শুরু করছো?",
+    "occasions": [
+      "exam",
+      "general"
+    ]
+  },
+  {
+    "id": 128,
+    "en": "The board exam question paper was so easy, anyone could score A+!",
+    "bn": "এই বছর বোর্ডের প্রশ্ন এত সহজ ছিল, যে কেউ এ প্লাস পাবে!",
+    "occasions": [
+      "exam"
+    ]
+  },
+  {
+    "id": 129,
+    "en": "Wake up at 4 AM and study; morning memory is 10 times sharper!",
+    "bn": "ভোর চারটায় উঠে পড়বা, সকালে পড়লে পড়া মাথায় বেশি থাকে!",
+    "occasions": [
+      "exam",
+      "general"
+    ]
+  },
+  {
+    "id": 130,
+    "en": "Stop making excuses about bad luck; hard work is the only secret!",
+    "bn": "ভাগ্যের দোষ দিবা না, কঠোর পরিশ্রম ছাড়া কেউ কোনোদিন বড় হতে পারে নাই!",
+    "occasions": [
+      "exam",
+      "general"
+    ]
+  }
+]

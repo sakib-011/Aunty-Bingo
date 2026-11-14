@@ -1,0 +1,177 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 380" width="100%" height="100%">
+  <defs>
+    <linearGradient id="wallGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF5E6"/>
+      <stop offset="100%" stop-color="#F1EDFF"/>
+    </linearGradient>
+    <linearGradient id="sofaGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FF6B5E"/>
+      <stop offset="100%" stop-color="#E25547"/>
+    </linearGradient>
+    <linearGradient id="cushionGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFD166"/>
+      <stop offset="100%" stop-color="#F6AE2D"/>
+    </linearGradient>
+    <linearGradient id="auntyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6854C7"/>
+      <stop offset="100%" stop-color="#4E3CA3"/>
+    </linearGradient>
+    <filter id="heroShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#292735" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <!-- Background Warm Room Frame -->
+  <rect x="10" y="10" width="580" height="360" rx="24" fill="url(#wallGrad)"/>
+
+  <!-- Decorative Wall Frames & Bengali Alpona Pattern Accent -->
+  <g opacity="0.25">
+    <circle cx="300" cy="190" r="140" fill="none" stroke="#6854C7" stroke-width="2" stroke-dasharray="8,6"/>
+    <circle cx="300" cy="190" r="170" fill="none" stroke="#FF6B5E" stroke-width="1.5" stroke-dasharray="4,6"/>
+  </g>
+
+  <!-- Wall Hanging Frame (Old Dhaka Rickshaw Art Motif) -->
+  <rect x="250" y="30" width="100" height="70" rx="8" fill="#FFF" stroke="#FFD166" stroke-width="4" filter="url(#heroShadow)"/>
+  <rect x="256" y="36" width="88" height="58" rx="4" fill="#FF8A80"/>
+  <circle cx="300" cy="65" r="16" fill="#FFD166"/>
+  <text x="300" y="70" font-family="'Poppins', sans-serif" font-weight="900" font-size="14" fill="#6854C7" text-anchor="middle">শুভ</text>
+
+  <!-- Hanging Potted Plant (Money Plant) -->
+  <g transform="translate(50, 40)">
+    <path d="M40 0 L40 40" stroke="#8D6E63" stroke-width="2"/>
+    <ellipse cx="40" cy="45" rx="16" ry="8" fill="#BCAAA4"/>
+    <path d="M40 45 Q20 70 30 90 Q38 100 35 110" stroke="#39B980" stroke-width="3" fill="none"/>
+    <path d="M40 45 Q60 70 50 95 Q42 105 45 115" stroke="#2E7D32" stroke-width="3" fill="none"/>
+    <circle cx="28" cy="85" r="6" fill="#39B980"/>
+    <circle cx="52" cy="90" r="7" fill="#4CAF50"/>
+  </g>
+
+  <!-- Floor Carpet / Rug with Warm Bengali Motif -->
+  <ellipse cx="300" cy="330" rx="230" ry="32" fill="#E8E2FF"/>
+  <ellipse cx="300" cy="330" rx="200" ry="24" fill="none" stroke="#FFD166" stroke-width="3" stroke-dasharray="6,4"/>
+
+  <!-- Big Cozy Family Sofa -->
+  <!-- Sofa Backrest -->
+  <rect x="140" y="160" width="320" height="110" rx="20" fill="url(#sofaGrad)" filter="url(#heroShadow)"/>
+  <!-- Sofa Armrests -->
+  <rect x="120" y="190" width="40" height="80" rx="18" fill="#E25547"/>
+  <rect x="440" y="190" width="40" height="80" rx="18" fill="#E25547"/>
+  <!-- Sofa Base Cushion -->
+  <rect x="140" y="240" width="320" height="45" rx="14" fill="#D32F2F"/>
+  <!-- Cushions -->
+  <rect x="165" y="210" width="45" height="40" rx="10" transform="rotate(-10 185 230)" fill="url(#cushionGrad)"/>
+  <rect x="390" y="210" width="45" height="40" rx="10" transform="rotate(12 410 230)" fill="#6854C7"/>
+
+  <!-- Character 1: The Inquiring Aunty (Right Side) -->
+  <g transform="translate(330, 115)">
+    <!-- Hair bun with flowers -->
+    <circle cx="50" cy="30" r="26" fill="#292735"/>
+    <circle cx="50" cy="12" r="14" fill="#1E1B29"/>
+    <circle cx="36" cy="15" r="5" fill="#FFF"/>
+    <circle cx="48" cy="8" r="5" fill="#FFD166"/>
+    <circle cx="62" cy="15" r="5" fill="#FFF"/>
+    <!-- Head -->
+    <path d="M30 35 C30 65 70 65 70 35 C70 20 30 20 30 35 Z" fill="#FAD4B2"/>
+    <!-- Bindi -->
+    <circle cx="50" cy="34" r="3.5" fill="#D32F2F"/>
+    <!-- Cat eye specs -->
+    <ellipse cx="40" cy="40" rx="7" ry="5" fill="none" stroke="#D81B60" stroke-width="2"/>
+    <ellipse cx="60" cy="40" rx="7" ry="5" fill="none" stroke="#D81B60" stroke-width="2"/>
+    <line x1="47" y1="40" x2="53" y2="40" stroke="#D81B60" stroke-width="2"/>
+    <!-- Inquiring Smile -->
+    <path d="M44 52 Q50 58 58 51" stroke="#C2185B" stroke-width="2" fill="none"/>
+    <!-- Sari Body -->
+    <path d="M15 75 C25 60 75 60 85 75 L95 140 L5 140 Z" fill="url(#auntyGrad)"/>
+    <!-- Sari Pallu & Gold border -->
+    <path d="M22 68 Q50 62 78 68" stroke="#FFD166" stroke-width="3" fill="none"/>
+    <path d="M18 70 L70 140" stroke="#FFD166" stroke-width="3"/>
+    <!-- Hand gesturing "Tell me!" -->
+    <path d="M15 85 Q0 90 -5 105" stroke="#FAD4B2" stroke-width="6" stroke-linecap="round" fill="none"/>
+    <circle cx="-5" cy="105" r="4" fill="#FAD4B2"/>
+  </g>
+
+  <!-- Character 2: The Serious Uncle with Newspaper/Tea (Left Side) -->
+  <g transform="translate(190, 120)">
+    <!-- Hair & Moustache -->
+    <circle cx="40" cy="30" r="22" fill="#546E7A"/>
+    <!-- Head -->
+    <circle cx="40" cy="38" r="18" fill="#FAD4B2"/>
+    <ellipse cx="40" cy="46" rx="9" ry="3.5" fill="#37474F"/> <!-- Thick Uncle Moustache -->
+    <!-- Specs -->
+    <rect x="28" y="32" width="10" height="7" rx="2" fill="none" stroke="#37474F" stroke-width="1.8"/>
+    <rect x="42" y="32" width="10" height="7" rx="2" fill="none" stroke="#37474F" stroke-width="1.8"/>
+    <line x1="38" y1="35" x2="42" y2="35" stroke="#37474F" stroke-width="1.8"/>
+    <!-- Kurta / Panjabi -->
+    <path d="M15 65 C25 55 55 55 65 65 L72 135 L8 135 Z" fill="#FFF9F0" stroke="#CFD8DC" stroke-width="2"/>
+    <!-- Classic Nehru Vest (Waistcoat) -->
+    <path d="M18 68 L32 130 L48 130 L62 68 Z" fill="#8D6E63"/>
+    <line x1="40" y1="72" x2="40" y2="125" stroke="#5D4037" stroke-width="2"/>
+    <!-- Hand holding newspaper/cha cup -->
+    <path d="M60 85 Q80 90 75 105" stroke="#FAD4B2" stroke-width="6" stroke-linecap="round" fill="none"/>
+  </g>
+
+  <!-- Center Tea Table (Teapoy) -->
+  <ellipse cx="300" cy="285" rx="80" ry="24" fill="#8D6E63" filter="url(#heroShadow)"/>
+  <ellipse cx="300" cy="283" rx="76" ry="21" fill="#A1887F"/>
+  <path d="M245 285 L245 320 M355 285 L355 320 M300 295 L300 325" stroke="#6D4C41" stroke-width="5"/>
+
+  <!-- Traditional Clay Cups / Ceramic Cups with Steaming Chai & Samosa plate -->
+  <g transform="translate(265, 265)">
+    <!-- Cup 1 -->
+    <path d="M6 10 L10 24 L22 24 L26 10 Z" fill="#D7CCC8" stroke="#8D6E63" stroke-width="1.5"/>
+    <ellipse cx="16" cy="10" rx="10" ry="3" fill="#6D4C41"/>
+    <!-- Steam -->
+    <path d="M14 6 Q12 0 16 -6" stroke="#B0BEC5" stroke-width="1.5" fill="none" opacity="0.7"/>
+    <path d="M18 6 Q20 0 16 -6" stroke="#B0BEC5" stroke-width="1.5" fill="none" opacity="0.7"/>
+  </g>
+  <g transform="translate(305, 268)">
+    <!-- Plate of Shingara / Samosas -->
+    <ellipse cx="20" cy="16" rx="20" ry="8" fill="#FFF" stroke="#BDBDBD" stroke-width="1.5"/>
+    <polygon points="12,14 18,7 22,14" fill="#F57C00"/>
+    <polygon points="20,15 26,8 30,15" fill="#EF6C00"/>
+    <polygon points="16,16 21,10 26,16" fill="#FFB74D"/>
+  </g>
+
+  <!-- Animated-Style Floating Speech Bubbles with Bengali Transliterations -->
+  <!-- Bubble 1: Top Left -->
+  <g transform="translate(45, 130)" filter="url(#heroShadow)">
+    <rect x="0" y="0" width="130" height="42" rx="16" fill="#FFFFFF" stroke="#FF6B5E" stroke-width="2.5"/>
+    <polygon points="100,42 115,54 112,42" fill="#FFFFFF"/>
+    <polyline points="100,42 115,54 112,42" stroke="#FF6B5E" stroke-width="2.5" fill="#FFFFFF"/>
+    <text x="65" y="22" font-family="'Poppins', sans-serif" font-weight="700" font-size="12" fill="#FF6B5E" text-anchor="middle">Biye kobe?</text>
+    <text x="65" y="34" font-family="'Noto Sans Bengali', sans-serif" font-weight="500" font-size="9" fill="#6C6A7B" text-anchor="middle">বিয়ে কবে করবা?</text>
+  </g>
+
+  <!-- Bubble 2: Top Right -->
+  <g transform="translate(425, 60)" filter="url(#heroShadow)">
+    <rect x="0" y="0" width="135" height="42" rx="16" fill="#FFFFFF" stroke="#6854C7" stroke-width="2.5"/>
+    <polygon points="30,42 22,54 42,42" fill="#FFFFFF"/>
+    <polyline points="30,42 22,54 42,42" stroke="#6854C7" stroke-width="2.5" fill="#FFFFFF"/>
+    <text x="67" y="22" font-family="'Poppins', sans-serif" font-weight="700" font-size="12" fill="#6854C7" text-anchor="middle">Salary koto?</text>
+    <text x="67" y="34" font-family="'Noto Sans Bengali', sans-serif" font-weight="500" font-size="9" fill="#6C6A7B" text-anchor="middle">মাসে বেতন কত পাও?</text>
+  </g>
+
+  <!-- Bubble 3: Mid Right -->
+  <g transform="translate(435, 175)" filter="url(#heroShadow)">
+    <rect x="0" y="0" width="140" height="42" rx="16" fill="#FFFFFF" stroke="#F26419" stroke-width="2.5"/>
+    <polygon points="25,42 15,52 35,42" fill="#FFFFFF"/>
+    <polyline points="25,42 15,52 35,42" stroke="#F26419" stroke-width="2.5" fill="#FFFFFF"/>
+    <text x="70" y="22" font-family="'Poppins', sans-serif" font-weight="700" font-size="12" fill="#F26419" text-anchor="middle">Result kemon?</text>
+    <text x="70" y="34" font-family="'Noto Sans Bengali', sans-serif" font-weight="500" font-size="9" fill="#6C6A7B" text-anchor="middle">গোল্ডেন এ প্লাস পাইছো?</text>
+  </g>
+
+  <!-- Bubble 4: Mid Left -->
+  <g transform="translate(30, 230)" filter="url(#heroShadow)">
+    <rect x="0" y="0" width="135" height="42" rx="16" fill="#FFFFFF" stroke="#39B980" stroke-width="2.5"/>
+    <polygon points="95,0 110,-12 105,0" fill="#FFFFFF"/>
+    <polyline points="95,0 110,-12 105,0" stroke="#39B980" stroke-width="2.5" fill="#FFFFFF"/>
+    <text x="67" y="22" font-family="'Poppins', sans-serif" font-weight="700" font-size="12" fill="#2E7D32" text-anchor="middle">Bidesh jaba?</text>
+    <text x="67" y="34" font-family="'Noto Sans Bengali', sans-serif" font-weight="500" font-size="9" fill="#6C6A7B" text-anchor="middle">বাইরে যাওয়ার চেষ্টা?</text>
+  </g>
+
+  <!-- Festive Confetti / Sparkle Accents -->
+  <circle cx="160" cy="80" r="4" fill="#FFD166"/>
+  <circle cx="410" cy="40" r="5" fill="#FF6B5E"/>
+  <path d="M120 100 L125 105 L120 110 L115 105 Z" fill="#6854C7"/>
+  <path d="M480 140 L485 145 L480 150 L475 145 Z" fill="#39B980"/>
+</svg>
