@@ -38,12 +38,12 @@ export default function LandingPage({
     },
     {
       name: lang === 'bn' ? 'নুসরাত জাহান' : 'Nusrat Jahan',
-      location: lang === 'bn' ? 'চট্টগ্রাম' : 'Chittagong',
+      location: lang === 'bn' ? 'চট্টগ্রাম' : 'Chattogram',
       occasion: lang === 'bn' ? 'বিয়ে ও দাওয়াত' : 'Wedding / Dawot',
       quote:
         lang === 'bn'
           ? 'চার ঘণ্টার লম্বা বিয়ের দাওয়াতে ঘটকালি আন্টিদের জেরা সামলানোর সেরা উপায় এটি! বিঙ্গো মেলাতেই কার্ড এক্সপোর্ট করে ইনস্টাগ্রাম স্টোরিতে দিয়েছিলাম, প্রচুর রেসপন্স পেয়েছি।'
-          : 'The ultimate survival tool for a four-hour wedding reception. When I got my diagonal line, I exported the card to Instagram Stories and got dozens of replies from friends who related immediately.'
+          : 'The ultimate survival tool for a four hour wedding reception. When I got my diagonal line, I exported the card to Instagram Stories and got dozens of replies from friends who related immediately.'
     },
     {
       name: lang === 'bn' ? 'ফারহান কবির' : 'Farhan Kabir',
@@ -61,14 +61,14 @@ export default function LandingPage({
       q: lang === 'bn' ? 'খেলার জন্য কি কোনো অ্যাকাউন্ট তৈরি করতে হবে?' : 'Do I need an account or registration to play?',
       a:
         lang === 'bn'
-          ? 'না, কোনো অ্যাকাউন্ট বা সাইন-আপের প্রয়োজন নেই। ব্রাউজার খুললেই তৎক্ষণাৎ খেলা শুরু করা যায় এবং এটি ১০০% বিনামূল্যে।'
-          : 'No. There is zero signup, no login, and no email required. Open your browser and play immediately for free.'
+          ? 'না, কোনো অ্যাকাউন্ট বা সাইন আপের প্রয়োজন নেই। ব্রাউজার খুললেই তৎক্ষণাৎ খেলা শুরু করা যায় এবং এটি ১০০% বিনামূল্যে।'
+          : 'No. There is zero sign up, no login, and no email required. Open your browser and play immediately for free.'
     },
     {
       q: lang === 'bn' ? 'আমার তথ্য বা কার্যকলাপ কি কোথাও সংরক্ষণ করা হয়?' : 'Is my data or game activity stored on any server?',
       a:
         lang === 'bn'
-          ? 'না। আন্টি বিঙ্গো সম্পূর্ণ ক্লায়েন্ট-সাইড আর্কিটেকচারে চলে। আপনার দাগানো কার্ড, সময় বা কোনো ডেটাই সার্ভারে যায় না, সবকিছু আপনার ডিভাইসেই থাকে।'
+          ? 'না। আন্টি বিঙ্গো সম্পূর্ণ ক্লায়েন্ট সাইড আর্কিটেকচারে চলে। আপনার দাগানো কার্ড, সময় বা কোনো ডেটাই সার্ভারে যায় না, সবকিছু আপনার ডিভাইসেই থাকে।'
           : 'Never. The application runs 100% inside your browser. No personal data, tracking cookies, or activity logs are collected or transmitted.'
     },
     {
@@ -82,8 +82,8 @@ export default function LandingPage({
       q: lang === 'bn' ? 'ভুল করে কোনো কার্ডে ক্লিক করলে কি দাগ মোছা যায়?' : 'Can I undo an accidental mark on a card?',
       a:
         lang === 'bn'
-          ? 'হ্যাঁ। ভুল করে কোনো কার্ড দাগিয়ে ফেললে সেই কার্ডে ডাবল ক্লিক (ডেস্কটপে) বা দ্রুত দুইবার ট্যাপ (মোবাইলে) করলেই কার্ডটি তৎক্ষণাৎ আনমার্ক হয়ে যাবে।'
-          : 'Yes. Double-click on desktop or double-tap on mobile instantly unmarks any tile back to its original state.'
+          ? 'হ্যাঁ। ভুল করে কোনো কার্ড দাগিয়ে ফেললে সেই কার্ডে ডাবল ক্লিক বা দ্রুত দুইবার ট্যাপ করলেই কার্ডটি তৎক্ষণাৎ আনমার্ক হয়ে যাবে।'
+          : 'Yes. Double click on desktop or double tap on mobile instantly unmarks any tile back to its original state.'
     },
     {
       q: lang === 'bn' ? 'কার্ডের লেখা বড় হলে সম্পূর্ণ প্রশ্ন কীভাবে পড়ব?' : 'How do I read long question text on small screens?',
@@ -96,15 +96,15 @@ export default function LandingPage({
       q: lang === 'bn' ? 'বিঙ্গো হওয়ার পর কীভাবে বন্ধুদের সাথে শেয়ার করব?' : 'How do I export and share my card after winning?',
       a:
         lang === 'bn'
-          ? 'বিঙ্গো হলেই ভিক্টরি কার্ড পপআপে ইনস্টাগ্রাম, ফেসবুক, হোয়াটসঅ্যাপ বা মেসেঞ্জারে এক-ক্লিকে শেয়ার করার বোতাম রয়েছে। এছাড়া হাই-রেজ্যুলেশন ১০৮০×১৩৫০ সাইজের পিএনজি কার্ড ডাউনলোড করা যায়।'
-          : 'Upon hitting BINGO, the victory dialog provides one-click sharing to Instagram Stories, WhatsApp, Facebook, and Messenger, along with a high-resolution 1080x1350 PNG download.'
+          ? 'বিঙ্গো হলেই ভিক্টরি কার্ড পপআপে ইনস্টাগ্রাম, ফেসবুক, হোয়াটসঅ্যাপ বা মেসেঞ্জারে এক ক্লিকে শেয়ার করার বোতাম রয়েছে। এছাড়া হাই রেজ্যুলেশন ১০৮০×১৩৫০ সাইজের পিএনজি কার্ড ডাউনলোড করা যায়।'
+          : 'Upon hitting BINGO, the victory dialog provides one click sharing to Instagram Stories, WhatsApp, Facebook, and Messenger, along with a high resolution 1080x1350 PNG download.'
     },
     {
       q: lang === 'bn' ? 'সবগুলো প্রশ্ন কি বাঙালি সংস্কৃতির জন্য সত্য?' : 'Are all phrases tailored to authentic Bengali gatherings?',
       a:
         lang === 'bn'
-          ? 'হ্যাঁ। আমাদের প্রশ্নভাণ্ডারে রয়েছে ১৩৯টিরও বেশি খাঁটি বাঙালি ডায়ালগ যা ঈদ, বিয়ে, রেজাল্ট এবং পারিবারিক আড্ডায় আত্মীয়দের মুখ থেকে প্রায়শই শোনা যায়।'
-          : 'Yes. Our database contains over 139 authentic phrases curated specifically around common cultural tropes heard at Bengali family events.'
+          ? 'হ্যাঁ। আমাদের প্রশ্নভাণ্ডারে রয়েছে ১৬৪টিরও বেশি খাঁটি বাঙালি ডায়ালগ যা ঈদ, বিয়ে, রেজাল্ট এবং পারিবারিক আড্ডায় আত্মীয়দের মুখ থেকে প্রায়শই শোনা যায়।'
+          : 'Yes. Our database contains over 164 authentic phrases curated specifically around common cultural tropes heard at Bengali family events.'
     },
     {
       q: lang === 'bn' ? 'অফলাইনে বা দুর্বল ইন্টারনেটে কি এটি খেলা সম্ভব?' : 'Does the game work offline or with slow connectivity?',
@@ -116,9 +116,9 @@ export default function LandingPage({
   ];
 
   return (
-    <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-10 flex flex-col gap-12 sm:gap-20">
+    <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8 flex flex-col gap-14 sm:gap-20">
       
-      {/* 1. HERO SECTION (Above the fold per A2) */}
+      {/* 1. HERO SECTION (Above the fold per A2 & B5) */}
       <section className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center pt-2 sm:pt-4">
         {/* Left Column: Heading, Subhead, CTA, Proof Signal */}
         <div className="flex flex-col items-start text-left max-w-[680px]">
@@ -128,23 +128,23 @@ export default function LandingPage({
             <span>
               {lang === 'bn'
                 ? 'আত্মীয়দের অপ্রস্তুত প্রশ্ন সামলানোর মজার বিঙ্গো'
-                : 'Survive awkward family interrogations with a game'}
+                : 'Survive awkward family interrogations with a party game'}
             </span>
           </div>
 
-          {/* Heading with approved light-theme text gradient per B5 */}
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight tracking-tight text-balance">
+          {/* Heading with approved text gradient per B5 and meaningful line breaks */}
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight tracking-tight text-balance max-w-[680px]">
             {lang === 'bn' ? (
               <>
                 <span className="text-[#8E1B3A]">পারিবারিক আড্ডায়</span> <br />
-                <span className="bg-gradient-to-r from-[#8E1B3A] via-[#B84B12] to-[#8E1B3A] bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-[#2B1B17] via-[#8E1B3A] to-[#6E554D] bg-clip-text text-transparent">
                   আন্টির প্রশ্নের বিঙ্গো
                 </span>
               </>
             ) : (
               <>
                 <span className="text-[#8E1B3A]">Survive the Family</span> <br />
-                <span className="bg-gradient-to-r from-[#8E1B3A] via-[#B84B12] to-[#8E1B3A] bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-[#2B1B17] via-[#8E1B3A] to-[#6E554D] bg-clip-text text-transparent">
                   Aunty Interrogation
                 </span>
               </>
@@ -158,11 +158,11 @@ export default function LandingPage({
               : 'Turn predictable family questions into a hilarious party game. Mark tiles as relatives ask their favorite questions, complete a line, and celebrate victory.'}
           </p>
 
-          {/* Primary CTA (Single prominent action per A4) */}
-          <div className="flex flex-wrap items-center gap-3 mt-6 sm:mt-8 w-full sm:w-auto">
+          {/* Primary Action Group: Single prominent CTA above fold per A4 */}
+          <div className="flex flex-wrap items-center gap-3.5 mt-6 sm:mt-8 w-full sm:w-auto">
             <button
               onClick={onStartPlaying}
-              className="flex-1 sm:flex-none px-7 py-3 rounded-full bg-[#8E1B3A] hover:bg-[#75142E] text-white font-semibold text-base flex items-center justify-center gap-2 shadow-md active:scale-[0.98] transition-all cursor-pointer"
+              className="px-8 py-3.5 rounded-full bg-[#8E1B3A] hover:bg-[#75142E] text-white font-semibold text-base flex items-center justify-center gap-2 shadow-md active:scale-[0.98] transition-all cursor-pointer"
             >
               <GamepadIcon className="text-sm" />
               <span>{lang === 'bn' ? 'এখনই বিঙ্গো খেলুন' : 'Play Bingo Now'}</span>
@@ -170,33 +170,33 @@ export default function LandingPage({
 
             <button
               onClick={onOpenHowTo}
-              className="flex-1 sm:flex-none px-6 py-3 rounded-full border-2 border-[#8E1B3A] text-[#8E1B3A] hover:bg-[#8E1B3A]/5 font-semibold text-base flex items-center justify-center gap-2 active:scale-[0.98] transition-all cursor-pointer"
+              className="px-5 py-3 rounded-full text-[#8E1B3A] hover:bg-[#8E1B3A]/10 font-semibold text-sm flex items-center justify-center gap-2 transition-colors cursor-pointer"
             >
               <QuestionIcon className="text-sm" />
               <span>{lang === 'bn' ? 'খেলার নিয়মাবলী' : 'How to Play'}</span>
             </button>
           </div>
 
-          {/* Proof Signal per A2 (No invented facts, clear product metric) */}
-          <div className="flex items-center gap-4 mt-6 pt-4 border-t border-[#E8DCD0] text-xs text-[#6E554D] font-medium">
+          {/* Proof Signal per A2 (Specific, verified numbers) */}
+          <div className="flex flex-wrap items-center gap-3 sm:gap-4 mt-6 pt-4 border-t border-[#E8DCD0] text-xs text-[#6E554D] font-medium">
             <div className="flex items-center gap-1.5">
               <CheckIcon className="text-green-600 text-xs" />
-              <span>{lang === 'bn' ? '১৩৯+ প্রামাণ্য বাঙালি ডায়ালগ' : '139+ Authentic Phrases'}</span>
+              <span>{lang === 'bn' ? '১৬৪+ প্রামাণ্য বাঙালি ডায়ালগ' : '164+ Curated Prompts'}</span>
             </div>
             <span>•</span>
             <div className="flex items-center gap-1.5">
               <CheckIcon className="text-green-600 text-xs" />
-              <span>{lang === 'bn' ? '১০০% ক্লায়েন্ট প্রাইভেট' : '100% Client-side Private'}</span>
+              <span>{lang === 'bn' ? '১০০% ক্লায়েন্ট সাইড ব্যক্তিগত' : '100% Client Side Private'}</span>
             </div>
             <span>•</span>
             <div className="flex items-center gap-1.5">
               <CheckIcon className="text-green-600 text-xs" />
-              <span>{lang === 'bn' ? 'কোনো সাইন-আপ নেই' : 'No Sign-up'}</span>
+              <span>{lang === 'bn' ? 'কোনো সাইন আপ নেই' : 'No Sign Up Required'}</span>
             </div>
           </div>
         </div>
 
-        {/* Right Column: Hero Visual Graphic & Draggable Floating Avatar */}
+        {/* Right Column: Hero Visual Graphic & Draggable Floating Mascot */}
         <div className="relative w-full aspect-[16/11]">
           {/* Framed Graphic */}
           <div className="w-full h-full rounded-3xl overflow-hidden shadow-xl border border-[#D8C6B6] bg-white flex items-center justify-center p-2">
@@ -207,7 +207,7 @@ export default function LandingPage({
             />
           </div>
 
-          {/* Draggable Floating Aunty Mascot that can be moved anywhere on screen */}
+          {/* Draggable Floating Aunty Mascot */}
           <DraggableAunty lang={lang} />
         </div>
       </section>
@@ -309,7 +309,7 @@ export default function LandingPage({
           <p className="text-xs sm:text-sm text-[#6E554D] mt-1.5 font-normal text-pretty">
             {lang === 'bn'
               ? 'কোনো জটিলতা ছাড়া তাৎক্ষণিকভাবে খেলা শুরু করার নিয়ম।'
-              : 'Simple, fast, and 100% relatable party gameplay.'}
+              : 'Simple, fast, and completely relatable party gameplay.'}
           </p>
         </div>
 
@@ -340,7 +340,7 @@ export default function LandingPage({
             <p className="text-xs text-[#6E554D] mt-1.5 leading-relaxed font-normal text-pretty">
               {lang === 'bn'
                 ? 'আত্মীয়রা কোনো প্রশ্ন জিজ্ঞেস করলেই ঘরে ট্যাপ করে দাগ দিন। ভুলে দাগ পড়লে ডাবল ট্যাপে আনমার্ক করুন।'
-                : 'Tap a tile whenever a relative asks that question. Double-tap to unmark if tapped by mistake.'}
+                : 'Tap a tile whenever a relative asks that question. Double tap to unmark if tapped by mistake.'}
             </p>
           </div>
 
@@ -397,7 +397,7 @@ export default function LandingPage({
               <CommentsIcon className="text-lg" />
             </div>
             <h3 className="font-bold text-base text-[#2B1B17]">
-              {lang === 'bn' ? '১৩৯+ খাঁটি প্রশ্ন' : '139+ Authentic Dialogues'}
+              {lang === 'bn' ? '১৬৪+ খাঁটি প্রশ্ন' : '164+ Authentic Prompts'}
             </h3>
             <p className="text-xs text-[#6E554D] mt-1.5 leading-relaxed font-normal text-pretty">
               {lang === 'bn'
@@ -411,7 +411,7 @@ export default function LandingPage({
               <CameraIcon className="text-lg" />
             </div>
             <h3 className="font-bold text-base text-[#2B1B17]">
-              {lang === 'bn' ? 'এইচডি কার্ড এক্সপোর্ট' : 'High-Res Card Export'}
+              {lang === 'bn' ? 'এইচডি কার্ড এক্সপোর্ট' : 'HD Card Export'}
             </h3>
             <p className="text-xs text-[#6E554D] mt-1.5 leading-relaxed font-normal text-pretty">
               {lang === 'bn'
@@ -430,7 +430,7 @@ export default function LandingPage({
             <p className="text-xs text-[#6E554D] mt-1.5 leading-relaxed font-normal text-pretty">
               {lang === 'bn'
                 ? 'কোনো ট্র্যাকিং নেই, কোনো বিজ্ঞাপন নেই। সম্পূর্ণ নিরাপদ ক্লায়েন্ট সাইড আর্কিটেকচার।'
-                : 'No cookies, no data collection, no ads. Operates entirely on the client-side.'}
+                : 'No cookies, no data collection, no ads. Operates entirely on the client side.'}
             </p>
           </div>
         </div>
@@ -558,8 +558,8 @@ export default function LandingPage({
         {/* Risk reversal line per A4 */}
         <p className="text-xs text-[#8A7268] mt-3 font-medium">
           {lang === 'bn'
-            ? '১০০% ফ্রি • কোনো সাইন-আপের প্রয়োজন নেই • তাৎক্ষণিক ব্রাউজার প্লে'
-            : '100% Free • No Sign-up Required • Instant Browser Play'}
+            ? '১০০% ফ্রি • কোনো সাইন আপের প্রয়োজন নেই • তাৎক্ষণিক ব্রাউজার প্লে'
+            : '100% Free • No Sign Up Required • Instant Browser Play'}
         </p>
       </section>
 
