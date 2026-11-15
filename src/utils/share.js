@@ -1,6 +1,7 @@
 /**
  * Social Sharing and Clipboard Utilities for Aunty Bingo
- * Clean copy without emojis.
+ * Provides native Web Share API with image file sharing on mobile web,
+ * automatic PNG download + direct clipboard image copy on desktop web.
  */
 
 export function toBengaliDigits(str) {
@@ -19,10 +20,122 @@ export function getShareDetails(lang, elapsedTime = '01:30') {
   return { url, text, displayTime };
 }
 
+/**
+ * Helper to convert dataUrl to Blob
+ */
+async function dataUrlToBlob(dataUrl) {
+  if (!dataUrl) return null;
+  try {
+    const res = await fetch(dataUrl);
+    return await res.blob();
+  } catch (err) {
+    console.warn('Failed to convert dataUrl to blob', err);
+    return null;
+  }
+}
+
+/**
+ * Check if Web Share API with file sharing is supported
+ */
+function canShareFiles(file) {
+  if (!navigator.share) return false;
+  if (file && navigator.canShare) {
+    try {
+      return navigator.canShare({ files: [file] });
+    } catch {
+      return false;
+    }
+  }
+  return true;
+}
+
 export async function shareToSocial(platform, { lang, elapsedTime, dataUrl, onToast }) {
   const { url, text } = getShareDetails(lang, elapsedTime);
+  const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
 
   switch (platform) {
+    case 'facebook': {
+      let blob = null;
+      if (dataUrl) {
+        blob = await dataUrlToBlob(dataUrl);
+      }
+
+      // 1. Mobile Web with native Web Share API file attachment
+      if (isMobile && blob && navigator.share) {
+        const shareFile = new File([blob], 'aunty-bingo-card.png', { type: 'image/png' });
+        if (canShareFiles(shareFile)) {
+          try {
+            await navigator.share({
+              title: 'Aunty Bingo Card',
+              text: `${text}\n${url}`,
+              files: [shareFile]
+            });
+            if (onToast) {
+              onToast(lang === 'bn' ? 'ফেসবুকে শেয়ার হচ্ছে...' : 'Sharing to Facebook...');
+            }
+            return;
+          } catch (err) {
+            if (err.name === 'AbortError') return;
+            console.warn('Mobile native share failed, falling back to desktop/download flow:', err);
+          }
+        }
+      }
+
+      // 2. Desktop Web (and mobile fallback)
+      // Step A: Trigger immediate card download so user has the high-res file
+      if (dataUrl) {
+        const a = document.createElement('a');
+        a.href = dataUrl;
+        a.download = `aunty-bingo-card-${Date.now()}.png`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      }
+
+      // Step B: Copy image directly to clipboard so user can press Ctrl + V on Facebook!
+      let copiedToClipboard = false;
+      if (blob && navigator.clipboard && window.ClipboardItem && navigator.clipboard.write) {
+        try {
+          const item = new ClipboardItem({ 'image/png': blob });
+          await navigator.clipboard.write([item]);
+          copiedToClipboard = true;
+        } catch (clipErr) {
+          console.warn('Clipboard image copy not supported, trying text copy:', clipErr);
+        }
+      }
+
+      if (!copiedToClipboard) {
+        try {
+          await navigator.clipboard.writeText(`${text}\n${url}`);
+        } catch {
+          // ignore
+        }
+      }
+
+      // Step C: Inform user with clear instruction toast
+      if (onToast) {
+        if (copiedToClipboard) {
+          onToast(
+            lang === 'bn'
+              ? 'কার্ড ডাউনলোড হয়েছে ও কপি হয়েছে! ফেসবুকে গিয়ে শুধু Ctrl+V চেপে পেস্ট করুন।'
+              : 'Card downloaded & copied! Just press Ctrl+V in Facebook to paste your image.'
+          );
+        } else {
+          onToast(
+            lang === 'bn'
+              ? 'কার্ড ডাউনলোড হয়েছে! ফেসবুকে ফটো হিসেবে আপলোড করুন।'
+              : 'Card downloaded! Upload as photo in Facebook.'
+          );
+        }
+      }
+
+      // Step D: Open Facebook in a new tab/window
+      setTimeout(() => {
+        window.open('https://www.facebook.com/', '_blank', 'noopener,noreferrer');
+      }, 700);
+      return;
+    }
+
     case 'whatsapp': {
       const waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(`${text}\n${url}`)}`;
       window.open(waUrl, '_blank', 'noopener,noreferrer');
@@ -32,17 +145,7 @@ export async function shareToSocial(platform, { lang, elapsedTime, dataUrl, onTo
       return;
     }
 
-    case 'facebook': {
-      const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(text)}`;
-      window.open(fbUrl, '_blank', 'width=600,height=500,noopener,noreferrer');
-      if (onToast) {
-        onToast(lang === 'bn' ? 'ফেসবুক শেয়ার ওপেন হচ্ছে...' : 'Opening Facebook...');
-      }
-      return;
-    }
-
     case 'messenger': {
-      const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
       if (isMobile) {
         window.location.href = `fb-messenger://share/?link=${encodeURIComponent(url)}`;
       } else {
@@ -58,15 +161,17 @@ export async function shareToSocial(platform, { lang, elapsedTime, dataUrl, onTo
     case 'instagram': {
       if (dataUrl && navigator.share) {
         try {
-          const blob = await (await fetch(dataUrl)).blob();
-          const file = new File([blob], 'aunty-bingo-victory.png', { type: 'image/png' });
-          if (navigator.canShare && navigator.canShare({ files: [file] })) {
-            await navigator.share({
-              title: 'Aunty Bingo',
-              text,
-              files: [file]
-            });
-            return;
+          const blob = await dataUrlToBlob(dataUrl);
+          if (blob) {
+            const file = new File([blob], 'aunty-bingo-victory.png', { type: 'image/png' });
+            if (canShareFiles(file)) {
+              await navigator.share({
+                title: 'Aunty Bingo',
+                text,
+                files: [file]
+              });
+              return;
+            }
           }
         } catch (err) {
           if (err.name === 'AbortError') return;
@@ -116,11 +221,13 @@ export async function shareToSocial(platform, { lang, elapsedTime, dataUrl, onTo
       if (navigator.share) {
         try {
           if (dataUrl) {
-            const blob = await (await fetch(dataUrl)).blob();
-            const file = new File([blob], 'aunty-bingo.png', { type: 'image/png' });
-            if (navigator.canShare && navigator.canShare({ files: [file] })) {
-              await navigator.share({ title: 'Aunty Bingo', text, files: [file] });
-              return;
+            const blob = await dataUrlToBlob(dataUrl);
+            if (blob) {
+              const file = new File([blob], 'aunty-bingo.png', { type: 'image/png' });
+              if (canShareFiles(file)) {
+                await navigator.share({ title: 'Aunty Bingo', text, files: [file] });
+                return;
+              }
             }
           }
           await navigator.share({ title: 'Aunty Bingo', text, url });

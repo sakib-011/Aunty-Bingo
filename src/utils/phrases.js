@@ -67,9 +67,25 @@ export const OCCASIONS = {
   }
 };
 
+// Track previously shown phrase IDs across shuffles to guarantee fresh boards every time
+let previousPhraseIds = new Set();
+
+/**
+ * Fisher-Yates array shuffle utility
+ */
+function shuffleArray(arr) {
+  const copy = [...arr];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
 /**
  * Returns randomized phrases for a selected occasion.
  * gridSize can be 3 (9 tiles) or 5 (25 tiles with center free tile).
+ * Uses smart anti-repetition to prioritize phrases not shown in the previous round.
  */
 export function generateBoardPhrases(occasionId = 'eid', forceRandom = false, gridSize = 3) {
   if (gridSize === 3 && !forceRandom && occasionId === 'eid') {
@@ -79,30 +95,53 @@ export function generateBoardPhrases(occasionId = 'eid', forceRandom = false, gr
       .filter(Boolean);
 
     if (initialTiles.length === 9) {
+      previousPhraseIds = new Set(initialTiles.map(p => p.id));
       return initialTiles;
     }
   }
 
-  // Filter phrases for this occasion
-  const pool = allPhrases.filter(p =>
-    !p.occasions || p.occasions.includes(occasionId) || p.occasions.includes('general')
-  );
-
-  const sourcePool = pool.length >= (gridSize === 5 ? 24 : 9) ? pool : allPhrases;
-
-  // Shuffle
-  const shuffled = [...sourcePool];
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  // Filter phrases for this occasion (supports 'all' for every question combined)
+  let pool;
+  if (occasionId === 'all') {
+    pool = allPhrases;
+  } else {
+    pool = allPhrases.filter(p =>
+      !p.occasions || p.occasions.includes(occasionId) || p.occasions.includes('general')
+    );
   }
 
+  const targetCount = gridSize === 5 ? 24 : 9;
+  const sourcePool = pool.length >= targetCount ? pool : allPhrases;
+
+  // Smart Anti-Repetition Partitioning:
+  // Separate into questions NOT on the previous board vs questions on the previous board
+  const freshPhrases = sourcePool.filter(p => !previousPhraseIds.has(p.id));
+  const recentPhrases = sourcePool.filter(p => previousPhraseIds.has(p.id));
+
+  const shuffledFresh = shuffleArray(freshPhrases);
+  const shuffledRecent = shuffleArray(recentPhrases);
+
+  let chosen;
+  if (shuffledFresh.length >= targetCount) {
+    // 100% of the board will be completely fresh questions!
+    chosen = shuffledFresh.slice(0, targetCount);
+  } else {
+    // Take all fresh questions, fill remainder from recent questions
+    const needed = targetCount - shuffledFresh.length;
+    chosen = shuffledFresh.concat(shuffledRecent.slice(0, needed));
+  }
+
+  // Final scramble so fresh and recent are mixed across grid positions
+  chosen = shuffleArray(chosen);
+
+  // Update memory of used phrase IDs for next shuffle
+  previousPhraseIds = new Set(chosen.map(p => p.id));
+
   if (gridSize === 3) {
-    return shuffled.slice(0, 9);
+    return chosen;
   }
 
   // 5x5 mode: 24 phrases + 1 center Free Tile at index 12
-  const chosen24 = shuffled.slice(0, 24);
   const freeTile = {
     id: 'free-tile-12',
     en: 'FREE TILE',
@@ -118,7 +157,7 @@ export function generateBoardPhrases(occasionId = 'eid', forceRandom = false, gr
     if (i === 12) {
       board25.push(freeTile);
     } else {
-      board25.push(chosen24[phraseIdx++]);
+      board25.push(chosen[phraseIdx++]);
     }
   }
 

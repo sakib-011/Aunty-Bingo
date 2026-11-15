@@ -64,7 +64,7 @@ export default function ExportModal({
 
   const showToast = (msg) => {
     setToastMessage(msg);
-    setTimeout(() => setToastMessage(''), 4000);
+    setTimeout(() => setToastMessage(''), 5000);
   };
 
   const handleDownload = () => {
