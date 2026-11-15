@@ -220,7 +220,7 @@ export default function App() {
   const timeFormatted = formatTimer(seconds);
 
   const handleSocialClick = useCallback((platform) => {
-    if (platform === 'instagram') {
+    if (platform === 'instagram' || platform === 'facebook') {
       setShowExportModal(true);
       return;
     }

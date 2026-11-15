@@ -1261,5 +1261,237 @@
       "exam",
       "general"
     ]
+  },
+  {
+    "id": 131,
+    "en": "Staying out so late, how will good marriage proposals come?",
+    "bn": "এত সময় বাইরে বাইরে ঘুরলে বিয়ের ভালো প্রস্তাব আসবে কীভাবে?",
+    "occasions": [
+      "wedding",
+      "general",
+      "eid"
+    ]
+  },
+  {
+    "id": 132,
+    "en": "Back then you promised you'd get Golden A+, what happened?",
+    "bn": "তখন তো বলছিলা গোল্ডেন এ-প্লাস পাবা, এখন কী হলো রেজাল্ট?",
+    "occasions": [
+      "exam",
+      "general"
+    ]
+  },
+  {
+    "id": 133,
+    "en": "Are you too shy to ask your boss for a salary raise?",
+    "bn": "স্যালারি বাড়ানোর ব্যাপারে বসের সাথে কথা বলতে ভয় পাও নাকি?",
+    "occasions": [
+      "general",
+      "exam",
+      "eid"
+    ]
+  },
+  {
+    "id": 134,
+    "en": "When you visit our house, you don't talk at all, just scroll!",
+    "bn": "আমাদের বাসায় আসলে তো মুখে কথাই থাকে না, খালি ফোন টিপো!",
+    "occasions": [
+      "general",
+      "eid",
+      "wedding"
+    ]
+  },
+  {
+    "id": 135,
+    "en": "All your friends are settled abroad, why are you still here?",
+    "bn": "তোমার বন্ধুরা তো সব বাইরে সেটেল হয়ে গেল, তুমি কী করতেছো?",
+    "occasions": [
+      "exam",
+      "general",
+      "eid"
+    ]
+  },
+  {
+    "id": 136,
+    "en": "Why buy such an expensive phone? Learn to save money!",
+    "bn": "এত দাম দিয়ে দামি ফোন কেনার কী দরকার ছিল? টাকা জমানো শেখো!",
+    "occasions": [
+      "general",
+      "eid"
+    ]
+  },
+  {
+    "id": 137,
+    "en": "How many years are you doing this same degree? When convocation?",
+    "bn": "কত বছর ধরে একই ডিগ্রি করছো? গ্র্যাজুয়েশন আর কনভোকেশন কবে?",
+    "occasions": [
+      "exam",
+      "general"
+    ]
+  },
+  {
+    "id": 138,
+    "en": "Why is your hair falling so much? You will go completely bald!",
+    "bn": "তোমার চুল এত পড়ছে কেন? মাথায় তো টাক পড়ে যাওয়ার অবস্থা!",
+    "occasions": [
+      "general",
+      "wedding",
+      "eid"
+    ]
+  },
+  {
+    "id": 139,
+    "en": "Come closer and look at me! Tell the truth, do you smoke?",
+    "bn": "কাছে আসো তো দেখি! সত্যি বলো তো, সিগারেট খাওয়া শুরু করছো?",
+    "occasions": [
+      "general",
+      "exam"
+    ]
+  },
+  {
+    "id": 140,
+    "en": "Waking up at 12 noon? How will you manage a household?",
+    "bn": "ঘুম থেকে উঠতে দুপুর বারোটা বাজে? সংসার সামলাবা কীভাবে?",
+    "occasions": [
+      "general",
+      "wedding"
+    ]
+  },
+  {
+    "id": 141,
+    "en": "Do you spend your entire salary on yourself or give to parents?",
+    "bn": "সব টাকা নিজের পেছনেই খরচ করো, বাপের হাতে কিছু তুলে দাও?",
+    "occasions": [
+      "general",
+      "eid"
+    ]
+  },
+  {
+    "id": 142,
+    "en": "Our son prays 5 times a day, how many times do you pray?",
+    "bn": "আমাদের ছেলে তো পাঁচ ওয়াক্ত নামাজ পড়ে, তুমি কয় ওয়াক্ত পড়ো?",
+    "occasions": [
+      "eid",
+      "general"
+    ]
+  },
+  {
+    "id": 143,
+    "en": "Will you invite us to your wedding or secretly marry in court?",
+    "bn": "বিয়েতে আমাদের দাওয়াত দিবা তো? নাকি চুপিচুপি কোর্টে করবা?",
+    "occasions": [
+      "wedding",
+      "general"
+    ]
+  },
+  {
+    "id": 144,
+    "en": "Looking at your eyes, you stayed awake on your phone all night!",
+    "bn": "চোখ দেখে মনে হচ্ছে সারারাত মোবাইলে ছিলা, একদম ঘুমাও নাই!",
+    "occasions": [
+      "general",
+      "exam"
+    ]
+  },
+  {
+    "id": 145,
+    "en": "You look noticeably shorter than your younger brother!",
+    "bn": "তোমার হাইট কিন্তু তোমার ছোট ভাইয়ের চেয়েও কম দেখাচ্ছে!",
+    "occasions": [
+      "general",
+      "wedding"
+    ]
+  },
+  {
+    "id": 146,
+    "en": "You've grown so old, you haven't learned to drive a car yet?",
+    "bn": "এত বয়স হয়ে গেল, এখনও একটা গাড়ি চালানো শিখলে না?",
+    "occasions": [
+      "general",
+      "eid"
+    ]
+  },
+  {
+    "id": 147,
+    "en": "In our time, we never looked up while talking to elders!",
+    "bn": "আমাদের আমলে আমরা বড়দের সামনে মুখ তুলে কথা বলতাম না!",
+    "occasions": [
+      "general",
+      "eid"
+    ]
+  },
+  {
+    "id": 148,
+    "en": "You are earning now, how much total Eidi will you give us?",
+    "bn": "এইবার ঈদে তুমি চাকরিজীবী হয়ে আমাদের কত টাকা সেলামি দিবা?",
+    "occasions": [
+      "eid"
+    ]
+  },
+  {
+    "id": 149,
+    "en": "You came to a wedding feast and ate just one piece of meat?",
+    "bn": "দাওয়াতে এসে মাত্র এক পিস মাংস খেয়ে উঠে পড়লা? লজ্জা পাচ্ছ কেন?",
+    "occasions": [
+      "wedding",
+      "eid",
+      "general"
+    ]
+  },
+  {
+    "id": 150,
+    "en": "Tell us when you are marrying, how many years will we live?",
+    "bn": "বিয়ে কবে করবা সেটা বলো, আমরা বেঁচে থাকতে দেখে যেতে চাই!",
+    "occasions": [
+      "wedding",
+      "eid",
+      "general"
+    ]
+  },
+  {
+    "id": 151,
+    "en": "We heard you have a secret romantic relationship with someone?",
+    "bn": "শুনলাম তোমার নাকি কার সাথে জানি তলে তলে সম্পর্ক আছে?",
+    "occasions": [
+      "wedding",
+      "general"
+    ]
+  },
+  {
+    "id": 152,
+    "en": "Right after joining work you do so much shopping, what will you eat later?",
+    "bn": "চাকরিতে ঢুকেই এত শপিং আর গ্যাজেট কিনলে শেষ বয়সে কী খাবা?",
+    "occasions": [
+      "general",
+      "eid"
+    ]
+  },
+  {
+    "id": 153,
+    "en": "The peace of a government job doesn't exist anywhere else in the world!",
+    "bn": "সরকারি চাকরির মতো নিশ্চিন্ত শান্তি আর দুনিয়ার কোথাও নেই!",
+    "occasions": [
+      "exam",
+      "general",
+      "eid"
+    ]
+  },
+  {
+    "id": 154,
+    "en": "How does the polao taste? Not as fragrant as our cook, right?",
+    "bn": "পোলাওটা কেমন হইছে? আমাদের বাড়ির বাবুর্চির মতো খোলে নাই, তাই না?",
+    "occasions": [
+      "wedding",
+      "eid"
+    ]
+  },
+  {
+    "id": 155,
+    "en": "Looking at your pale face, looks like you stepped out of home after ages!",
+    "bn": "চেহারা দেখে মনে হচ্ছে অনেক দিন পর ঘরের বাইরে সূর্যের মুখ দেখলা!",
+    "occasions": [
+      "general",
+      "exam"
+    ]
   }
 ]

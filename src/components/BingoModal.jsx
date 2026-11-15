@@ -93,7 +93,7 @@ export default function BingoModal({
 
   const showToast = (msg) => {
     setToastMessage(msg);
-    setTimeout(() => setToastMessage(''), 3500);
+    setTimeout(() => setToastMessage(''), 5000);
   };
 
   const handleSocial = async (platform) => {
