@@ -22,6 +22,9 @@ import { playStampSound, playUnstampSound, playBingoFanfare } from './utils/soun
 import auntyAvatarUrl from './assets/mascots/aunty_avatar_perfect.png';
 import { ArrowLeftIcon, Grid3x3Icon, Grid5x5Icon } from './components/FontAwesomeIcons';
 import { shareToSocial } from './utils/share';
+import AdminPanel from './components/AdminPanel';
+import { trackEvent, initGA4 } from './utils/analytics';
+import { getStoredTheme, setStoredTheme, applyTheme } from './utils/theme';
 
 function formatTimer(totalSeconds) {
   const mins = Math.floor(totalSeconds / 60);
@@ -47,13 +50,34 @@ function getTimeOfDay(lang) {
 }
 
 export default function App() {
-  // Navigation View: 'home' | 'game' | 'occasions' | 'rules'
-  const [activeView, setActiveView] = useState('home');
+  // Navigation View: 'home' | 'game' | 'occasions' | 'rules' | 'admin'
+  const [activeView, setActiveView] = useState(() => {
+    if (typeof window !== 'undefined') {
+      if (window.location.search.includes('admin') || window.location.hash.includes('admin')) {
+        return 'admin';
+      }
+    }
+    return 'home';
+  });
 
   // Localization
   const [lang, setLang] = useState(() => {
     return localStorage.getItem('aunty_bingo_lang') || 'bn';
   });
+
+  // Theme Mode: 'light' | 'dark'
+  const [theme, setTheme] = useState(() => getStoredTheme());
+
+  const handleToggleTheme = () => {
+    const next = theme === 'dark' ? 'light' : 'dark';
+    setTheme(next);
+    setStoredTheme(next);
+    applyTheme(next);
+  };
+
+  useEffect(() => {
+    applyTheme(theme);
+  }, [theme]);
 
   // Grid Mode: 3 (3x3 Quick) or 5 (5x5 Classic)
   const [gridSize, setGridSize] = useState(3);
@@ -92,6 +116,32 @@ export default function App() {
     document.documentElement.lang = lang;
   }, [lang]);
 
+  // Analytics & Admin Shortcuts
+  useEffect(() => {
+    initGA4();
+    trackEvent('page_view');
+
+    // Admin shortcut: Ctrl + Shift + A
+    const handleKeyDown = (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
+        e.preventDefault();
+        setActiveView((prev) => (prev === 'admin' ? 'home' : 'admin'));
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+
+    // Live reload board if questions are edited in admin panel
+    const onQuestionsUpdated = () => {
+      setBoard(generateBoardPhrases(occasionId, true, gridSize));
+    };
+    window.addEventListener('aunty:questions_updated', onQuestionsUpdated);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('aunty:questions_updated', onQuestionsUpdated);
+    };
+  }, [occasionId, gridSize]);
+
   // Timer Tick
   useEffect(() => {
     if (isTimerRunning) {
@@ -127,9 +177,11 @@ export default function App() {
         if (!stillWon) setHasCelebrated(false);
       } else {
         if (soundEnabled) playStampSound();
+        trackEvent('tile_mark', { phraseId: board[index]?.id });
         const { hasBingo: wonNow } = checkBingo(next, gridSize);
         if (wonNow && !hasCelebrated) {
           setHasCelebrated(true);
+          trackEvent('bingo_win', { occasionId, gridSize });
           const elapsed = formatTimer(seconds);
           const timeOfDay = getTimeOfDay(lang);
           setWinTime({ elapsed, timeOfDay });
@@ -146,7 +198,7 @@ export default function App() {
 
       return next;
     });
-  }, [gridSize, isTimerRunning, seconds, soundEnabled, hasCelebrated, lang]);
+  }, [gridSize, isTimerRunning, seconds, soundEnabled, hasCelebrated, lang, board, occasionId]);
 
   // Double Click / Accidental Click: Immediately unmark tile back to original state
   const handleUnmarkTile = useCallback((index) => {
@@ -231,8 +283,23 @@ export default function App() {
     });
   }, [lang, timeFormatted]);
 
+  // VIEW: CREATOR ADMIN PANEL
+  if (activeView === 'admin') {
+    return (
+      <AdminPanel
+        lang={lang}
+        theme={theme}
+        onToggleTheme={handleToggleTheme}
+        onBackToGame={() => {
+          setActiveView('home');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
+      />
+    );
+  }
+
   return (
-    <div className="min-h-screen bg-[#FFF6E5] text-[#2B1B17] flex flex-col font-sans selection:bg-[#8E1B3A] selection:text-white">
+    <div className="min-h-screen bg-[#FFF6E5] dark:bg-[#140d10] text-[#2B1B17] dark:text-[#fbf5ef] flex flex-col font-sans selection:bg-[#8E1B3A] selection:text-white transition-colors duration-300">
       {/* Decorative Gutters on Desktop */}
       <DecorativeBorder themeColor={activeOccasion.tagColor} />
 
@@ -240,6 +307,8 @@ export default function App() {
       <Header
         lang={lang}
         setLang={setLang}
+        theme={theme}
+        onToggleTheme={handleToggleTheme}
         onOpenHowTo={() => setShowHowTo(true)}
         soundEnabled={soundEnabled}
         setSoundEnabled={setSoundEnabled}
@@ -295,20 +364,20 @@ export default function App() {
           <div className="flex flex-wrap items-center justify-between gap-3 mb-3">
             <button
               onClick={() => setActiveView('home')}
-              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#8E1B3A] hover:underline cursor-pointer"
+              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#8E1B3A] dark:text-[#ff7597] hover:underline cursor-pointer"
             >
               <ArrowLeftIcon className="text-xs" />
               <span>{lang === 'bn' ? 'হোমে ফিরে যান' : 'Back to Home'}</span>
             </button>
 
             {/* Grid Size Switcher Pill */}
-            <div className="flex items-center bg-[#F4E8D9] p-1 rounded-full border border-[#D8C6B6]">
+            <div className="flex items-center bg-[#F4E8D9] dark:bg-[#28181f] p-1 rounded-full border border-[#D8C6B6] dark:border-[#422530]">
               <button
                 onClick={() => handleSwitchGridSize(3)}
                 className={`px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
                   gridSize === 3
                     ? 'bg-[#8E1B3A] text-white shadow-sm'
-                    : 'text-[#6E554D] hover:text-[#8E1B3A]'
+                    : 'text-[#6E554D] dark:text-[#c7a9b3] hover:text-[#8E1B3A] dark:hover:text-[#ff7597]'
                 }`}
               >
                 <Grid3x3Icon className="text-xs" />
@@ -319,7 +388,7 @@ export default function App() {
                 className={`px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
                   gridSize === 5
                     ? 'bg-[#8E1B3A] text-white shadow-sm'
-                    : 'text-[#6E554D] hover:text-[#8E1B3A]'
+                    : 'text-[#6E554D] dark:text-[#c7a9b3] hover:text-[#8E1B3A] dark:hover:text-[#ff7597]'
                 }`}
               >
                 <Grid5x5Icon className="text-xs" />

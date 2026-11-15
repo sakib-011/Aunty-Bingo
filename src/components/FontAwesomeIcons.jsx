@@ -28,6 +28,7 @@ import {
   faChevronDown,
   faXmark,
   faMoon,
+  faSun,
   faRing,
   faGraduationCap,
   faMugHot,
@@ -45,7 +46,29 @@ import {
   faBolt,
   faComments,
   faCamera,
-  faBookOpen
+  faBookOpen,
+  faEnvelope,
+  faKey,
+  faLightbulb,
+  faFloppyDisk,
+  faGear,
+  faClipboardList,
+  faChartColumn,
+  faChartLine,
+  faTriangleExclamation,
+  faCircleCheck,
+  faCircleXmark,
+  faTrashCan,
+  faPenToSquare,
+  faPlus,
+  faFileExport,
+  faFileImport,
+  faEye,
+  faEyeSlash,
+  faPaperPlane,
+  faCircle,
+  faHandPointUp,
+  faArrowsUpDownLeftRight
 } from '@fortawesome/free-solid-svg-icons';
 
 export function FaIcon({ icon, className = '', ...props }) {
@@ -116,3 +139,29 @@ export function BoltIcon(props) { return <FontAwesomeIcon icon={faBolt} {...prop
 export function CommentsIcon(props) { return <FontAwesomeIcon icon={faComments} {...props} />; }
 export function CameraIcon(props) { return <FontAwesomeIcon icon={faCamera} {...props} />; }
 export function BookOpenIcon(props) { return <FontAwesomeIcon icon={faBookOpen} {...props} />; }
+
+// Professional Admin & Theme Icons
+export function SunIcon(props) { return <FontAwesomeIcon icon={faSun} {...props} />; }
+export function MoonIcon(props) { return <FontAwesomeIcon icon={faMoon} {...props} />; }
+export function EnvelopeIcon(props) { return <FontAwesomeIcon icon={faEnvelope} {...props} />; }
+export function KeyIcon(props) { return <FontAwesomeIcon icon={faKey} {...props} />; }
+export function LightbulbIcon(props) { return <FontAwesomeIcon icon={faLightbulb} {...props} />; }
+export function SaveIcon(props) { return <FontAwesomeIcon icon={faFloppyDisk} {...props} />; }
+export function GearIcon(props) { return <FontAwesomeIcon icon={faGear} {...props} />; }
+export function ClipboardListIcon(props) { return <FontAwesomeIcon icon={faClipboardList} {...props} />; }
+export function ChartBarIcon(props) { return <FontAwesomeIcon icon={faChartColumn} {...props} />; }
+export function ChartLineIcon(props) { return <FontAwesomeIcon icon={faChartLine} {...props} />; }
+export function WarningIcon(props) { return <FontAwesomeIcon icon={faTriangleExclamation} {...props} />; }
+export function SuccessIcon(props) { return <FontAwesomeIcon icon={faCircleCheck} {...props} />; }
+export function ErrorIcon(props) { return <FontAwesomeIcon icon={faCircleXmark} {...props} />; }
+export function TrashIcon(props) { return <FontAwesomeIcon icon={faTrashCan} {...props} />; }
+export function EditIcon(props) { return <FontAwesomeIcon icon={faPenToSquare} {...props} />; }
+export function PlusIcon(props) { return <FontAwesomeIcon icon={faPlus} {...props} />; }
+export function ExportIcon(props) { return <FontAwesomeIcon icon={faFileExport} {...props} />; }
+export function ImportIcon(props) { return <FontAwesomeIcon icon={faFileImport} {...props} />; }
+export function EyeIcon(props) { return <FontAwesomeIcon icon={faEye} {...props} />; }
+export function EyeSlashIcon(props) { return <FontAwesomeIcon icon={faEyeSlash} {...props} />; }
+export function PaperPlaneIcon(props) { return <FontAwesomeIcon icon={faPaperPlane} {...props} />; }
+export function CircleDotIcon(props) { return <FontAwesomeIcon icon={faCircle} {...props} />; }
+export function HandPointIcon(props) { return <FontAwesomeIcon icon={faHandPointUp} {...props} />; }
+export function DragIcon(props) { return <FontAwesomeIcon icon={faArrowsUpDownLeftRight} {...props} />; }

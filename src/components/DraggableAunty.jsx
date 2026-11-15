@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import auntyAvatarUrl from '../assets/mascots/aunty_avatar_perfect.png';
-import { RotateLeftIcon } from './FontAwesomeIcons';
+import { RotateLeftIcon, HandPointIcon } from './FontAwesomeIcons';
 
 const AUNTY_QUOTES = {
   bn: [
@@ -161,20 +161,21 @@ export default function DraggableAunty({ lang = 'bn' }) {
     >
       {/* 1. Speech Bubble / Dialogue */}
       {quote && (
-        <div className="absolute bottom-[105%] left-1/2 -translate-x-1/2 mb-2 w-48 sm:w-56 bg-[#FFFDF9] border-2 border-[#8E1B3A] rounded-2xl p-2.5 sm:p-3 shadow-2xl animate-pop-speech pointer-events-none z-30">
-          <p className="text-xs sm:text-sm font-bold text-[#8E1B3A] text-center leading-snug">
+        <div className="absolute bottom-[105%] left-1/2 -translate-x-1/2 mb-2 w-48 sm:w-56 bg-[#FFFDF9] dark:bg-stone-900 border-2 border-[#8E1B3A] dark:border-rose-500 rounded-2xl p-2.5 sm:p-3 shadow-2xl animate-pop-speech pointer-events-none z-30">
+          <p className="text-xs sm:text-sm font-bold text-[#8E1B3A] dark:text-rose-300 text-center leading-snug">
             "{quote}"
           </p>
           {/* Comic Pointer Arrow */}
-          <div className="absolute top-full left-1/2 -translate-x-1/2 w-0 h-0 border-x-8 border-x-transparent border-t-8 border-t-[#8E1B3A]" />
-          <div className="absolute top-[calc(100%-2px)] left-1/2 -translate-x-1/2 w-0 h-0 border-x-7 border-x-transparent border-t-7 border-t-[#FFFDF9]" />
+          <div className="absolute top-full left-1/2 -translate-x-1/2 w-0 h-0 border-x-8 border-x-transparent border-t-8 border-t-[#8E1B3A] dark:border-t-rose-500" />
+          <div className="absolute top-[calc(100%-2px)] left-1/2 -translate-x-1/2 w-0 h-0 border-x-7 border-x-transparent border-t-7 border-t-[#FFFDF9] dark:border-t-stone-900" />
         </div>
       )}
 
-      {/* 2. Initial Playful Hint Badge */}
+      {/* 2. Initial Playful Hint Badge (No emoji, uses FontAwesome HandPointIcon) */}
       {showHint && !quote && isDocked && (
-        <div className="absolute -top-7 sm:-top-8 left-1/2 -translate-x-1/2 whitespace-nowrap bg-[#8E1B3A] text-[#FFF6E5] text-[10px] sm:text-xs font-bold py-1 px-2.5 rounded-full shadow-lg animate-bounce pointer-events-none z-30 flex items-center gap-1">
-          <span>{lang === 'bn' ? '👆 আমাকে টেনে স্ক্রিনে সরাও!' : '👆 Drag me anywhere!'}</span>
+        <div className="absolute -top-7 sm:-top-8 left-1/2 -translate-x-1/2 whitespace-nowrap bg-[#8E1B3A] dark:bg-rose-700 text-[#FFF6E5] text-[10px] sm:text-xs font-bold py-1 px-2.5 rounded-full shadow-lg animate-bounce pointer-events-none z-30 flex items-center gap-1.5">
+          <HandPointIcon className="text-xs text-amber-300" />
+          <span>{lang === 'bn' ? 'আমাকে টেনে স্ক্রিনে সরাও!' : 'Drag me anywhere!'}</span>
         </div>
       )}
 
@@ -182,7 +183,7 @@ export default function DraggableAunty({ lang = 'bn' }) {
       {!isDocked && (
         <button
           onClick={handleResetPosition}
-          className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-[#8E1B3A] text-white hover:bg-[#75142E] shadow-md flex items-center justify-center text-xs transition-transform hover:scale-110 z-30 cursor-pointer"
+          className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-[#8E1B3A] dark:bg-rose-700 text-white hover:bg-[#75142E] shadow-md flex items-center justify-center text-xs transition-transform hover:scale-110 z-30 cursor-pointer"
           title={lang === 'bn' ? 'আন্টিকে আগের জায়গায় ফিরিয়ে নাও' : 'Reset Aunty to original spot'}
           aria-label="Reset position"
         >
@@ -192,9 +193,9 @@ export default function DraggableAunty({ lang = 'bn' }) {
 
       {/* 4. Aunty Mascot Floating Avatar Card */}
       <div
-        className={`relative w-28 h-28 sm:w-36 sm:h-36 bg-[#FFFDF9] rounded-full p-2 border-2 sm:border-[3px] border-[#8E1B3A] shadow-2xl flex items-center justify-center transition-all ${
+        className={`relative w-28 h-28 sm:w-36 sm:h-36 bg-[#FFFDF9] dark:bg-stone-900 rounded-full p-2 border-2 sm:border-[3px] border-[#8E1B3A] dark:border-rose-500 shadow-2xl flex items-center justify-center transition-all ${
           isDragging
-            ? 'scale-105 rotate-6 shadow-2xl opacity-95 ring-4 ring-[#8E1B3A]/30'
+            ? 'scale-105 rotate-6 shadow-2xl opacity-95 ring-4 ring-[#8E1B3A]/30 dark:ring-rose-400/30'
             : 'animate-aunty-float group-hover:scale-105'
         }`}
       >

@@ -30,10 +30,10 @@ export default function StatusHeader({ markedCount, isOneAway, hasWon, lang, isD
 
   return (
     <div className="text-center my-3 sm:my-4 transition-all duration-200">
-      <h2 className="text-xl sm:text-2xl md:text-3xl font-black text-[#8E1B3A] tracking-tight">
+      <h2 className="text-xl sm:text-2xl md:text-3xl font-black text-[#8E1B3A] dark:text-[#ff7597] tracking-tight">
         {title}
       </h2>
-      <p className="text-xs sm:text-sm text-[#6E554D] mt-0.5 sm:mt-1 font-medium">
+      <p className="text-xs sm:text-sm text-[#6E554D] dark:text-[#c7a9b3] mt-0.5 sm:mt-1 font-medium">
         {subtitle}
       </p>
     </div>

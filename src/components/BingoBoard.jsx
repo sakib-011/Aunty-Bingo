@@ -88,26 +88,26 @@ export default function BingoBoard({
               data-tile-index={index}
               aria-pressed={isMarked}
               aria-label={`${phraseText} - ${isFree ? 'Free Tile' : isMarked ? 'Marked. Double-click to unmark' : 'Not marked'}`}
-              className={`relative flex flex-col items-center justify-center text-center select-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#8E1B3A] transition-all duration-150 group ${
+              className={`relative flex flex-col items-center justify-center text-center select-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#8E1B3A] dark:focus:ring-[#ff7597] transition-all duration-150 group ${
                 is5x5 ? 'p-1 sm:p-2 rounded-xl sm:rounded-2xl border' : 'p-2 sm:p-3.5 rounded-2xl sm:rounded-3xl border-2'
               } ${
                 isFree
-                  ? 'bg-[#FFF9E6] border-[#E69C24] shadow-sm'
+                  ? 'bg-[#FFF9E6] dark:bg-[#2b1f14] border-[#E69C24] dark:border-[#e5a034] shadow-sm'
                   : isWinning
-                  ? 'bg-[#E2EEE1] border-[#0F7B5F] shadow-sm scale-[1.01]'
+                  ? 'bg-[#E2EEE1] dark:bg-[#1a3827] border-[#0F7B5F] dark:border-[#2ecc71] shadow-sm scale-[1.01]'
                   : isMarked
-                  ? 'bg-[#FBE9DF] border-[#8E1B3A] shadow-inner'
-                  : 'bg-white hover:bg-[#FFFDF9] border-[#8E1B3A] active:scale-[0.98]'
+                  ? 'bg-[#FBE9DF] dark:bg-[#341b25] border-[#8E1B3A] dark:border-[#ff7597] shadow-inner'
+                  : 'bg-white dark:bg-[#1f1318] hover:bg-[#FFFDF9] dark:hover:bg-[#2c1720] border-[#8E1B3A] dark:border-[#4d2737] active:scale-[0.98]'
               }`}
             >
               {/* Center Free Tile Star */}
               {isFree ? (
                 <div className="flex flex-col items-center">
                   <StarIcon className="text-[#E69C24] text-sm sm:text-base animate-spin" />
-                  <span className="font-black text-[10px] sm:text-xs text-[#B84B12] mt-0.5 uppercase tracking-wider">
+                  <span className="font-black text-[10px] sm:text-xs text-[#B84B12] dark:text-[#f39c12] mt-0.5 uppercase tracking-wider">
                     {lang === 'bn' ? tile.bn : tile.en}
                   </span>
-                  <span className="text-[9px] text-[#8A7268] hidden sm:block">
+                  <span className="text-[9px] text-[#8A7268] dark:text-[#a08b93] hidden sm:block">
                     {lang === 'bn' ? tile.subBn : tile.subEn}
                   </span>
                 </div>
@@ -120,8 +120,8 @@ export default function BingoBoard({
                         is5x5 ? 'w-4 h-4 sm:w-4.5 sm:h-4.5' : 'w-5 h-5 sm:w-6 sm:h-6 border-2'
                       } ${
                         isWinning
-                          ? 'border-[#0F7B5F] text-[#0F7B5F]'
-                          : 'border-[#CB3C3B] text-[#CB3C3B]'
+                          ? 'border-[#0F7B5F] dark:border-[#2ecc71] text-[#0F7B5F] dark:text-[#2ecc71]'
+                          : 'border-[#CB3C3B] dark:border-[#ff5e62] text-[#CB3C3B] dark:text-[#ff5e62]'
                       }`}
                       title={lang === 'bn' ? 'দাগ দেওয়া হয়েছে (ডাবল ক্লিকে মুছুন)' : 'Marked (Double-click to unmark)'}
                     >
@@ -131,7 +131,11 @@ export default function BingoBoard({
 
                   {/* Phrase Text */}
                   <span
-                    className={`font-bold leading-tight text-[#2B1B17] px-0.5 ${
+                    className={`font-bold leading-tight px-0.5 ${
+                      isMarked
+                        ? 'text-[#8E1B3A] dark:text-[#ff91ac]'
+                        : 'text-[#2B1B17] dark:text-[#fbf5ef]'
+                    } ${
                       is5x5
                         ? 'text-[10px] sm:text-xs line-clamp-3'
                         : isLong
@@ -149,7 +153,7 @@ export default function BingoBoard({
                       e.stopPropagation();
                       onViewFullQuestion(tile, index);
                     }}
-                    className={`absolute bottom-0.5 right-0.5 sm:bottom-1 sm:right-1 rounded-full bg-[#8E1B3A]/10 text-[#8E1B3A] hover:bg-[#8E1B3A] hover:text-white flex items-center justify-center transition-all cursor-pointer shadow-xs ${
+                    className={`absolute bottom-0.5 right-0.5 sm:bottom-1 sm:right-1 rounded-full bg-[#8E1B3A]/10 dark:bg-white/10 text-[#8E1B3A] dark:text-[#ff7597] hover:bg-[#8E1B3A] hover:text-white dark:hover:bg-[#ff7597] dark:hover:text-[#140d10] flex items-center justify-center transition-all cursor-pointer shadow-xs ${
                       is5x5 ? 'w-3.5 h-3.5 sm:w-4 sm:h-4' : 'w-4 h-4 sm:w-5 sm:h-5'
                     } ${isLong ? 'opacity-90' : 'opacity-40 group-hover:opacity-100'}`}
                     title={lang === 'bn' ? 'সম্পূর্ণ প্রশ্ন দেখুন' : 'View full question'}

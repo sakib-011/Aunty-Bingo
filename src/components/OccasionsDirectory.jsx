@@ -36,7 +36,7 @@ export default function OccasionsDirectory({ lang, onSelectAndPlay, onBack }) {
       <div className="mb-6">
         <button
           onClick={onBack}
-          className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#8E1B3A] hover:underline cursor-pointer"
+          className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#8E1B3A] dark:text-rose-400 hover:underline cursor-pointer"
         >
           <ArrowLeftIcon className="text-xs" />
           <span>{lang === 'bn' ? 'ফিরে যান' : 'Back'}</span>
@@ -44,13 +44,13 @@ export default function OccasionsDirectory({ lang, onSelectAndPlay, onBack }) {
       </div>
 
       <div className="text-center mb-8 sm:mb-10">
-        <span className="bg-[#F4E8D9] text-[#8E1B3A] text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+        <span className="bg-[#F4E8D9] dark:bg-stone-800 text-[#8E1B3A] dark:text-rose-300 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
           {lang === 'bn' ? 'পারিবারিক আড্ডার ধরন' : 'Gathering Presets'}
         </span>
-        <h1 className="text-3xl sm:text-4xl font-bold text-[#8E1B3A] mt-2">
+        <h1 className="text-3xl sm:text-4xl font-bold text-[#8E1B3A] dark:text-rose-400 mt-2">
           {lang === 'bn' ? 'অনুষ্ঠান পরিচিতি ও বিশেষ আড্ডা' : 'Explore All 4 Occasions'}
         </h1>
-        <p className="text-xs sm:text-sm text-[#6E554D] font-medium mt-2 max-w-lg mx-auto">
+        <p className="text-xs sm:text-sm text-[#6E554D] dark:text-stone-400 font-medium mt-2 max-w-lg mx-auto">
           {lang === 'bn'
             ? 'প্রতিটি বাঙালি অনুষ্ঠানের রয়েছে নিজস্ব ধাঁচের প্রশ্ন ও মিষ্টি খোঁচা। যেকোনো একটি বেছে নিয়ে শুরু করুন খেলা।'
             : 'Every Bengali gathering has its own unique flavor of repetitive questions. Choose one to start playing.'}
@@ -63,18 +63,18 @@ export default function OccasionsDirectory({ lang, onSelectAndPlay, onBack }) {
           return (
             <div
               key={occ.id}
-              className="bg-white rounded-3xl p-6 border border-[#D8C6B6] shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow"
+              className="bg-white dark:bg-stone-900 rounded-3xl p-6 border border-[#D8C6B6] dark:border-stone-700 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow"
             >
               <div>
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-2.5">
                     <div
                       style={{ backgroundColor: occ.themeBg, color: occ.tagColor }}
-                      className="w-10 h-10 rounded-2xl flex items-center justify-center border border-[#D8C6B6]/50"
+                      className="w-10 h-10 rounded-2xl flex items-center justify-center border border-[#D8C6B6]/50 dark:border-stone-700"
                     >
                       <OccasionIcon occasionId={occ.id} className="text-lg" />
                     </div>
-                    <h2 className="text-xl font-bold text-[#2B1B17]">
+                    <h2 className="text-xl font-bold text-[#2B1B17] dark:text-stone-100">
                       {lang === 'bn' ? occ.nameBn : occ.nameEn}
                     </h2>
                   </div>
@@ -86,19 +86,19 @@ export default function OccasionsDirectory({ lang, onSelectAndPlay, onBack }) {
                   </span>
                 </div>
 
-                <p className="text-xs sm:text-sm text-[#6E554D] font-medium mb-4 leading-relaxed">
+                <p className="text-xs sm:text-sm text-[#6E554D] dark:text-stone-400 font-medium mb-4 leading-relaxed">
                   {lang === 'bn' ? occ.descBn : occ.descEn}
                 </p>
 
                 {/* Sample Phrases */}
-                <div className="bg-[#FFF6E5] rounded-2xl p-3.5 mb-4 border border-[#D8C6B6]/60">
-                  <div className="text-xs font-bold text-[#8E1B3A] uppercase tracking-wider mb-2">
+                <div className="bg-[#FFF6E5] dark:bg-stone-800/80 rounded-2xl p-3.5 mb-4 border border-[#D8C6B6]/60 dark:border-stone-700">
+                  <div className="text-xs font-bold text-[#8E1B3A] dark:text-rose-400 uppercase tracking-wider mb-2">
                     {lang === 'bn' ? 'নমুনাস্বরূপ কিছু প্রশ্ন:' : 'Sample Questions You Will Hear:'}
                   </div>
-                  <ul className="space-y-1.5 text-xs text-[#2B1B17] font-semibold">
+                  <ul className="space-y-1.5 text-xs text-[#2B1B17] dark:text-stone-200 font-semibold">
                     {samples.map((s, idx) => (
                       <li key={idx} className="flex items-start gap-1.5">
-                        <span className="text-[#8E1B3A]">•</span>
+                        <span className="text-[#8E1B3A] dark:text-rose-400">•</span>
                         <span>{lang === 'bn' ? s.bn : s.en}</span>
                       </li>
                     ))}
