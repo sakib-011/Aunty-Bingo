@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite';
+import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 import nodemailer from 'nodemailer';
@@ -8,7 +8,7 @@ import nodemailer from 'nodemailer';
  * Emulates the Vercel serverless function during local development
  * so Gmail OTP emails can be sent right from the dev server.
  */
-function devOtpPlugin() {
+function devOtpPlugin(env = {}) {
   return {
     name: 'dev-otp-api',
     configureServer(server) {
@@ -38,7 +38,14 @@ function devOtpPlugin() {
               return;
             }
 
-            const rawPass = (appPassword || process.env.GMAIL_APP_PASSWORD || process.env.VITE_GMAIL_APP_PASSWORD || '').trim();
+            const rawPass = (
+              appPassword ||
+              env.GMAIL_APP_PASSWORD ||
+              env.VITE_GMAIL_APP_PASSWORD ||
+              process.env.GMAIL_APP_PASSWORD ||
+              process.env.VITE_GMAIL_APP_PASSWORD ||
+              ''
+            ).trim();
             const cleanPassword = rawPass.replace(/\s+/g, '');
 
             if (!cleanPassword) {
@@ -100,10 +107,14 @@ function devOtpPlugin() {
 }
 
 // https://vite.dev/config/
-export default defineConfig({
-  plugins: [
-    react(),
-    tailwindcss(),
-    devOtpPlugin()
-  ],
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), '');
+
+  return {
+    plugins: [
+      react(),
+      tailwindcss(),
+      devOtpPlugin(env)
+    ],
+  };
 });
