@@ -1,4 +1,4 @@
-import allPhrases from '../data/phrases.json';
+import { getStoredQuestions } from './questionStore';
 
 export const OCCASIONS = {
   eid: {
@@ -88,6 +88,7 @@ function shuffleArray(arr) {
  * Uses smart anti-repetition to prioritize phrases not shown in the previous round.
  */
 export function generateBoardPhrases(occasionId = 'eid', forceRandom = false, gridSize = 3) {
+  const allPhrases = getStoredQuestions();
   if (gridSize === 3 && !forceRandom && occasionId === 'eid') {
     const figmaIds = [9001, 9002, 9003, 9004, 9005, 9006, 9007, 9008, 9009];
     const initialTiles = figmaIds

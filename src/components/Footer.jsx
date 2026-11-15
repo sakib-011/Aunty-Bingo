@@ -60,6 +60,14 @@ export default function Footer({ lang, onNavigate }) {
           >
             {lang === 'bn' ? 'নিয়মাবলী' : 'Rules'}
           </button>
+          <button
+            onClick={() => onNavigate('admin')}
+            className="hover:underline transition-colors cursor-pointer flex items-center gap-1 opacity-80 hover:opacity-100"
+            title="Admin & Question Control"
+          >
+            <span>🔒</span>
+            <span>{lang === 'bn' ? 'অ্যাডমিন প্যানেল' : 'Admin Panel'}</span>
+          </button>
         </nav>
 
         {/* Legal & Privacy Links (per B10 ship requirement) */}
