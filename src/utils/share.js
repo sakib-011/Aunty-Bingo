@@ -10,7 +10,10 @@ export function toBengaliDigits(str) {
 }
 
 export function getShareDetails(lang, elapsedTime = '01:30') {
-  const url = typeof window !== 'undefined' ? window.location.origin + window.location.pathname : 'https://aunty-bingo.example';
+  let url = typeof window !== 'undefined' ? window.location.origin + window.location.pathname : 'https://aunty-bingo.vercel.app';
+  if (url.includes('localhost') || url.includes('127.0.0.1')) {
+    url = 'https://aunty-bingo.vercel.app';
+  }
   const displayTime = lang === 'bn' ? toBengaliDigits(elapsedTime) : elapsedTime;
 
   const text = lang === 'bn'
@@ -55,84 +58,19 @@ export async function shareToSocial(platform, { lang, elapsedTime, dataUrl, onTo
 
   switch (platform) {
     case 'facebook': {
-      let blob = null;
-      if (dataUrl) {
-        blob = await dataUrlToBlob(dataUrl);
+      try {
+        await navigator.clipboard.writeText(`${text}\n${url}`);
+      } catch {
+        // ignore
       }
 
-      // 1. Mobile Web with native Web Share API file attachment
-      if (isMobile && blob && navigator.share) {
-        const shareFile = new File([blob], 'aunty-bingo-card.png', { type: 'image/png' });
-        if (canShareFiles(shareFile)) {
-          try {
-            await navigator.share({
-              title: 'Aunty Bingo Card',
-              text: `${text}\n${url}`,
-              files: [shareFile]
-            });
-            if (onToast) {
-              onToast(lang === 'bn' ? 'ফেসবুকে শেয়ার হচ্ছে...' : 'Sharing to Facebook...');
-            }
-            return;
-          } catch (err) {
-            if (err.name === 'AbortError') return;
-            console.warn('Mobile native share failed, falling back to desktop/download flow:', err);
-          }
-        }
-      }
+      // Open official Facebook Post sharing dialog with Aunty Bingo link and quote
+      const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(text)}`;
+      window.open(fbUrl, '_blank', 'width=650,height=550,noopener,noreferrer');
 
-      // 2. Desktop Web (and mobile fallback)
-      // Step A: Trigger immediate card download so user has the high-res file
-      if (dataUrl) {
-        const a = document.createElement('a');
-        a.href = dataUrl;
-        a.download = `aunty-bingo-card-${Date.now()}.png`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-      }
-
-      // Step B: Copy image directly to clipboard so user can press Ctrl + V on Facebook!
-      let copiedToClipboard = false;
-      if (blob && navigator.clipboard && window.ClipboardItem && navigator.clipboard.write) {
-        try {
-          const item = new ClipboardItem({ 'image/png': blob });
-          await navigator.clipboard.write([item]);
-          copiedToClipboard = true;
-        } catch (clipErr) {
-          console.warn('Clipboard image copy not supported, trying text copy:', clipErr);
-        }
-      }
-
-      if (!copiedToClipboard) {
-        try {
-          await navigator.clipboard.writeText(`${text}\n${url}`);
-        } catch {
-          // ignore
-        }
-      }
-
-      // Step C: Inform user with clear instruction toast
       if (onToast) {
-        if (copiedToClipboard) {
-          onToast(
-            lang === 'bn'
-              ? 'কার্ড ডাউনলোড হয়েছে ও কপি হয়েছে! ফেসবুকে গিয়ে শুধু Ctrl+V চেপে পেস্ট করুন।'
-              : 'Card downloaded & copied! Just press Ctrl+V in Facebook to paste your image.'
-          );
-        } else {
-          onToast(
-            lang === 'bn'
-              ? 'কার্ড ডাউনলোড হয়েছে! ফেসবুকে ফটো হিসেবে আপলোড করুন।'
-              : 'Card downloaded! Upload as photo in Facebook.'
-          );
-        }
+        onToast(lang === 'bn' ? 'ফেসবুক পোস্ট ডায়ালগ ওপেন হচ্ছে...' : 'Opening Facebook share dialog...');
       }
-
-      // Step D: Open Facebook in a new tab/window
-      setTimeout(() => {
-        window.open('https://www.facebook.com/', '_blank', 'noopener,noreferrer');
-      }, 700);
       return;
     }
 
