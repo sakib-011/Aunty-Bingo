@@ -54,8 +54,8 @@ export function createOtpHtmlEmail({ otp, email }) {
           <!-- Logo & Header -->
           <tr>
             <td align="center" style="padding-bottom: 20px;">
-              <div style="width: 64px; height: 64px; border-radius: 20px; background-color: #FFE6E2; border: 2px solid #8E1B3A; line-height: 60px; font-size: 32px; text-align: center; margin-bottom: 12px;">
-                👵
+              <div style="width: 64px; height: 64px; border-radius: 20px; background-color: #8E1B3A; color: #FFF6E5; font-family: Georgia, serif; font-weight: 800; line-height: 64px; font-size: 26px; text-align: center; margin-bottom: 12px; display: inline-block; letter-spacing: 1px;">
+                AB
               </div>
               <h1 style="margin: 0; color: #8E1B3A; font-size: 24px; font-weight: 800; letter-spacing: -0.5px;">
                 আন্টি বিঙ্গো (Aunty Bingo)

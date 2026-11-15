@@ -21,21 +21,49 @@ import {
   hasStoredAppPassword,
   sendAdminOtpEmail
 } from '../utils/emailService';
+import { getStoredTheme, setStoredTheme, applyTheme } from '../utils/theme';
 import { OCCASIONS } from '../utils/phrases';
 import {
   ShieldIcon,
   RotateLeftIcon,
-  DownloadIcon,
   OccasionIcon,
   ArrowLeftIcon,
   LockIcon,
-  CloseIcon
+  CloseIcon,
+  SunIcon,
+  MoonIcon,
+  EnvelopeIcon,
+  KeyIcon,
+  LightbulbIcon,
+  SaveIcon,
+  GearIcon,
+  ClipboardListIcon,
+  ChartBarIcon,
+  ChartLineIcon,
+  SuccessIcon,
+  ErrorIcon,
+  TrashIcon,
+  EditIcon,
+  PlusIcon,
+  ExportIcon,
+  ImportIcon,
+  EyeIcon,
+  EyeSlashIcon,
+  PaperPlaneIcon,
+  CircleDotIcon,
+  ClockIcon,
+  CheckIcon,
+  UsersIcon,
+  GamepadIcon,
+  TrophyIcon,
+  ShareIcon,
+  BookOpenIcon
 } from './FontAwesomeIcons';
 
 const AUTH_SESSION_KEY = 'aunty_admin_auth_session';
 
 /**
- * Professional Bilingual Text Dictionary for Admin Panel
+ * Professional Bilingual Text Dictionary for Admin Panel (100% Emoji Free)
  */
 const T = {
   bn: {
@@ -77,8 +105,8 @@ const T = {
     clearPassBtn: 'মুছে ফেলুন',
     sendTestEmailBtn: 'টেস্ট ওটিপি পাঠান',
     testingEmail: 'পাঠানো হচ্ছে...',
-    statusConnected: 'ইনবক্স ডেলিভারি সক্রিয় 🟢',
-    statusFallback: 'স্ক্রিন ফলব্যাক মোড (কনফিগ নেই) 🟡',
+    statusConnected: 'ইনবক্স ডেলিভারি সক্রিয়',
+    statusFallback: 'স্ক্রিন ফলব্যাক মোড (কনফিগ নেই)',
     testEmailSuccess: 'টেস্ট ওটিপি সফলভাবে sakibshourov001@gmail.com ইনবক্সে পৌঁছেছে!',
     testEmailFailed: 'ইমেইল পাঠাতে ব্যর্থ: ',
     searchPlaceholder: 'প্রশ্ন সার্চ করুন (বাংলা বা ইংরেজি)...',
@@ -165,8 +193,8 @@ const T = {
     clearPassBtn: 'Remove Password',
     sendTestEmailBtn: 'Send Test OTP',
     testingEmail: 'Sending...',
-    statusConnected: 'Direct Inbox Dispatch Active 🟢',
-    statusFallback: 'Screen Fallback Mode 🟡',
+    statusConnected: 'Direct Inbox Dispatch Active',
+    statusFallback: 'Screen Fallback Mode',
     testEmailSuccess: 'Test OTP sent directly to sakibshourov001@gmail.com inbox!',
     testEmailFailed: 'Failed to send email: ',
     searchPlaceholder: 'Search questions by text...',
@@ -223,6 +251,7 @@ function EmailSettingsModal({
   isOpen,
   onClose,
   text,
+  adminLang,
   appPasswordInput,
   setAppPasswordInput,
   showPasswordMask,
@@ -237,43 +266,47 @@ function EmailSettingsModal({
 
   return (
     <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-150">
-      <div className="w-full max-w-lg bg-[#FFFDF9] rounded-3xl border-2 border-[#D8C6B6] p-6 sm:p-7 shadow-2xl relative max-h-[92vh] overflow-y-auto animate-in zoom-in-95 duration-150 text-left">
+      <div className="w-full max-w-lg bg-[#FFFDF9] dark:bg-[#1f1318] rounded-3xl border-2 border-[#D8C6B6] dark:border-[#422530] p-6 sm:p-7 shadow-2xl relative max-h-[92vh] overflow-y-auto animate-in zoom-in-95 duration-150 text-left">
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 w-9 h-9 rounded-full bg-[#FFF6E5] text-[#8E1B3A] font-bold flex items-center justify-center hover:bg-[#8E1B3A] hover:text-white transition-colors cursor-pointer"
+          className="absolute top-4 right-4 w-9 h-9 rounded-full bg-[#FFF6E5] dark:bg-[#2c1720] text-[#8E1B3A] dark:text-[#ff7597] font-bold flex items-center justify-center hover:bg-[#8E1B3A] hover:text-white dark:hover:bg-[#ff7597] dark:hover:text-[#140d10] transition-colors cursor-pointer"
+          title="Close"
+          aria-label="Close"
         >
-          ✕
+          <CloseIcon className="text-xs" />
         </button>
 
         <div className="flex items-center gap-3 mb-3">
-          <div className="w-11 h-11 rounded-2xl bg-[#8E1B3A]/10 text-[#8E1B3A] flex items-center justify-center text-xl">
-            ✉️
+          <div className="w-11 h-11 rounded-2xl bg-[#8E1B3A]/10 dark:bg-[#ff7597]/15 text-[#8E1B3A] dark:text-[#ff7597] flex items-center justify-center text-lg">
+            <EnvelopeIcon />
           </div>
           <div>
-            <h2 className="text-lg sm:text-xl font-bold text-[#8E1B3A]">
+            <h2 className="text-lg sm:text-xl font-bold text-[#8E1B3A] dark:text-[#ff7597]">
               {text.emailModalTitle}
             </h2>
-            <p className="text-xs text-[#6E554D]">
+            <p className="text-xs text-[#6E554D] dark:text-[#c7a9b3]">
               {text.emailModalSubtitle}
             </p>
           </div>
         </div>
 
         {/* Reassuring Highlight Box: Business Mail FAQ */}
-        <div className="mb-4 p-3.5 rounded-2xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-900 leading-relaxed shadow-xs">
-          <p className="font-bold flex items-center gap-1.5 text-emerald-800">
-            <span>💡</span> {text.faqBusinessQ}
+        <div className="mb-4 p-3.5 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-xs sm:text-sm text-emerald-900 dark:text-emerald-200 leading-relaxed shadow-xs">
+          <p className="font-bold flex items-center gap-2 text-emerald-800 dark:text-emerald-300">
+            <LightbulbIcon className="text-amber-500 text-sm shrink-0" />
+            <span>{text.faqBusinessQ}</span>
           </p>
-          <p className="mt-1 text-emerald-700 font-medium">
+          <p className="mt-1.5 text-emerald-700 dark:text-emerald-300 font-medium">
             {text.faqBusinessA}
           </p>
         </div>
 
         {/* 3 Step Guide Box */}
-        <div className="mb-4 p-3.5 rounded-2xl bg-[#FFF6E5] border border-[#D8C6B6] text-xs text-[#2B1B17] space-y-2">
-          <p className="font-bold text-[#8E1B3A] flex items-center gap-1">
-            <span>🔑</span> {text.appPassInstructionsTitle}
+        <div className="mb-4 p-3.5 rounded-2xl bg-[#FFF6E5] dark:bg-[#28181f] border border-[#D8C6B6] dark:border-[#422530] text-xs text-[#2B1B17] dark:text-[#fbf5ef] space-y-2">
+          <p className="font-bold text-[#8E1B3A] dark:text-[#ff7597] flex items-center gap-1.5">
+            <KeyIcon className="text-xs shrink-0" />
+            <span>{text.appPassInstructionsTitle}</span>
           </p>
           <p className="leading-relaxed">
             {text.step1}{' '}
@@ -281,7 +314,7 @@ function EmailSettingsModal({
               href="https://myaccount.google.com/apppasswords"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-bold text-[#8E1B3A] underline hover:text-[#75142E]"
+              className="font-bold text-[#8E1B3A] dark:text-[#ff7597] underline hover:text-[#75142E] dark:hover:text-[#ff91ac]"
             >
               myaccount.google.com/apppasswords ↗
             </a>
@@ -293,7 +326,7 @@ function EmailSettingsModal({
         {/* Password Input Form */}
         <form onSubmit={handleSaveAppPassword} className="space-y-3">
           <div>
-            <label className="block text-xs font-bold text-[#6E554D] mb-1">
+            <label className="block text-xs font-bold text-[#6E554D] dark:text-[#c7a9b3] mb-1">
               {text.appPasswordInputLabel}
             </label>
             <div className="relative">
@@ -302,14 +335,24 @@ function EmailSettingsModal({
                 value={appPasswordInput}
                 onChange={(e) => setAppPasswordInput(e.target.value)}
                 placeholder={text.appPasswordPlaceholder}
-                className="w-full px-4 py-2.5 rounded-2xl border-2 border-[#D8C6B6] focus:border-[#8E1B3A] focus:outline-none text-sm font-mono bg-white text-[#2B1B17] pr-20"
+                className="w-full px-4 py-2.5 rounded-2xl border-2 border-[#D8C6B6] dark:border-[#4d2737] focus:border-[#8E1B3A] dark:focus:border-[#ff7597] focus:outline-none text-sm font-mono bg-white dark:bg-[#2b1922] text-[#2B1B17] dark:text-[#fbf5ef] pr-20"
               />
               <button
                 type="button"
                 onClick={() => setShowPasswordMask(!showPasswordMask)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-bold text-[#6E554D] hover:text-[#8E1B3A] cursor-pointer"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-bold text-[#6E554D] dark:text-[#c7a9b3] hover:text-[#8E1B3A] dark:hover:text-[#ff7597] cursor-pointer flex items-center gap-1.5"
               >
-                {showPasswordMask ? 'লুকান' : 'দেখান'}
+                {showPasswordMask ? (
+                  <>
+                    <EyeSlashIcon className="text-xs" />
+                    <span>{adminLang === 'bn' ? 'লুকান' : 'Hide'}</span>
+                  </>
+                ) : (
+                  <>
+                    <EyeIcon className="text-xs" />
+                    <span>{adminLang === 'bn' ? 'দেখান' : 'Show'}</span>
+                  </>
+                )}
               </button>
             </div>
           </div>
@@ -317,9 +360,10 @@ function EmailSettingsModal({
           <div className="flex flex-wrap items-center gap-2 pt-1">
             <button
               type="submit"
-              className="flex-1 py-2.5 px-4 rounded-xl bg-[#8E1B3A] hover:bg-[#75142E] text-white font-bold text-xs transition-colors shadow-xs cursor-pointer"
+              className="flex-1 py-2.5 px-4 rounded-xl bg-[#8E1B3A] hover:bg-[#75142E] dark:bg-[#a62245] dark:hover:bg-[#8E1B3A] text-white font-bold text-xs transition-colors shadow-xs cursor-pointer flex items-center justify-center gap-1.5"
             >
-              💾 {text.savePassBtn}
+              <SaveIcon className="text-xs" />
+              <span>{text.savePassBtn}</span>
             </button>
 
             <button
@@ -331,10 +375,13 @@ function EmailSettingsModal({
               {isTestingEmail ? (
                 <>
                   <span className="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
-                  {text.testingEmail}
+                  <span>{text.testingEmail}</span>
                 </>
               ) : (
-                <>✉️ {text.sendTestEmailBtn}</>
+                <>
+                  <PaperPlaneIcon className="text-xs" />
+                  <span>{text.sendTestEmailBtn}</span>
+                </>
               )}
             </button>
 
@@ -342,22 +389,24 @@ function EmailSettingsModal({
               <button
                 type="button"
                 onClick={handleClearAppPassword}
-                className="py-2.5 px-3 rounded-xl bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold text-xs transition-colors cursor-pointer"
+                className="py-2.5 px-3 rounded-xl bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 font-bold text-xs transition-colors cursor-pointer flex items-center gap-1"
               >
-                {text.clearPassBtn}
+                <TrashIcon className="text-xs" />
+                <span>{text.clearPassBtn}</span>
               </button>
             )}
           </div>
         </form>
 
-        <div className="mt-4 pt-3 border-t border-[#D8C6B6]/50 flex items-center justify-between text-[11px] text-[#8A7268]">
+        <div className="mt-4 pt-3 border-t border-[#D8C6B6]/50 dark:border-[#422530] flex items-center justify-between text-[11px] text-[#8A7268] dark:text-[#a08b93]">
           <span>রেজিস্টার্ড মেইল: sakibshourov001@gmail.com</span>
           <button
             type="button"
             onClick={onClose}
-            className="font-bold text-[#8E1B3A] hover:underline cursor-pointer"
+            className="font-bold text-[#8E1B3A] dark:text-[#ff7597] hover:underline cursor-pointer flex items-center gap-1"
           >
-            বন্ধ করুন ✕
+            <CloseIcon className="text-xs" />
+            <span>{adminLang === 'bn' ? 'বন্ধ করুন' : 'Close'}</span>
           </button>
         </div>
       </div>
@@ -365,10 +414,31 @@ function EmailSettingsModal({
   );
 }
 
-export default function AdminPanel({ lang = 'bn', onBackToGame }) {
+export default function AdminPanel({
+  lang = 'bn',
+  onBackToGame,
+  theme = 'light',
+  onToggleTheme
+}) {
   // Bilingual state inside admin
   const [adminLang, setAdminLang] = useState(lang);
   const text = T[adminLang] || T.bn;
+
+  // Theme State (Dark / Light)
+  const [localTheme, setLocalTheme] = useState(() => getStoredTheme());
+  const currentTheme = theme || localTheme;
+
+  const handleToggleTheme = () => {
+    const next = currentTheme === 'dark' ? 'light' : 'dark';
+    setLocalTheme(next);
+    setStoredTheme(next);
+    applyTheme(next);
+    if (onToggleTheme) onToggleTheme(next);
+  };
+
+  useEffect(() => {
+    applyTheme(currentTheme);
+  }, [currentTheme]);
 
   // Authentication State
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
@@ -770,12 +840,27 @@ export default function AdminPanel({ lang = 'bn', onBackToGame }) {
   // ==============================================================
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-[#FFF6E5] flex flex-col items-center justify-center p-4 selection:bg-[#8E1B3A] selection:text-white">
-        {/* Top Floating Language Switcher */}
+      <div className="min-h-screen bg-[#FFF6E5] dark:bg-[#140d10] text-[#2B1B17] dark:text-[#fbf5ef] flex flex-col items-center justify-center p-4 selection:bg-[#8E1B3A] selection:text-white transition-colors duration-300">
+        {/* Top Floating Controls: Language and Dark/Light Mode */}
         <div className="absolute top-4 right-4 sm:top-6 sm:right-8 flex items-center gap-2">
+          {/* Theme Toggle Button */}
+          <button
+            onClick={handleToggleTheme}
+            className="w-8 h-8 rounded-full bg-[#FFFDF9] dark:bg-[#20151a] border border-[#D8C6B6] dark:border-[#422530] text-[#8E1B3A] dark:text-[#ff7597] shadow-sm hover:bg-[#F4E8D9] dark:hover:bg-[#341d27] flex items-center justify-center transition-colors cursor-pointer"
+            title={currentTheme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+            aria-label="Toggle theme"
+          >
+            {currentTheme === 'dark' ? (
+              <SunIcon className="text-amber-400 text-xs" />
+            ) : (
+              <MoonIcon className="text-xs" />
+            )}
+          </button>
+
+          {/* Language Toggle Button */}
           <button
             onClick={() => setAdminLang(adminLang === 'bn' ? 'en' : 'bn')}
-            className="px-3 py-1.5 rounded-full bg-[#FFFDF9] border border-[#D8C6B6] text-xs font-bold text-[#8E1B3A] shadow-sm hover:bg-[#F4E8D9] transition-colors cursor-pointer"
+            className="px-3 py-1.5 rounded-full bg-[#FFFDF9] dark:bg-[#20151a] border border-[#D8C6B6] dark:border-[#422530] text-xs font-bold text-[#8E1B3A] dark:text-[#ff7597] shadow-sm hover:bg-[#F4E8D9] dark:hover:bg-[#341d27] transition-colors cursor-pointer"
           >
             {adminLang === 'bn' ? 'English' : 'বাংলা'}
           </button>
@@ -792,29 +877,35 @@ export default function AdminPanel({ lang = 'bn', onBackToGame }) {
             }}
             className={`w-full max-w-md mb-4 p-3.5 rounded-2xl border text-xs sm:text-sm font-semibold flex items-center justify-between gap-3 shadow-md animate-in slide-in-from-top-2 duration-200 cursor-pointer ${
               alert.type === 'error'
-                ? 'bg-red-50 border-red-300 text-red-700'
+                ? 'bg-red-50 dark:bg-red-950/40 border-red-300 dark:border-red-800 text-red-700 dark:text-red-300'
                 : alert.type === 'success'
-                ? 'bg-emerald-50 border-emerald-300 text-emerald-800'
-                : 'bg-[#FFFDF9] border-[#8E1B3A] text-[#8E1B3A]'
+                ? 'bg-emerald-50 dark:bg-emerald-950/40 border-emerald-300 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300'
+                : 'bg-[#FFFDF9] dark:bg-[#20151a] border-[#8E1B3A] dark:border-[#ff7597] text-[#8E1B3A] dark:text-[#ff7597]'
             }`}
           >
             <div className="flex items-center gap-2">
-              <span className="text-base">{alert.type === 'error' ? '⚠️' : alert.type === 'success' ? '✅' : '🔐'}</span>
+              {alert.type === 'error' ? (
+                <ErrorIcon className="text-red-600 dark:text-red-400 text-base shrink-0" />
+              ) : alert.type === 'success' ? (
+                <SuccessIcon className="text-emerald-600 dark:text-emerald-400 text-base shrink-0" />
+              ) : (
+                <ShieldIcon className="text-[#8E1B3A] dark:text-[#ff7597] text-base shrink-0" />
+              )}
               <span>{alert.message}</span>
             </div>
-            <span className="text-[10px] font-bold opacity-60">✕</span>
+            <CloseIcon className="text-xs opacity-60 hover:opacity-100 shrink-0" />
           </div>
         )}
 
-        <div className="w-full max-w-md bg-[#FFFDF9] rounded-3xl border-2 border-[#D8C6B6] p-6 sm:p-8 shadow-2xl text-center animate-in zoom-in-95 duration-200">
-          <div className="w-16 h-16 rounded-2xl bg-[#8E1B3A]/10 text-[#8E1B3A] flex items-center justify-center mx-auto mb-4 text-2xl shadow-inner">
+        <div className="w-full max-w-md bg-[#FFFDF9] dark:bg-[#1f1318] rounded-3xl border-2 border-[#D8C6B6] dark:border-[#422530] p-6 sm:p-8 shadow-2xl text-center animate-in zoom-in-95 duration-200">
+          <div className="w-16 h-16 rounded-2xl bg-[#8E1B3A]/10 dark:bg-[#ff7597]/15 text-[#8E1B3A] dark:text-[#ff7597] flex items-center justify-center mx-auto mb-4 text-2xl shadow-inner">
             <ShieldIcon />
           </div>
 
-          <h1 className="text-2xl font-bold text-[#8E1B3A]">
+          <h1 className="text-2xl font-bold text-[#8E1B3A] dark:text-[#ff7597]">
             {authStep === 'email' ? text.authTitle : text.otpTitle}
           </h1>
-          <p className="text-xs sm:text-sm text-[#6E554D] mt-1.5 mb-6 leading-relaxed">
+          <p className="text-xs sm:text-sm text-[#6E554D] dark:text-[#c7a9b3] mt-1.5 mb-6 leading-relaxed">
             {authStep === 'email' ? text.authSubtitle : text.otpSubtitle}
           </p>
 
@@ -822,7 +913,7 @@ export default function AdminPanel({ lang = 'bn', onBackToGame }) {
           {authStep === 'email' && (
             <form onSubmit={handleRequestOtp} className="flex flex-col gap-3.5">
               <div className="text-left">
-                <label className="block text-xs font-bold text-[#6E554D] mb-1">
+                <label className="block text-xs font-bold text-[#6E554D] dark:text-[#c7a9b3] mb-1">
                   {text.emailLabel}
                 </label>
                 <input
@@ -830,7 +921,7 @@ export default function AdminPanel({ lang = 'bn', onBackToGame }) {
                   value={enteredEmail}
                   onChange={(e) => setEnteredEmail(e.target.value)}
                   placeholder="sakibshourov001@gmail.com"
-                  className="w-full px-4 py-3 rounded-2xl border-2 border-[#D8C6B6] focus:border-[#8E1B3A] focus:outline-none text-sm font-semibold bg-white text-[#2B1B17]"
+                  className="w-full px-4 py-3 rounded-2xl border-2 border-[#D8C6B6] dark:border-[#4d2737] focus:border-[#8E1B3A] dark:focus:border-[#ff7597] focus:outline-none text-sm font-semibold bg-white dark:bg-[#2b1922] text-[#2B1B17] dark:text-[#fbf5ef]"
                   required
                   autoFocus
                 />
@@ -839,38 +930,43 @@ export default function AdminPanel({ lang = 'bn', onBackToGame }) {
               <button
                 type="submit"
                 disabled={isSendingOtp}
-                className="w-full py-3.5 rounded-2xl bg-[#8E1B3A] hover:bg-[#75142E] disabled:opacity-60 text-white font-bold text-sm transition-all shadow-md active:scale-95 cursor-pointer mt-1 flex items-center justify-center gap-2"
+                className="w-full py-3.5 rounded-2xl bg-[#8E1B3A] hover:bg-[#75142E] dark:bg-[#a62245] dark:hover:bg-[#8E1B3A] disabled:opacity-60 text-white font-bold text-sm transition-all shadow-md active:scale-95 cursor-pointer mt-1 flex items-center justify-center gap-2"
               >
                 {isSendingOtp ? (
                   <>
                     <span className="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
-                    {text.sendingOtpBtn}
+                    <span>{text.sendingOtpBtn}</span>
                   </>
                 ) : (
-                  <>{text.sendOtpBtn} →</>
+                  <>
+                    <PaperPlaneIcon className="text-xs" />
+                    <span>{text.sendOtpBtn}</span>
+                  </>
                 )}
               </button>
 
               <button
                 type="button"
                 onClick={onBackToGame}
-                className="text-xs text-[#6E554D] hover:text-[#8E1B3A] font-semibold mt-2 cursor-pointer"
+                className="text-xs text-[#6E554D] dark:text-[#c7a9b3] hover:text-[#8E1B3A] dark:hover:text-[#ff7597] font-semibold mt-2 cursor-pointer flex items-center justify-center gap-1.5"
               >
-                ← {text.backToGame}
+                <ArrowLeftIcon className="text-xs" />
+                <span>{text.backToGame}</span>
               </button>
 
               {/* Email Delivery Status Badge & Settings Trigger */}
-              <div className="mt-2 pt-3 border-t border-[#D8C6B6]/60 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs">
-                <span className="text-[#6E554D] font-semibold flex items-center gap-1.5">
-                  <span className={`w-2.5 h-2.5 rounded-full ${hasAppPass ? 'bg-emerald-500 animate-pulse' : 'bg-amber-400'}`}></span>
-                  {hasAppPass ? text.statusConnected : text.statusFallback}
+              <div className="mt-2 pt-3 border-t border-[#D8C6B6]/60 dark:border-[#422530] flex flex-col sm:flex-row items-center justify-between gap-2 text-xs">
+                <span className="text-[#6E554D] dark:text-[#c7a9b3] font-semibold flex items-center gap-1.5">
+                  <CircleDotIcon className={`text-[10px] ${hasAppPass ? 'text-emerald-500 animate-pulse' : 'text-amber-400'}`} />
+                  <span>{hasAppPass ? text.statusConnected : text.statusFallback}</span>
                 </span>
                 <button
                   type="button"
                   onClick={() => setIsEmailModalOpen(true)}
-                  className="text-[#8E1B3A] font-bold hover:underline cursor-pointer flex items-center gap-1"
+                  className="text-[#8E1B3A] dark:text-[#ff7597] font-bold hover:underline cursor-pointer flex items-center gap-1.5"
                 >
-                  ⚙️ {text.emailSettingsBtn}
+                  <GearIcon className="text-xs" />
+                  <span>{text.emailSettingsBtn}</span>
                 </button>
               </div>
             </form>
@@ -891,17 +987,18 @@ export default function AdminPanel({ lang = 'bn', onBackToGame }) {
                     value={digit}
                     onChange={(e) => handleOtpDigitChange(idx, e.target.value)}
                     onKeyDown={(e) => handleOtpKeyDown(idx, e)}
-                    className="w-11 h-13 sm:w-12 sm:h-14 text-center text-xl sm:text-2xl font-bold font-mono rounded-2xl border-2 border-[#D8C6B6] focus:border-[#8E1B3A] focus:ring-2 focus:ring-[#8E1B3A]/20 focus:outline-none bg-white text-[#8E1B3A] shadow-xs"
+                    className="w-11 h-13 sm:w-12 sm:h-14 text-center text-xl sm:text-2xl font-bold font-mono rounded-2xl border-2 border-[#D8C6B6] dark:border-[#4d2737] focus:border-[#8E1B3A] dark:focus:border-[#ff7597] focus:ring-2 focus:ring-[#8E1B3A]/20 dark:focus:ring-[#ff7597]/20 focus:outline-none bg-white dark:bg-[#2b1922] text-[#8E1B3A] dark:text-[#ff7597] shadow-xs"
                     autoFocus={idx === 0}
                   />
                 ))}
               </div>
 
               {/* Expiration Timer Indicator */}
-              <div className="flex items-center justify-between text-xs font-bold text-[#6E554D] px-2">
-                <span>
-                  ⏱️ {text.otpExpiresIn}:{' '}
-                  <span className={secondsRemaining < 60 ? 'text-red-600' : 'text-[#8E1B3A]'}>
+              <div className="flex items-center justify-between text-xs font-bold text-[#6E554D] dark:text-[#c7a9b3] px-2">
+                <span className="flex items-center gap-1">
+                  <ClockIcon className="text-xs" />
+                  <span>{text.otpExpiresIn}:</span>
+                  <span className={secondsRemaining < 60 ? 'text-red-600 dark:text-red-400 font-mono' : 'text-[#8E1B3A] dark:text-[#ff7597] font-mono'}>
                     {formatTime(secondsRemaining)}
                   </span>
                 </span>
@@ -909,46 +1006,53 @@ export default function AdminPanel({ lang = 'bn', onBackToGame }) {
                   type="button"
                   disabled={resendCooldown > 0 || isSendingOtp}
                   onClick={handleRequestOtp}
-                  className={`cursor-pointer ${
+                  className={`cursor-pointer flex items-center gap-1 ${
                     resendCooldown > 0 || isSendingOtp
-                      ? 'text-[#8A7268] opacity-50 cursor-not-allowed'
-                      : 'text-[#8E1B3A] hover:underline'
+                      ? 'text-[#8A7268] dark:text-[#7d6870] opacity-50 cursor-not-allowed'
+                      : 'text-[#8E1B3A] dark:text-[#ff7597] hover:underline'
                   }`}
                 >
-                  {isSendingOtp
-                    ? text.sendingOtpBtn
-                    : resendCooldown > 0
-                    ? `${text.resendOtp} (${resendCooldown}s)`
-                    : text.resendOtp}
+                  <RotateLeftIcon className="text-xs" />
+                  <span>
+                    {isSendingOtp
+                      ? text.sendingOtpBtn
+                      : resendCooldown > 0
+                      ? `${text.resendOtp} (${resendCooldown}s)`
+                      : text.resendOtp}
+                  </span>
                 </button>
               </div>
 
               <button
                 type="submit"
-                className="w-full py-3.5 rounded-2xl bg-[#8E1B3A] hover:bg-[#75142E] text-white font-bold text-sm transition-all shadow-md active:scale-95 cursor-pointer mt-1"
+                className="w-full py-3.5 rounded-2xl bg-[#8E1B3A] hover:bg-[#75142E] dark:bg-[#a62245] dark:hover:bg-[#8E1B3A] text-white font-bold text-sm transition-all shadow-md active:scale-95 cursor-pointer mt-1 flex items-center justify-center gap-2"
               >
-                {text.verifyBtn} ✓
+                <CheckIcon className="text-xs" />
+                <span>{text.verifyBtn}</span>
               </button>
 
               <button
                 type="button"
                 onClick={() => setAuthStep('email')}
-                className="text-xs text-[#6E554D] hover:text-[#8E1B3A] font-semibold cursor-pointer"
+                className="text-xs text-[#6E554D] dark:text-[#c7a9b3] hover:text-[#8E1B3A] dark:hover:text-[#ff7597] font-semibold cursor-pointer flex items-center justify-center gap-1.5"
               >
-                ← {text.changeEmail}
+                <ArrowLeftIcon className="text-xs" />
+                <span>{text.changeEmail}</span>
               </button>
 
               {/* Email Delivery Status Badge in Step 2 */}
-              <div className="mt-1 pt-3 border-t border-[#D8C6B6]/60 flex items-center justify-between text-xs">
-                <span className="text-[#6E554D] font-semibold">
-                  {hasAppPass ? text.statusConnected : text.statusFallback}
+              <div className="mt-1 pt-3 border-t border-[#D8C6B6]/60 dark:border-[#422530] flex items-center justify-between text-xs">
+                <span className="text-[#6E554D] dark:text-[#c7a9b3] font-semibold flex items-center gap-1.5">
+                  <CircleDotIcon className={`text-[10px] ${hasAppPass ? 'text-emerald-500 animate-pulse' : 'text-amber-400'}`} />
+                  <span>{hasAppPass ? text.statusConnected : text.statusFallback}</span>
                 </span>
                 <button
                   type="button"
                   onClick={() => setIsEmailModalOpen(true)}
-                  className="text-[#8E1B3A] font-bold hover:underline cursor-pointer"
+                  className="text-[#8E1B3A] dark:text-[#ff7597] font-bold hover:underline cursor-pointer flex items-center gap-1.5"
                 >
-                  ⚙️ {text.emailSettingsBtn}
+                  <GearIcon className="text-xs" />
+                  <span>{text.emailSettingsBtn}</span>
                 </button>
               </div>
             </form>
@@ -960,6 +1064,7 @@ export default function AdminPanel({ lang = 'bn', onBackToGame }) {
           isOpen={isEmailModalOpen}
           onClose={() => setIsEmailModalOpen(false)}
           text={text}
+          adminLang={adminLang}
           appPasswordInput={appPasswordInput}
           setAppPasswordInput={setAppPasswordInput}
           showPasswordMask={showPasswordMask}
@@ -982,94 +1087,118 @@ export default function AdminPanel({ lang = 'bn', onBackToGame }) {
   const winRate = stats.gamesStarted > 0 ? Math.round((stats.bingosWon / stats.gamesStarted) * 100) : 0;
 
   return (
-    <div className="min-h-screen bg-[#FFF6E5] text-[#2B1B17] flex flex-col font-sans selection:bg-[#8E1B3A] selection:text-white">
+    <div className="min-h-screen bg-[#FFF6E5] dark:bg-[#140d10] text-[#2B1B17] dark:text-[#fbf5ef] flex flex-col font-sans selection:bg-[#8E1B3A] selection:text-white transition-colors duration-300">
       {/* Alert Notification Banner */}
       {alert && (
-        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 max-w-lg w-[92%] bg-[#2B1B17] text-white text-xs sm:text-sm font-bold py-3 px-5 rounded-2xl shadow-2xl flex items-center justify-between gap-3 animate-in slide-in-from-top-2 duration-150">
+        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 max-w-lg w-[92%] bg-[#2B1B17] dark:bg-[#20151a] border border-[#D8C6B6]/40 dark:border-[#422530] text-white text-xs sm:text-sm font-bold py-3 px-5 rounded-2xl shadow-2xl flex items-center justify-between gap-3 animate-in slide-in-from-top-2 duration-150">
           <div className="flex items-center gap-2">
-            <span>{alert.type === 'error' ? '⚠️' : alert.type === 'success' ? '✅' : 'ℹ️'}</span>
+            {alert.type === 'error' ? (
+              <ErrorIcon className="text-red-400 text-sm shrink-0" />
+            ) : alert.type === 'success' ? (
+              <SuccessIcon className="text-emerald-400 text-sm shrink-0" />
+            ) : (
+              <ShieldIcon className="text-[#ff7597] text-sm shrink-0" />
+            )}
             <span>{alert.message}</span>
           </div>
           <button
             onClick={() => setAlert(null)}
             className="text-white/80 hover:text-white font-bold cursor-pointer text-xs"
+            title="Dismiss"
           >
-            ✕
+            <CloseIcon className="text-xs" />
           </button>
         </div>
       )}
 
       {/* Top Navbar */}
-      <header className="w-full bg-[#FFFDF9] border-b border-[#D8C6B6] px-4 sm:px-8 py-3.5 flex flex-wrap items-center justify-between gap-3 sticky top-0 z-40 shadow-sm">
+      <header className="w-full bg-[#FFFDF9] dark:bg-[#1c1216] border-b border-[#D8C6B6] dark:border-[#3d232c] px-4 sm:px-8 py-3.5 flex flex-wrap items-center justify-between gap-3 sticky top-0 z-40 shadow-sm transition-colors">
         <div className="flex items-center gap-3">
           <button
             onClick={onBackToGame}
-            className="w-9 h-9 rounded-xl bg-[#F4E8D9] hover:bg-[#E8DCD0] text-[#8E1B3A] flex items-center justify-center transition-transform active:scale-95 cursor-pointer"
+            className="w-9 h-9 rounded-xl bg-[#F4E8D9] dark:bg-[#28181f] hover:bg-[#E8DCD0] dark:hover:bg-[#38202c] text-[#8E1B3A] dark:text-[#ff7597] flex items-center justify-center transition-transform active:scale-95 cursor-pointer border border-[#D8C6B6]/40 dark:border-[#422530]"
             title={text.backToGame}
           >
             <ArrowLeftIcon className="text-sm" />
           </button>
           <div>
             <div className="flex items-center gap-2">
-              <span className="font-bold text-lg sm:text-xl text-[#8E1B3A]">
+              <span className="font-bold text-lg sm:text-xl text-[#8E1B3A] dark:text-[#ff7597]">
                 {text.adminTitle}
               </span>
-              <span className="text-[10px] uppercase tracking-wider font-extrabold bg-[#8E1B3A]/10 text-[#8E1B3A] px-2 py-0.5 rounded-full">
+              <span className="text-[10px] uppercase tracking-wider font-extrabold bg-[#8E1B3A]/10 dark:bg-[#ff7597]/15 text-[#8E1B3A] dark:text-[#ff7597] px-2 py-0.5 rounded-full">
                 {ADMIN_EMAIL}
               </span>
             </div>
-            <p className="text-[11px] text-[#6E554D] hidden sm:block">
+            <p className="text-[11px] text-[#6E554D] dark:text-[#c7a9b3] hidden sm:block">
               {text.adminSubtitle}
             </p>
           </div>
         </div>
 
-        {/* Tab Switcher, Language Toggle & Logout */}
+        {/* Tab Switcher, Theme Toggle, Language Toggle & Logout */}
         <div className="flex items-center gap-2">
+          {/* Theme Toggle Button */}
+          <button
+            onClick={handleToggleTheme}
+            className="px-2.5 py-1.5 rounded-xl border border-[#D8C6B6] dark:border-[#422530] bg-white dark:bg-[#28181f] text-xs font-bold text-[#8E1B3A] dark:text-[#ff7597] hover:bg-[#F4E8D9] dark:hover:bg-[#38202c] transition-colors cursor-pointer shadow-xs flex items-center gap-1.5"
+            title={currentTheme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+          >
+            {currentTheme === 'dark' ? (
+              <SunIcon className="text-amber-400 text-xs" />
+            ) : (
+              <MoonIcon className="text-xs" />
+            )}
+            <span className="hidden sm:inline">{currentTheme === 'dark' ? 'Light' : 'Dark'}</span>
+          </button>
+
           {/* Language Toggle */}
           <button
             onClick={() => setAdminLang(adminLang === 'bn' ? 'en' : 'bn')}
-            className="px-2.5 py-1.5 rounded-xl border border-[#D8C6B6] bg-white text-xs font-bold text-[#8E1B3A] hover:bg-[#F4E8D9] transition-colors cursor-pointer shadow-xs"
+            className="px-2.5 py-1.5 rounded-xl border border-[#D8C6B6] dark:border-[#422530] bg-white dark:bg-[#28181f] text-xs font-bold text-[#8E1B3A] dark:text-[#ff7597] hover:bg-[#F4E8D9] dark:hover:bg-[#38202c] transition-colors cursor-pointer shadow-xs"
           >
             {adminLang === 'bn' ? 'EN' : 'বাংলা'}
           </button>
 
           {/* Tab Switcher */}
-          <div className="flex bg-[#F4E8D9] p-1 rounded-2xl border border-[#D8C6B6]/60">
+          <div className="flex bg-[#F4E8D9] dark:bg-[#28181f] p-1 rounded-2xl border border-[#D8C6B6]/60 dark:border-[#422530]">
             <button
               onClick={() => setActiveTab('questions')}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
                 activeTab === 'questions'
-                  ? 'bg-[#8E1B3A] text-white shadow-sm'
-                  : 'text-[#6E554D] hover:text-[#8E1B3A]'
+                  ? 'bg-[#8E1B3A] dark:bg-[#a62245] text-white shadow-sm'
+                  : 'text-[#6E554D] dark:text-[#c7a9b3] hover:text-[#8E1B3A] dark:hover:text-[#ff7597]'
               }`}
             >
-              📋 {text.tabQuestions} ({questions.length})
+              <ClipboardListIcon className="text-xs" />
+              <span>{text.tabQuestions} ({questions.length})</span>
             </button>
             <button
               onClick={() => setActiveTab('analytics')}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
                 activeTab === 'analytics'
-                  ? 'bg-[#8E1B3A] text-white shadow-sm'
-                  : 'text-[#6E554D] hover:text-[#8E1B3A]'
+                  ? 'bg-[#8E1B3A] dark:bg-[#a62245] text-white shadow-sm'
+                  : 'text-[#6E554D] dark:text-[#c7a9b3] hover:text-[#8E1B3A] dark:hover:text-[#ff7597]'
               }`}
             >
-              📊 {text.tabAnalytics}
+              <ChartBarIcon className="text-xs" />
+              <span>{text.tabAnalytics}</span>
             </button>
           </div>
 
           {/* Email Settings & App Password Button */}
           <button
             onClick={() => setIsEmailModalOpen(true)}
-            className="px-2.5 py-1.5 rounded-xl border border-[#D8C6B6] bg-white text-xs font-bold text-[#8E1B3A] hover:bg-[#F4E8D9] transition-colors cursor-pointer shadow-xs flex items-center gap-1.5"
+            className="px-2.5 py-1.5 rounded-xl border border-[#D8C6B6] dark:border-[#422530] bg-white dark:bg-[#28181f] text-xs font-bold text-[#8E1B3A] dark:text-[#ff7597] hover:bg-[#F4E8D9] dark:hover:bg-[#38202c] transition-colors cursor-pointer shadow-xs flex items-center gap-1.5"
             title={text.emailSettingsBtn}
           >
-            ✉️ <span className="hidden md:inline">{text.emailSettingsBtn}</span>
+            <GearIcon className="text-xs" />
+            <span className="hidden md:inline">{text.emailSettingsBtn}</span>
           </button>
 
           <button
             onClick={handleLogout}
-            className="text-xs font-bold text-[#8E1B3A] hover:bg-red-50 hover:text-red-600 px-2.5 py-1.5 rounded-xl transition-colors cursor-pointer"
+            className="text-xs font-bold text-[#8E1B3A] dark:text-[#ff7597] hover:bg-red-50 dark:hover:bg-red-950/40 hover:text-red-600 dark:hover:text-red-400 px-2.5 py-1.5 rounded-xl transition-colors cursor-pointer"
             title={text.logout}
           >
             <LockIcon className="text-xs" />
@@ -1085,47 +1214,47 @@ export default function AdminPanel({ lang = 'bn', onBackToGame }) {
         {activeTab === 'questions' && (
           <div className="flex flex-col gap-6">
             {/* Top Filter & Action Bar */}
-            <div className="bg-[#FFFDF9] rounded-3xl border border-[#D8C6B6] p-4 sm:p-6 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div className="bg-[#FFFDF9] dark:bg-[#1f1318] rounded-3xl border border-[#D8C6B6] dark:border-[#422530] p-4 sm:p-6 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div className="flex flex-wrap items-center gap-2.5 flex-1 max-w-2xl">
                 <input
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder={text.searchPlaceholder}
-                  className="flex-1 min-w-[200px] px-4 py-2.5 rounded-2xl border border-[#D8C6B6] bg-white text-sm focus:outline-none focus:border-[#8E1B3A]"
+                  className="flex-1 min-w-[200px] px-4 py-2.5 rounded-2xl border border-[#D8C6B6] dark:border-[#4d2737] bg-white dark:bg-[#2b1922] text-[#2B1B17] dark:text-[#fbf5ef] text-sm focus:outline-none focus:border-[#8E1B3A] dark:focus:border-[#ff7597]"
                 />
                 <select
                   value={selectedOccasionFilter}
                   onChange={(e) => setSelectedOccasionFilter(e.target.value)}
-                  className="px-3 py-2.5 rounded-2xl border border-[#D8C6B6] bg-white text-xs font-bold text-[#6E554D] focus:outline-none focus:border-[#8E1B3A] cursor-pointer"
+                  className="px-3 py-2.5 rounded-2xl border border-[#D8C6B6] dark:border-[#4d2737] bg-white dark:bg-[#2b1922] text-xs font-bold text-[#6E554D] dark:text-[#c7a9b3] focus:outline-none focus:border-[#8E1B3A] dark:focus:border-[#ff7597] cursor-pointer"
                 >
                   <option value="all">{text.allOccasions}</option>
-                  <option value="eid">{adminLang === 'bn' ? 'ঈদের আড্ডা (Eid)' : 'Eid Reunion'}</option>
-                  <option value="wedding">{adminLang === 'bn' ? 'বিয়ে ও দাওয়াত (Wedding)' : 'Wedding'}</option>
-                  <option value="exam">{adminLang === 'bn' ? 'রেজাল্টের দিন (Exam)' : 'Exam Results'}</option>
-                  <option value="general">{adminLang === 'bn' ? 'সাধারণ আড্ডা (General)' : 'General Adda'}</option>
+                  {Object.entries(OCCASIONS).map(([key, occ]) => (
+                    <option key={key} value={key}>
+                      {adminLang === 'bn' ? occ.nameBn : occ.nameEn}
+                    </option>
+                  ))}
                 </select>
               </div>
 
-              {/* Action Buttons */}
+              {/* Action Buttons: Add, Export, Import, Reset */}
               <div className="flex flex-wrap items-center gap-2">
                 <button
                   onClick={handleOpenAdd}
-                  className="px-4 py-2.5 rounded-2xl bg-[#8E1B3A] hover:bg-[#75142E] text-white text-xs font-bold flex items-center gap-1.5 shadow-sm active:scale-95 transition-all cursor-pointer"
+                  className="px-4 py-2 rounded-2xl bg-[#8E1B3A] hover:bg-[#75142E] dark:bg-[#a62245] dark:hover:bg-[#8E1B3A] text-white text-xs font-bold shadow-sm transition-transform active:scale-95 cursor-pointer flex items-center gap-1.5"
                 >
-                  <span>+</span>
+                  <PlusIcon className="text-xs" />
                   <span>{text.addQuestionBtn}</span>
                 </button>
                 <button
                   onClick={exportQuestionsAsJSON}
-                  className="px-3.5 py-2.5 rounded-2xl bg-white border border-[#D8C6B6] hover:bg-[#F9F4ED] text-[#6E554D] text-xs font-bold flex items-center gap-1.5 shadow-sm active:scale-95 transition-all cursor-pointer"
-                  title="Export questions to phrases.json"
+                  className="px-3.5 py-2 rounded-2xl bg-white dark:bg-[#2b1922] border border-[#D8C6B6] dark:border-[#4d2737] text-xs font-bold text-[#6E554D] dark:text-[#c7a9b3] hover:bg-[#F4E8D9] dark:hover:bg-[#38202c] shadow-sm transition-colors cursor-pointer flex items-center gap-1.5"
                 >
-                  <DownloadIcon className="text-xs" />
+                  <ExportIcon className="text-xs" />
                   <span>{text.exportJsonBtn}</span>
                 </button>
-                <label className="px-3.5 py-2.5 rounded-2xl bg-white border border-[#D8C6B6] hover:bg-[#F9F4ED] text-[#6E554D] text-xs font-bold flex items-center gap-1.5 shadow-sm active:scale-95 transition-all cursor-pointer">
-                  <span>📥</span>
+                <label className="px-3.5 py-2 rounded-2xl bg-white dark:bg-[#2b1922] border border-[#D8C6B6] dark:border-[#4d2737] text-xs font-bold text-[#6E554D] dark:text-[#c7a9b3] hover:bg-[#F4E8D9] dark:hover:bg-[#38202c] shadow-sm transition-colors cursor-pointer flex items-center gap-1.5">
+                  <ImportIcon className="text-xs" />
                   <span>{text.importBtn}</span>
                   <input
                     type="file"
@@ -1136,8 +1265,8 @@ export default function AdminPanel({ lang = 'bn', onBackToGame }) {
                 </label>
                 <button
                   onClick={handleResetDefaults}
-                  className="px-3 py-2.5 rounded-2xl bg-[#FFF0EB] border border-[#FFD7CC] hover:bg-[#FFE6DF] text-[#D32F2F] text-xs font-bold flex items-center gap-1 shadow-sm active:scale-95 transition-all cursor-pointer"
-                  title="Reset to original 164 questions"
+                  className="px-3.5 py-2 rounded-2xl bg-white dark:bg-[#2b1922] border border-red-200 dark:border-red-900/50 text-xs font-bold text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/40 shadow-sm transition-colors cursor-pointer flex items-center gap-1.5"
+                  title={text.resetDefaultsBtn}
                 >
                   <RotateLeftIcon className="text-xs" />
                   <span>{text.resetDefaultsBtn}</span>
@@ -1146,37 +1275,39 @@ export default function AdminPanel({ lang = 'bn', onBackToGame }) {
             </div>
 
             {/* Questions Table / List */}
-            <div className="bg-[#FFFDF9] rounded-3xl border border-[#D8C6B6] overflow-hidden shadow-sm">
-              <div className="px-6 py-4 border-b border-[#E8DCD0] flex items-center justify-between bg-[#FBF6EE]">
-                <span className="text-xs font-extrabold uppercase tracking-wider text-[#6E554D]">
-                  {text.totalQuestions} ({filteredQuestions.length})
-                </span>
-                <span className="text-xs text-[#8A7268] hidden sm:inline">
-                  {text.immediateEffect}
-                </span>
+            <div className="bg-[#FFFDF9] dark:bg-[#1f1318] rounded-3xl border border-[#D8C6B6] dark:border-[#422530] overflow-hidden shadow-sm">
+              <div className="p-4 sm:p-5 border-b border-[#D8C6B6]/60 dark:border-[#422530] flex items-center justify-between">
+                <div>
+                  <h2 className="text-base sm:text-lg font-bold text-[#8E1B3A] dark:text-[#ff7597]">
+                    {text.totalQuestions} ({filteredQuestions.length})
+                  </h2>
+                  <p className="text-xs text-[#6E554D] dark:text-[#c7a9b3]">
+                    {text.immediateEffect}
+                  </p>
+                </div>
               </div>
 
               {filteredQuestions.length === 0 ? (
-                <div className="p-12 text-center text-[#8A7268]">
-                  <p className="text-base font-bold">{text.noQuestionsFound}</p>
+                <div className="p-12 text-center text-[#6E554D] dark:text-[#c7a9b3] text-sm">
+                  {text.noQuestionsFound}
                 </div>
               ) : (
-                <div className="divide-y divide-[#EFE7DE] max-h-[620px] overflow-y-auto">
+                <div className="divide-y divide-[#EFE7DE] dark:divide-[#38202c] max-h-[620px] overflow-y-auto">
                   {filteredQuestions.map((q, idx) => (
                     <div
                       key={q.id || idx}
-                      className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-[#FAF5EC] transition-colors"
+                      className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-[#FAF5EC] dark:hover:bg-[#2a1721] transition-colors"
                     >
                       <div className="flex-1 pr-4">
                         <div className="flex items-center gap-2 mb-1">
-                          <span className="text-[11px] font-mono text-[#8A7268] bg-[#F2EAE1] px-1.5 py-0.5 rounded">
+                          <span className="text-[11px] font-mono text-[#8A7268] dark:text-[#a08b93] bg-[#F2EAE1] dark:bg-[#2c1720] px-1.5 py-0.5 rounded">
                             #{q.id}
                           </span>
-                          <span className="text-sm font-bold text-[#8E1B3A]">
+                          <span className="text-sm font-bold text-[#8E1B3A] dark:text-[#ff7597]">
                             {q.bn}
                           </span>
                         </div>
-                        <p className="text-xs text-[#6E554D] italic">
+                        <p className="text-xs text-[#6E554D] dark:text-[#c7a9b3] italic">
                           "{q.en}"
                         </p>
                         <div className="flex flex-wrap gap-1 mt-2">
@@ -1198,15 +1329,17 @@ export default function AdminPanel({ lang = 'bn', onBackToGame }) {
                       <div className="flex items-center gap-2 self-end sm:self-center">
                         <button
                           onClick={() => handleOpenEdit(q)}
-                          className="px-3 py-1.5 rounded-xl bg-white border border-[#D8C6B6] text-xs font-bold text-[#2B1B17] hover:bg-[#F4E8D9] shadow-sm transition-transform active:scale-95 cursor-pointer"
+                          className="px-3 py-1.5 rounded-xl bg-white dark:bg-[#28181f] border border-[#D8C6B6] dark:border-[#422530] text-xs font-bold text-[#2B1B17] dark:text-[#fbf5ef] hover:bg-[#F4E8D9] dark:hover:bg-[#38202c] shadow-sm transition-transform active:scale-95 cursor-pointer flex items-center gap-1.5"
                         >
-                          {text.editBtn}
+                          <EditIcon className="text-xs text-[#8E1B3A] dark:text-[#ff7597]" />
+                          <span>{text.editBtn}</span>
                         </button>
                         <button
                           onClick={() => handleDelete(q.id)}
-                          className="px-3 py-1.5 rounded-xl bg-red-50 border border-red-200 text-xs font-bold text-red-600 hover:bg-red-100 shadow-sm transition-transform active:scale-95 cursor-pointer"
+                          className="px-3 py-1.5 rounded-xl bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900/50 text-xs font-bold text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/60 shadow-sm transition-transform active:scale-95 cursor-pointer flex items-center gap-1.5"
                         >
-                          {text.deleteBtn}
+                          <TrashIcon className="text-xs" />
+                          <span>{text.deleteBtn}</span>
                         </button>
                       </div>
                     </div>
@@ -1224,69 +1357,76 @@ export default function AdminPanel({ lang = 'bn', onBackToGame }) {
           <div className="flex flex-col gap-6">
             {/* Top KPI Metric Cards */}
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
-              <div className="bg-[#FFFDF9] rounded-2xl border border-[#D8C6B6] p-4 text-center shadow-sm">
-                <div className="text-2xl sm:text-3xl font-extrabold text-[#8E1B3A]">
+              <div className="bg-[#FFFDF9] dark:bg-[#1f1318] rounded-2xl border border-[#D8C6B6] dark:border-[#422530] p-4 text-center shadow-sm">
+                <div className="text-2xl sm:text-3xl font-extrabold text-[#8E1B3A] dark:text-[#ff7597]">
                   {stats.pageViews || 0}
                 </div>
-                <div className="text-xs font-bold text-[#6E554D] mt-1">
-                  👥 {text.kpiVisits}
+                <div className="text-xs font-bold text-[#6E554D] dark:text-[#c7a9b3] mt-1.5 flex items-center justify-center gap-1.5">
+                  <UsersIcon className="text-xs" />
+                  <span>{text.kpiVisits}</span>
                 </div>
               </div>
 
-              <div className="bg-[#FFFDF9] rounded-2xl border border-[#D8C6B6] p-4 text-center shadow-sm">
-                <div className="text-2xl sm:text-3xl font-extrabold text-[#0F7B5F]">
+              <div className="bg-[#FFFDF9] dark:bg-[#1f1318] rounded-2xl border border-[#D8C6B6] dark:border-[#422530] p-4 text-center shadow-sm">
+                <div className="text-2xl sm:text-3xl font-extrabold text-[#0F7B5F] dark:text-[#2ecc71]">
                   {stats.gamesStarted || 0}
                 </div>
-                <div className="text-xs font-bold text-[#6E554D] mt-1">
-                  🎮 {text.kpiGames}
+                <div className="text-xs font-bold text-[#6E554D] dark:text-[#c7a9b3] mt-1.5 flex items-center justify-center gap-1.5">
+                  <GamepadIcon className="text-xs" />
+                  <span>{text.kpiGames}</span>
                 </div>
               </div>
 
-              <div className="bg-[#FFFDF9] rounded-2xl border border-[#D8C6B6] p-4 text-center shadow-sm">
-                <div className="text-2xl sm:text-3xl font-extrabold text-[#B84B12]">
+              <div className="bg-[#FFFDF9] dark:bg-[#1f1318] rounded-2xl border border-[#D8C6B6] dark:border-[#422530] p-4 text-center shadow-sm">
+                <div className="text-2xl sm:text-3xl font-extrabold text-[#B84B12] dark:text-[#f39c12]">
                   {stats.bingosWon || 0}
                 </div>
-                <div className="text-xs font-bold text-[#6E554D] mt-1">
-                  🏆 {text.kpiBingos} ({winRate}%)
+                <div className="text-xs font-bold text-[#6E554D] dark:text-[#c7a9b3] mt-1.5 flex items-center justify-center gap-1.5">
+                  <TrophyIcon className="text-xs" />
+                  <span>{text.kpiBingos} ({winRate}%)</span>
                 </div>
               </div>
 
-              <div className="bg-[#FFFDF9] rounded-2xl border border-[#D8C6B6] p-4 text-center shadow-sm">
-                <div className="text-2xl sm:text-3xl font-extrabold text-[#1877F2]">
+              <div className="bg-[#FFFDF9] dark:bg-[#1f1318] rounded-2xl border border-[#D8C6B6] dark:border-[#422530] p-4 text-center shadow-sm">
+                <div className="text-2xl sm:text-3xl font-extrabold text-[#1877F2] dark:text-[#3498db]">
                   {stats.facebookShares || 0}
                 </div>
-                <div className="text-xs font-bold text-[#6E554D] mt-1">
-                  📢 {text.kpiShares}
+                <div className="text-xs font-bold text-[#6E554D] dark:text-[#c7a9b3] mt-1.5 flex items-center justify-center gap-1.5">
+                  <ShareIcon className="text-xs" />
+                  <span>{text.kpiShares}</span>
                 </div>
               </div>
 
-              <div className="bg-[#FFFDF9] rounded-2xl border border-[#D8C6B6] p-4 text-center shadow-sm">
-                <div className="text-2xl sm:text-3xl font-extrabold text-[#6854C7]">
+              <div className="bg-[#FFFDF9] dark:bg-[#1f1318] rounded-2xl border border-[#D8C6B6] dark:border-[#422530] p-4 text-center shadow-sm">
+                <div className="text-2xl sm:text-3xl font-extrabold text-[#6854C7] dark:text-[#9b59b6]">
                   {questions.length}
                 </div>
-                <div className="text-xs font-bold text-[#6E554D] mt-1">
-                  📋 {text.kpiQuestions}
+                <div className="text-xs font-bold text-[#6E554D] dark:text-[#c7a9b3] mt-1.5 flex items-center justify-center gap-1.5">
+                  <BookOpenIcon className="text-xs" />
+                  <span>{text.kpiQuestions}</span>
                 </div>
               </div>
 
-              <div className="bg-[#FFFDF9] rounded-2xl border border-[#D8C6B6] p-4 text-center shadow-sm">
-                <div className="text-xs font-extrabold text-emerald-600 flex items-center justify-center gap-1 mt-1">
+              <div className="bg-[#FFFDF9] dark:bg-[#1f1318] rounded-2xl border border-[#D8C6B6] dark:border-[#422530] p-4 text-center shadow-sm">
+                <div className="text-xs font-extrabold text-emerald-600 dark:text-emerald-400 flex items-center justify-center gap-1 mt-1">
                   <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
                   <span>Active</span>
                 </div>
-                <div className="text-xs font-bold text-[#6E554D] mt-2">
-                  🟢 {text.kpiStatus}
+                <div className="text-xs font-bold text-[#6E554D] dark:text-[#c7a9b3] mt-2 flex items-center justify-center gap-1.5">
+                  <CircleDotIcon className="text-[10px] text-emerald-500" />
+                  <span>{text.kpiStatus}</span>
                 </div>
               </div>
             </div>
 
             {/* VISUAL COMPONENT 1: OCCASION DISTRIBUTION BAR CHART */}
-            <div className="bg-[#FFFDF9] rounded-3xl border border-[#D8C6B6] p-6 shadow-sm">
+            <div className="bg-[#FFFDF9] dark:bg-[#1f1318] rounded-3xl border border-[#D8C6B6] dark:border-[#422530] p-6 shadow-sm">
               <div className="mb-4">
-                <h3 className="text-base sm:text-lg font-bold text-[#8E1B3A]">
-                  📊 {text.barChartTitle}
+                <h3 className="text-base sm:text-lg font-bold text-[#8E1B3A] dark:text-[#ff7597] flex items-center gap-2">
+                  <ChartBarIcon className="text-sm" />
+                  <span>{text.barChartTitle}</span>
                 </h3>
-                <p className="text-xs text-[#6E554D] mt-0.5">
+                <p className="text-xs text-[#6E554D] dark:text-[#c7a9b3] mt-0.5">
                   {text.barChartDesc}
                 </p>
               </div>
@@ -1308,18 +1448,18 @@ export default function AdminPanel({ lang = 'bn', onBackToGame }) {
                       <div className="flex items-center justify-between text-xs font-bold">
                         <div className="flex items-center gap-2">
                           <OccasionIcon occasionId={item.id} className="text-xs" style={{ color: item.color }} />
-                          <span className="text-[#2B1B17]">
+                          <span className="text-[#2B1B17] dark:text-[#fbf5ef]">
                             {adminLang === 'bn' ? item.nameBn : item.nameEn}
                           </span>
                         </div>
                         <div className="flex items-center gap-2 font-mono">
                           <span style={{ color: item.color }}>{count} plays</span>
-                          <span className="text-[#8A7268]">({pct}%)</span>
+                          <span className="text-[#8A7268] dark:text-[#a08b93]">({pct}%)</span>
                         </div>
                       </div>
 
                       {/* Bar Fill */}
-                      <div className="w-full h-4 rounded-full bg-[#EFE7DE] overflow-hidden p-0.5">
+                      <div className="w-full h-4 rounded-full bg-[#EFE7DE] dark:bg-[#341d27] overflow-hidden p-0.5">
                         <div
                           style={{
                             width: `${barWidthPercent}%`,
@@ -1335,24 +1475,25 @@ export default function AdminPanel({ lang = 'bn', onBackToGame }) {
             </div>
 
             {/* VISUAL COMPONENT 2: ACTIVITY & TRAFFIC TREND LINE GRAPH */}
-            <div className="bg-[#FFFDF9] rounded-3xl border border-[#D8C6B6] p-6 shadow-sm">
+            <div className="bg-[#FFFDF9] dark:bg-[#1f1318] rounded-3xl border border-[#D8C6B6] dark:border-[#422530] p-6 shadow-sm">
               <div className="mb-4 flex items-center justify-between">
                 <div>
-                  <h3 className="text-base sm:text-lg font-bold text-[#8E1B3A]">
-                    📈 {text.trendTitle}
+                  <h3 className="text-base sm:text-lg font-bold text-[#8E1B3A] dark:text-[#ff7597] flex items-center gap-2">
+                    <ChartLineIcon className="text-sm" />
+                    <span>{text.trendTitle}</span>
                   </h3>
-                  <p className="text-xs text-[#6E554D] mt-0.5">
+                  <p className="text-xs text-[#6E554D] dark:text-[#c7a9b3] mt-0.5">
                     {text.trendDesc}
                   </p>
                 </div>
-                <div className="flex items-center gap-3 text-xs font-bold">
-                  <span className="flex items-center gap-1.5 text-[#8E1B3A]">
-                    <span className="w-3 h-3 rounded-full bg-[#8E1B3A]" />
-                    Visits
+                <div className="flex items-center gap-4 text-xs font-bold">
+                  <span className="flex items-center gap-1.5 text-[#8E1B3A] dark:text-[#ff7597]">
+                    <span className="w-3 h-3 rounded-full bg-[#8E1B3A] dark:bg-[#ff7597]" />
+                    <span>Visits</span>
                   </span>
-                  <span className="flex items-center gap-1.5 text-[#0F7B5F]">
-                    <span className="w-3 h-3 rounded-full bg-[#0F7B5F]" />
-                    Games
+                  <span className="flex items-center gap-1.5 text-[#0F7B5F] dark:text-[#2ecc71]">
+                    <span className="w-3 h-3 rounded-full bg-[#0F7B5F] dark:bg-[#2ecc71]" />
+                    <span>Games</span>
                   </span>
                 </div>
               </div>
@@ -1368,9 +1509,9 @@ export default function AdminPanel({ lang = 'bn', onBackToGame }) {
                   </defs>
 
                   {/* Horizontal Grid lines */}
-                  <line x1="0" y1="30" x2="500" y2="30" stroke="#EFE7DE" strokeWidth="1" strokeDasharray="4 4" />
-                  <line x1="0" y1="80" x2="500" y2="80" stroke="#EFE7DE" strokeWidth="1" strokeDasharray="4 4" />
-                  <line x1="0" y1="130" x2="500" y2="130" stroke="#EFE7DE" strokeWidth="1" strokeDasharray="4 4" />
+                  <line x1="0" y1="30" x2="500" y2="30" stroke="#EFE7DE" strokeWidth="1" strokeDasharray="4 4" className="stroke-[#EFE7DE] dark:stroke-[#38202c]" />
+                  <line x1="0" y1="80" x2="500" y2="80" stroke="#EFE7DE" strokeWidth="1" strokeDasharray="4 4" className="stroke-[#EFE7DE] dark:stroke-[#38202c]" />
+                  <line x1="0" y1="130" x2="500" y2="130" stroke="#EFE7DE" strokeWidth="1" strokeDasharray="4 4" className="stroke-[#EFE7DE] dark:stroke-[#38202c]" />
 
                   {/* Area fill */}
                   <path
@@ -1385,6 +1526,7 @@ export default function AdminPanel({ lang = 'bn', onBackToGame }) {
                     stroke="#8E1B3A"
                     strokeWidth="3.5"
                     strokeLinecap="round"
+                    className="stroke-[#8E1B3A] dark:stroke-[#ff7597]"
                   />
 
                   {/* Games Line */}
@@ -1395,6 +1537,7 @@ export default function AdminPanel({ lang = 'bn', onBackToGame }) {
                     strokeWidth="2.5"
                     strokeDasharray="6 4"
                     strokeLinecap="round"
+                    className="stroke-[#0F7B5F] dark:stroke-[#2ecc71]"
                   />
 
                   {/* Markers */}
@@ -1415,14 +1558,14 @@ export default function AdminPanel({ lang = 'bn', onBackToGame }) {
             </div>
 
             {/* Google Analytics 4 (GA4) Real-Time Integration */}
-            <div className="bg-[#FFFDF9] rounded-3xl border-2 border-[#8E1B3A] p-6 shadow-md">
+            <div className="bg-[#FFFDF9] dark:bg-[#1f1318] rounded-3xl border-2 border-[#8E1B3A] dark:border-[#ff7597] p-6 shadow-md">
               <div className="flex items-center gap-2 mb-2">
-                <ShieldIcon className="text-lg text-[#8E1B3A]" />
-                <h3 className="text-lg font-bold text-[#8E1B3A]">
+                <ShieldIcon className="text-lg text-[#8E1B3A] dark:text-[#ff7597]" />
+                <h3 className="text-lg font-bold text-[#8E1B3A] dark:text-[#ff7597]">
                   {text.ga4Title}
                 </h3>
               </div>
-              <p className="text-xs sm:text-sm text-[#6E554D] mb-4 leading-relaxed">
+              <p className="text-xs sm:text-sm text-[#6E554D] dark:text-[#c7a9b3] mb-4 leading-relaxed">
                 {text.ga4Desc}
               </p>
 
@@ -1432,38 +1575,50 @@ export default function AdminPanel({ lang = 'bn', onBackToGame }) {
                   value={ga4Input}
                   onChange={(e) => setGa4Input(e.target.value)}
                   placeholder={text.ga4Placeholder}
-                  className="w-full px-4 py-2.5 rounded-2xl border border-[#D8C6B6] bg-white font-mono text-sm focus:outline-none focus:border-[#8E1B3A]"
+                  className="w-full px-4 py-2.5 rounded-2xl border border-[#D8C6B6] dark:border-[#4d2737] bg-white dark:bg-[#2b1922] text-[#2B1B17] dark:text-[#fbf5ef] font-mono text-sm focus:outline-none focus:border-[#8E1B3A] dark:focus:border-[#ff7597]"
                 />
                 <button
                   type="submit"
-                  className="w-full sm:w-auto px-6 py-2.5 rounded-2xl bg-[#8E1B3A] hover:bg-[#75142E] text-white text-xs font-bold shadow-md active:scale-95 transition-all whitespace-nowrap cursor-pointer"
+                  className="w-full sm:w-auto px-6 py-2.5 rounded-2xl bg-[#8E1B3A] hover:bg-[#75142E] dark:bg-[#a62245] dark:hover:bg-[#8E1B3A] text-white text-xs font-bold shadow-md active:scale-95 transition-all whitespace-nowrap cursor-pointer flex items-center justify-center gap-1.5"
                 >
-                  {ga4Saved ? '✓ Saved!' : text.ga4SaveBtn}
+                  <CheckIcon className="text-xs" />
+                  <span>{ga4Saved ? 'Saved!' : text.ga4SaveBtn}</span>
                 </button>
               </form>
 
               {/* Step by step helper cards */}
-              <div className="mt-4 pt-4 border-t border-[#E8DCD0] text-xs text-[#6E554D] grid grid-cols-1 md:grid-cols-3 gap-3">
-                <div className="bg-[#FAF5EC] p-3 rounded-xl border border-[#D8C6B6]/50">
-                  <div className="font-bold text-[#8E1B3A] mb-1">{text.ga4Step1Title}</div>
+              <div className="mt-4 pt-4 border-t border-[#E8DCD0] dark:border-[#422530] text-xs text-[#6E554D] dark:text-[#c7a9b3] grid grid-cols-1 md:grid-cols-3 gap-3">
+                <div className="bg-[#FAF5EC] dark:bg-[#28181f] p-3 rounded-xl border border-[#D8C6B6]/50 dark:border-[#422530]">
+                  <div className="font-bold text-[#8E1B3A] dark:text-[#ff7597] mb-1 flex items-center gap-1.5">
+                    <ShieldIcon className="text-xs" />
+                    <span>{text.ga4Step1Title}</span>
+                  </div>
                   <p>{text.ga4Step1Desc}</p>
                 </div>
-                <div className="bg-[#FAF5EC] p-3 rounded-xl border border-[#D8C6B6]/50">
-                  <div className="font-bold text-[#8E1B3A] mb-1">{text.ga4Step2Title}</div>
+                <div className="bg-[#FAF5EC] dark:bg-[#28181f] p-3 rounded-xl border border-[#D8C6B6]/50 dark:border-[#422530]">
+                  <div className="font-bold text-[#8E1B3A] dark:text-[#ff7597] mb-1 flex items-center gap-1.5">
+                    <KeyIcon className="text-xs" />
+                    <span>{text.ga4Step2Title}</span>
+                  </div>
                   <p>{text.ga4Step2Desc}</p>
                 </div>
-                <div className="bg-[#FAF5EC] p-3 rounded-xl border border-[#D8C6B6]/50">
-                  <div className="font-bold text-[#8E1B3A] mb-1">{text.ga4Step3Title}</div>
+                <div className="bg-[#FAF5EC] dark:bg-[#28181f] p-3 rounded-xl border border-[#D8C6B6]/50 dark:border-[#422530]">
+                  <div className="font-bold text-[#8E1B3A] dark:text-[#ff7597] mb-1 flex items-center gap-1.5">
+                    <ChartLineIcon className="text-xs" />
+                    <span>{text.ga4Step3Title}</span>
+                  </div>
                   <p>{text.ga4Step3Desc}</p>
                 </div>
               </div>
 
-              <div className="mt-4 text-right">
+              <div className="mt-6 pt-4 border-t border-[#E8DCD0] dark:border-[#422530] flex items-center justify-end">
                 <button
+                  type="button"
                   onClick={handleResetStats}
-                  className="text-xs text-red-600 hover:underline font-bold cursor-pointer"
+                  className="text-xs font-bold text-red-600 dark:text-red-400 hover:underline cursor-pointer flex items-center gap-1.5"
                 >
-                  {text.resetStatsBtn}
+                  <RotateLeftIcon className="text-xs" />
+                  <span>{text.resetStatsBtn}</span>
                 </button>
               </div>
             </div>
@@ -1475,68 +1630,68 @@ export default function AdminPanel({ lang = 'bn', onBackToGame }) {
       {/* MODAL: ADD / EDIT QUESTION                                     */}
       {/* ============================================================== */}
       {isAddModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="w-full max-w-lg bg-[#FFFDF9] rounded-3xl border-2 border-[#D8C6B6] p-6 shadow-2xl animate-in zoom-in-95 duration-150">
-            <div className="flex items-center justify-between pb-3 border-b border-[#E8DCD0] mb-4">
-              <h3 className="font-bold text-lg text-[#8E1B3A]">
-                {editingQuestion ? text.modalEditTitle : text.modalAddTitle}
-              </h3>
-              <button
-                onClick={() => setIsAddModalOpen(false)}
-                className="w-8 h-8 rounded-full bg-[#F4E8D9] text-[#6E554D] flex items-center justify-center hover:bg-[#E8DCD0] cursor-pointer"
-              >
-                <CloseIcon className="text-xs" />
-              </button>
-            </div>
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-150">
+          <div className="w-full max-w-lg bg-[#FFFDF9] dark:bg-[#1f1318] rounded-3xl border-2 border-[#D8C6B6] dark:border-[#422530] p-6 shadow-2xl relative animate-in zoom-in-95 duration-150">
+            <button
+              onClick={() => setIsAddModalOpen(false)}
+              className="absolute top-4 right-4 w-8 h-8 rounded-full bg-[#FFF6E5] dark:bg-[#28181f] text-[#8E1B3A] dark:text-[#ff7597] font-bold flex items-center justify-center hover:bg-[#8E1B3A] hover:text-white dark:hover:bg-[#ff7597] dark:hover:text-[#140d10] transition-colors cursor-pointer"
+            >
+              <CloseIcon className="text-xs" />
+            </button>
 
-            <form onSubmit={handleSaveQuestion} className="flex flex-col gap-4">
+            <h2 className="text-lg font-bold text-[#8E1B3A] dark:text-[#ff7597] mb-4 flex items-center gap-2">
+              <PlusIcon className="text-xs" />
+              <span>{editingQuestion ? text.modalEditTitle : text.modalAddTitle}</span>
+            </h2>
+
+            <form onSubmit={handleSaveQuestion} className="flex flex-col gap-4 text-left">
               <div>
-                <label className="block text-xs font-bold text-[#6E554D] mb-1">
-                  {text.fieldBnLabel} *
+                <label className="block text-xs font-bold text-[#6E554D] dark:text-[#c7a9b3] mb-1">
+                  {text.fieldBnLabel}
                 </label>
                 <input
                   type="text"
                   value={formBn}
                   onChange={(e) => setFormBn(e.target.value)}
-                  placeholder="যেমন: বিয়ে কবে করবা?"
-                  className="w-full px-4 py-2.5 rounded-2xl border border-[#D8C6B6] bg-white text-sm focus:outline-none focus:border-[#8E1B3A]"
+                  placeholder="যেমন: আর কতদিন বেকার বসে থাকবা?"
+                  className="w-full px-4 py-2.5 rounded-2xl border border-[#D8C6B6] dark:border-[#4d2737] bg-white dark:bg-[#2b1922] text-[#2B1B17] dark:text-[#fbf5ef] text-sm focus:outline-none focus:border-[#8E1B3A] dark:focus:border-[#ff7597]"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-[#6E554D] mb-1">
-                  {text.fieldEnLabel} *
+                <label className="block text-xs font-bold text-[#6E554D] dark:text-[#c7a9b3] mb-1">
+                  {text.fieldEnLabel}
                 </label>
                 <input
                   type="text"
                   value={formEn}
                   onChange={(e) => setFormEn(e.target.value)}
-                  placeholder="e.g. When are you getting married?"
-                  className="w-full px-4 py-2.5 rounded-2xl border border-[#D8C6B6] bg-white text-sm focus:outline-none focus:border-[#8E1B3A]"
+                  placeholder="e.g. When are you getting a job?"
+                  className="w-full px-4 py-2.5 rounded-2xl border border-[#D8C6B6] dark:border-[#4d2737] bg-white dark:bg-[#2b1922] text-[#2B1B17] dark:text-[#fbf5ef] text-sm focus:outline-none focus:border-[#8E1B3A] dark:focus:border-[#ff7597]"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-[#6E554D] mb-2">
+                <label className="block text-xs font-bold text-[#6E554D] dark:text-[#c7a9b3] mb-1.5">
                   {text.fieldOccasionsLabel}
                 </label>
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-2 gap-2 text-xs">
                   {[
-                    { id: 'eid', labelBn: 'ঈদের আড্ডা (Eid)', labelEn: 'Eid Reunion' },
-                    { id: 'wedding', labelBn: 'বিয়ে ও দাওয়াত (Wedding)', labelEn: 'Wedding' },
-                    { id: 'exam', labelBn: 'রেজাল্টের দিন (Exam)', labelEn: 'Exam Results' },
-                    { id: 'general', labelBn: 'সাধারণ আড্ডা (General)', labelEn: 'General Adda' }
+                    { id: 'eid', labelBn: 'ঈদের আড্ডা', labelEn: 'Eid' },
+                    { id: 'wedding', labelBn: 'বিয়ে ও দাওয়াত', labelEn: 'Wedding' },
+                    { id: 'exam', labelBn: 'রেজাল্টের দিন', labelEn: 'Exam' },
+                    { id: 'general', labelBn: 'সাধারণ পারিবারিক আড্ডা', labelEn: 'General' }
                   ].map((occ) => {
                     const isChecked = formOccasions.includes(occ.id);
                     return (
                       <label
                         key={occ.id}
-                        className={`flex items-center gap-2 p-2.5 rounded-xl border text-xs font-bold cursor-pointer transition-colors ${
+                        className={`flex items-center gap-2 p-2 rounded-xl border cursor-pointer transition-colors ${
                           isChecked
-                            ? 'bg-[#8E1B3A]/10 border-[#8E1B3A] text-[#8E1B3A]'
-                            : 'bg-white border-[#D8C6B6] text-[#6E554D]'
+                            ? 'bg-[#8E1B3A]/10 dark:bg-[#ff7597]/20 border-[#8E1B3A] dark:border-[#ff7597] text-[#8E1B3A] dark:text-[#ff7597] font-bold'
+                            : 'border-[#D8C6B6] dark:border-[#422530] text-[#6E554D] dark:text-[#c7a9b3]'
                         }`}
                       >
                         <input
@@ -1558,19 +1713,21 @@ export default function AdminPanel({ lang = 'bn', onBackToGame }) {
                 </div>
               </div>
 
-              <div className="flex items-center justify-end gap-2 pt-3 border-t border-[#E8DCD0] mt-2">
+              <div className="flex items-center justify-end gap-2 pt-3 border-t border-[#E8DCD0] dark:border-[#422530] mt-2">
                 <button
                   type="button"
                   onClick={() => setIsAddModalOpen(false)}
-                  className="px-4 py-2 rounded-2xl bg-white border border-[#D8C6B6] text-xs font-bold text-[#6E554D] hover:bg-[#F4E8D9] cursor-pointer"
+                  className="px-4 py-2 rounded-2xl bg-white dark:bg-[#28181f] border border-[#D8C6B6] dark:border-[#422530] text-xs font-bold text-[#6E554D] dark:text-[#c7a9b3] hover:bg-[#F4E8D9] dark:hover:bg-[#38202c] cursor-pointer flex items-center gap-1.5"
                 >
-                  {text.cancelBtn}
+                  <CloseIcon className="text-xs" />
+                  <span>{text.cancelBtn}</span>
                 </button>
                 <button
                   type="submit"
-                  className="px-6 py-2 rounded-2xl bg-[#8E1B3A] hover:bg-[#75142E] text-white text-xs font-bold shadow-md active:scale-95 cursor-pointer"
+                  className="px-6 py-2 rounded-2xl bg-[#8E1B3A] hover:bg-[#75142E] dark:bg-[#a62245] dark:hover:bg-[#8E1B3A] text-white text-xs font-bold shadow-md active:scale-95 cursor-pointer flex items-center gap-1.5"
                 >
-                  {editingQuestion ? text.updateBtn : text.saveBtn}
+                  <SaveIcon className="text-xs" />
+                  <span>{editingQuestion ? text.updateBtn : text.saveBtn}</span>
                 </button>
               </div>
             </form>
@@ -1583,6 +1740,7 @@ export default function AdminPanel({ lang = 'bn', onBackToGame }) {
         isOpen={isEmailModalOpen}
         onClose={() => setIsEmailModalOpen(false)}
         text={text}
+        adminLang={adminLang}
         appPasswordInput={appPasswordInput}
         setAppPasswordInput={setAppPasswordInput}
         showPasswordMask={showPasswordMask}

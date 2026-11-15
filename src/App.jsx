@@ -24,6 +24,7 @@ import { ArrowLeftIcon, Grid3x3Icon, Grid5x5Icon } from './components/FontAwesom
 import { shareToSocial } from './utils/share';
 import AdminPanel from './components/AdminPanel';
 import { trackEvent, initGA4 } from './utils/analytics';
+import { getStoredTheme, setStoredTheme, applyTheme } from './utils/theme';
 
 function formatTimer(totalSeconds) {
   const mins = Math.floor(totalSeconds / 60);
@@ -63,6 +64,20 @@ export default function App() {
   const [lang, setLang] = useState(() => {
     return localStorage.getItem('aunty_bingo_lang') || 'bn';
   });
+
+  // Theme Mode: 'light' | 'dark'
+  const [theme, setTheme] = useState(() => getStoredTheme());
+
+  const handleToggleTheme = () => {
+    const next = theme === 'dark' ? 'light' : 'dark';
+    setTheme(next);
+    setStoredTheme(next);
+    applyTheme(next);
+  };
+
+  useEffect(() => {
+    applyTheme(theme);
+  }, [theme]);
 
   // Grid Mode: 3 (3x3 Quick) or 5 (5x5 Classic)
   const [gridSize, setGridSize] = useState(3);
@@ -273,6 +288,8 @@ export default function App() {
     return (
       <AdminPanel
         lang={lang}
+        theme={theme}
+        onToggleTheme={handleToggleTheme}
         onBackToGame={() => {
           setActiveView('home');
           window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -282,7 +299,7 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-[#FFF6E5] text-[#2B1B17] flex flex-col font-sans selection:bg-[#8E1B3A] selection:text-white">
+    <div className="min-h-screen bg-[#FFF6E5] dark:bg-[#140d10] text-[#2B1B17] dark:text-[#fbf5ef] flex flex-col font-sans selection:bg-[#8E1B3A] selection:text-white transition-colors duration-300">
       {/* Decorative Gutters on Desktop */}
       <DecorativeBorder themeColor={activeOccasion.tagColor} />
 
@@ -290,6 +307,8 @@ export default function App() {
       <Header
         lang={lang}
         setLang={setLang}
+        theme={theme}
+        onToggleTheme={handleToggleTheme}
         onOpenHowTo={() => setShowHowTo(true)}
         soundEnabled={soundEnabled}
         setSoundEnabled={setSoundEnabled}
@@ -345,20 +364,20 @@ export default function App() {
           <div className="flex flex-wrap items-center justify-between gap-3 mb-3">
             <button
               onClick={() => setActiveView('home')}
-              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#8E1B3A] hover:underline cursor-pointer"
+              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#8E1B3A] dark:text-[#ff7597] hover:underline cursor-pointer"
             >
               <ArrowLeftIcon className="text-xs" />
               <span>{lang === 'bn' ? 'হোমে ফিরে যান' : 'Back to Home'}</span>
             </button>
 
             {/* Grid Size Switcher Pill */}
-            <div className="flex items-center bg-[#F4E8D9] p-1 rounded-full border border-[#D8C6B6]">
+            <div className="flex items-center bg-[#F4E8D9] dark:bg-[#28181f] p-1 rounded-full border border-[#D8C6B6] dark:border-[#422530]">
               <button
                 onClick={() => handleSwitchGridSize(3)}
                 className={`px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
                   gridSize === 3
                     ? 'bg-[#8E1B3A] text-white shadow-sm'
-                    : 'text-[#6E554D] hover:text-[#8E1B3A]'
+                    : 'text-[#6E554D] dark:text-[#c7a9b3] hover:text-[#8E1B3A] dark:hover:text-[#ff7597]'
                 }`}
               >
                 <Grid3x3Icon className="text-xs" />
@@ -369,7 +388,7 @@ export default function App() {
                 className={`px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
                   gridSize === 5
                     ? 'bg-[#8E1B3A] text-white shadow-sm'
-                    : 'text-[#6E554D] hover:text-[#8E1B3A]'
+                    : 'text-[#6E554D] dark:text-[#c7a9b3] hover:text-[#8E1B3A] dark:hover:text-[#ff7597]'
                 }`}
               >
                 <Grid5x5Icon className="text-xs" />

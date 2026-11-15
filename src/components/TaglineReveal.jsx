@@ -57,7 +57,7 @@ export default function TaglineReveal({ lang }) {
       className="w-full max-w-[680px] mx-auto my-10 sm:my-16 px-4 text-center select-none"
       aria-label="Core Philosophy"
     >
-      <div className="text-xs uppercase tracking-widest text-[#B84B12] font-semibold mb-3">
+      <div className="text-xs uppercase tracking-widest text-[#B84B12] dark:text-[#f39c12] font-semibold mb-3">
         {lang === 'bn' ? 'আমাদের দর্শন' : 'Our Philosophy'}
       </div>
       <p className="text-xl sm:text-2xl md:text-3xl font-bold leading-relaxed tracking-tight text-balance">
@@ -68,8 +68,8 @@ export default function TaglineReveal({ lang }) {
               key={idx}
               className={`inline-block mr-1.5 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
                 isRevealed
-                  ? 'text-[#8E1B3A] opacity-100 transform-none'
-                  : 'text-[#6E554D] opacity-25 translate-y-1'
+                  ? 'text-[#8E1B3A] dark:text-[#ff7597] opacity-100 transform-none'
+                  : 'text-[#6E554D] dark:text-[#a08b93] opacity-25 translate-y-1'
               }`}
             >
               {word}
