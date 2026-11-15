@@ -30,14 +30,25 @@
     <circle cx="300" cy="190" r="170" fill="none" stroke="#FF6B5E" stroke-width="1.5" stroke-dasharray="4,6"/>
   </g>
 
-  <!-- Wall Hanging Frame (Old Dhaka Rickshaw Art Motif) -->
+  <!-- Wall Hanging Frame (Old Dhaka Rickshaw Art Motif) with Warm Pulsing Glow -->
   <rect x="250" y="30" width="100" height="70" rx="8" fill="#FFF" stroke="#FFD166" stroke-width="4" filter="url(#heroShadow)"/>
   <rect x="256" y="36" width="88" height="58" rx="4" fill="#FF8A80"/>
-  <circle cx="300" cy="65" r="16" fill="#FFD166"/>
+  <circle cx="300" cy="65" r="16" fill="#FFD166">
+    <animate attributeName="r" values="16; 18.5; 16" dur="3s" repeatCount="indefinite" calcMode="spline" keySplines="0.45 0 0.55 1; 0.45 0 0.55 1"/>
+  </circle>
   <text x="300" y="70" font-family="'Poppins', sans-serif" font-weight="900" font-size="14" fill="#6854C7" text-anchor="middle">শুভ</text>
 
-  <!-- Hanging Potted Plant (Money Plant) -->
+  <!-- Hanging Potted Plant (Money Plant) with Gentle Ceiling Sway -->
   <g transform="translate(50, 40)">
+    <animateTransform
+      attributeName="transform"
+      type="rotate"
+      values="0 90 40; 2.5 90 40; 0 90 40; -2.5 90 40; 0 90 40"
+      dur="5.5s"
+      repeatCount="indefinite"
+      calcMode="spline"
+      keySplines="0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1"
+    />
     <path d="M40 0 L40 40" stroke="#8D6E63" stroke-width="2"/>
     <ellipse cx="40" cy="45" rx="16" ry="8" fill="#BCAAA4"/>
     <path d="M40 45 Q20 70 30 90 Q38 100 35 110" stroke="#39B980" stroke-width="3" fill="none"/>
@@ -62,8 +73,17 @@
   <rect x="165" y="210" width="45" height="40" rx="10" transform="rotate(-10 185 230)" fill="url(#cushionGrad)"/>
   <rect x="390" y="210" width="45" height="40" rx="10" transform="rotate(12 410 230)" fill="#6854C7"/>
 
-  <!-- Character 1: The Inquiring Aunty (Right Side) -->
+  <!-- Character 1: The Inquiring Aunty (Right Side) with Subtle Living Breathing Motion -->
   <g transform="translate(330, 115)">
+    <animateTransform
+      attributeName="transform"
+      type="translate"
+      values="330,115; 330,113; 330,115"
+      dur="3.2s"
+      repeatCount="indefinite"
+      calcMode="spline"
+      keySplines="0.45 0 0.55 1; 0.45 0 0.55 1"
+    />
     <!-- Hair bun with flowers -->
     <circle cx="50" cy="30" r="26" fill="#292735"/>
     <circle cx="50" cy="12" r="14" fill="#1E1B29"/>
@@ -92,6 +112,15 @@
 
   <!-- Character 2: The Serious Uncle with Newspaper/Tea (Left Side) -->
   <g transform="translate(190, 120)">
+    <animateTransform
+      attributeName="transform"
+      type="translate"
+      values="190,120; 190,121.5; 190,120"
+      dur="3.6s"
+      repeatCount="indefinite"
+      calcMode="spline"
+      keySplines="0.45 0 0.55 1; 0.45 0 0.55 1"
+    />
     <!-- Hair & Moustache -->
     <circle cx="40" cy="30" r="22" fill="#546E7A"/>
     <!-- Head -->
@@ -120,9 +149,15 @@
     <!-- Cup 1 -->
     <path d="M6 10 L10 24 L22 24 L26 10 Z" fill="#D7CCC8" stroke="#8D6E63" stroke-width="1.5"/>
     <ellipse cx="16" cy="10" rx="10" ry="3" fill="#6D4C41"/>
-    <!-- Steam -->
-    <path d="M14 6 Q12 0 16 -6" stroke="#B0BEC5" stroke-width="1.5" fill="none" opacity="0.7"/>
-    <path d="M18 6 Q20 0 16 -6" stroke="#B0BEC5" stroke-width="1.5" fill="none" opacity="0.7"/>
+    <!-- Rising Animated Chai Steam -->
+    <path d="M14 6 Q12 0 16 -6" stroke="#B0BEC5" stroke-width="1.5" fill="none">
+      <animate attributeName="opacity" values="0.8; 0.2; 0.8" dur="2.4s" repeatCount="indefinite"/>
+      <animateTransform attributeName="transform" type="translate" values="0,0; 0,-5; 0,0" dur="2.4s" repeatCount="indefinite"/>
+    </path>
+    <path d="M18 6 Q20 0 16 -6" stroke="#B0BEC5" stroke-width="1.5" fill="none">
+      <animate attributeName="opacity" values="0.3; 0.8; 0.3" dur="2.8s" repeatCount="indefinite"/>
+      <animateTransform attributeName="transform" type="translate" values="0,0; 0,-6; 0,0" dur="2.8s" repeatCount="indefinite"/>
+    </path>
   </g>
   <g transform="translate(305, 268)">
     <!-- Plate of Shingara / Samosas -->
@@ -133,8 +168,17 @@
   </g>
 
   <!-- Animated-Style Floating Speech Bubbles with Bengali Transliterations -->
-  <!-- Bubble 1: Top Left -->
+  <!-- Bubble 1: Top Left ("Biye kobe?") with Gentle Floating Animation -->
   <g transform="translate(45, 130)" filter="url(#heroShadow)">
+    <animateTransform
+      attributeName="transform"
+      type="translate"
+      values="45,130; 45,123; 45,130"
+      dur="3.2s"
+      repeatCount="indefinite"
+      calcMode="spline"
+      keySplines="0.45 0 0.55 1; 0.45 0 0.55 1"
+    />
     <rect x="0" y="0" width="130" height="42" rx="16" fill="#FFFFFF" stroke="#FF6B5E" stroke-width="2.5"/>
     <polygon points="100,42 115,54 112,42" fill="#FFFFFF"/>
     <polyline points="100,42 115,54 112,42" stroke="#FF6B5E" stroke-width="2.5" fill="#FFFFFF"/>
@@ -142,8 +186,17 @@
     <text x="65" y="34" font-family="'Noto Sans Bengali', sans-serif" font-weight="500" font-size="9" fill="#6C6A7B" text-anchor="middle">বিয়ে কবে করবা?</text>
   </g>
 
-  <!-- Bubble 2: Top Right -->
+  <!-- Bubble 2: Top Right ("Salary koto?") with Gentle Floating Animation -->
   <g transform="translate(425, 60)" filter="url(#heroShadow)">
+    <animateTransform
+      attributeName="transform"
+      type="translate"
+      values="425,60; 425,52; 425,60"
+      dur="3.7s"
+      repeatCount="indefinite"
+      calcMode="spline"
+      keySplines="0.45 0 0.55 1; 0.45 0 0.55 1"
+    />
     <rect x="0" y="0" width="135" height="42" rx="16" fill="#FFFFFF" stroke="#6854C7" stroke-width="2.5"/>
     <polygon points="30,42 22,54 42,42" fill="#FFFFFF"/>
     <polyline points="30,42 22,54 42,42" stroke="#6854C7" stroke-width="2.5" fill="#FFFFFF"/>
@@ -151,8 +204,17 @@
     <text x="67" y="34" font-family="'Noto Sans Bengali', sans-serif" font-weight="500" font-size="9" fill="#6C6A7B" text-anchor="middle">মাসে বেতন কত পাও?</text>
   </g>
 
-  <!-- Bubble 3: Mid Right -->
+  <!-- Bubble 3: Mid Right ("Result kemon?") with Gentle Floating Animation -->
   <g transform="translate(435, 175)" filter="url(#heroShadow)">
+    <animateTransform
+      attributeName="transform"
+      type="translate"
+      values="435,175; 435,183; 435,175"
+      dur="3.4s"
+      repeatCount="indefinite"
+      calcMode="spline"
+      keySplines="0.45 0 0.55 1; 0.45 0 0.55 1"
+    />
     <rect x="0" y="0" width="140" height="42" rx="16" fill="#FFFFFF" stroke="#F26419" stroke-width="2.5"/>
     <polygon points="25,42 15,52 35,42" fill="#FFFFFF"/>
     <polyline points="25,42 15,52 35,42" stroke="#F26419" stroke-width="2.5" fill="#FFFFFF"/>
@@ -160,8 +222,17 @@
     <text x="70" y="34" font-family="'Noto Sans Bengali', sans-serif" font-weight="500" font-size="9" fill="#6C6A7B" text-anchor="middle">গোল্ডেন এ প্লাস পাইছো?</text>
   </g>
 
-  <!-- Bubble 4: Mid Left -->
+  <!-- Bubble 4: Mid Left ("Bidesh jaba?") with Gentle Floating Animation -->
   <g transform="translate(30, 230)" filter="url(#heroShadow)">
+    <animateTransform
+      attributeName="transform"
+      type="translate"
+      values="30,230; 30,222; 30,230"
+      dur="4.0s"
+      repeatCount="indefinite"
+      calcMode="spline"
+      keySplines="0.45 0 0.55 1; 0.45 0 0.55 1"
+    />
     <rect x="0" y="0" width="135" height="42" rx="16" fill="#FFFFFF" stroke="#39B980" stroke-width="2.5"/>
     <polygon points="95,0 110,-12 105,0" fill="#FFFFFF"/>
     <polyline points="95,0 110,-12 105,0" stroke="#39B980" stroke-width="2.5" fill="#FFFFFF"/>
@@ -169,9 +240,19 @@
     <text x="67" y="34" font-family="'Noto Sans Bengali', sans-serif" font-weight="500" font-size="9" fill="#6C6A7B" text-anchor="middle">বাইরে যাওয়ার চেষ্টা?</text>
   </g>
 
-  <!-- Festive Confetti / Sparkle Accents -->
-  <circle cx="160" cy="80" r="4" fill="#FFD166"/>
-  <circle cx="410" cy="40" r="5" fill="#FF6B5E"/>
-  <path d="M120 100 L125 105 L120 110 L115 105 Z" fill="#6854C7"/>
-  <path d="M480 140 L485 145 L480 150 L475 145 Z" fill="#39B980"/>
+  <!-- Festive Confetti / Sparkle Accents with Soft Twinkle -->
+  <circle cx="160" cy="80" r="4" fill="#FFD166">
+    <animate attributeName="r" values="4; 6; 4" dur="2.5s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.5; 1; 0.5" dur="2.5s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="410" cy="40" r="5" fill="#FF6B5E">
+    <animate attributeName="r" values="5; 7; 5" dur="3s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.6; 1; 0.6" dur="3s" repeatCount="indefinite"/>
+  </circle>
+  <path d="M120 100 L125 105 L120 110 L115 105 Z" fill="#6854C7">
+    <animateTransform attributeName="transform" type="rotate" values="0 120 105; 180 120 105; 360 120 105" dur="9s" repeatCount="indefinite"/>
+  </path>
+  <path d="M480 140 L485 145 L480 150 L475 145 Z" fill="#39B980">
+    <animateTransform attributeName="transform" type="rotate" values="0 480 145; -180 480 145; -360 480 145" dur="8s" repeatCount="indefinite"/>
+  </path>
 </svg>

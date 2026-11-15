@@ -21,3 +21,47 @@
     -webkit-font-smoothing: antialiased;
   }
 }
+
+/* Draggable Aunty Mascot & Floating Scene Keyframe Animations */
+@keyframes auntyBob {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(1.5deg);
+  }
+}
+
+@keyframes auntyShadowPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.28;
+  }
+  50% {
+    transform: scale(0.82);
+    opacity: 0.12;
+  }
+}
+
+@keyframes popSpeech {
+  0% {
+    opacity: 0;
+    transform: scale(0.75) translateY(12px) translateX(-50%);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0) translateX(-50%);
+  }
+}
+
+.animate-aunty-float {
+  animation: auntyBob 3.4s ease-in-out infinite;
+}
+
+.animate-aunty-shadow {
+  animation: auntyShadowPulse 3.4s ease-in-out infinite;
+}
+
+.animate-pop-speech {
+  animation: popSpeech 0.22s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}

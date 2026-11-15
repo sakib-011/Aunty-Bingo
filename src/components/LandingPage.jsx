@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import heroGatheringUrl from '../assets/images/hero-gathering.svg';
-import auntyAvatarUrl from '../assets/mascots/aunty_avatar_perfect.png';
 import { OCCASIONS } from '../utils/phrases';
 import TaglineReveal from './TaglineReveal';
+import DraggableAunty from './DraggableAunty';
 import {
   SparklesIcon,
   GamepadIcon,
@@ -196,22 +196,19 @@ export default function LandingPage({
           </div>
         </div>
 
-        {/* Right Column: Hero Visual Graphic & Avatar */}
-        <div className="relative w-full aspect-[16/11] rounded-3xl overflow-hidden shadow-xl border border-[#D8C6B6] bg-white flex items-center justify-center p-2">
-          <img
-            src={heroGatheringUrl}
-            alt="Bengali Family Gathering Illustration"
-            className="w-full h-full object-cover rounded-2xl"
-          />
-
-          {/* Mascot Floating Badge */}
-          <div className="absolute -bottom-2 -right-2 w-32 h-32 sm:w-36 sm:h-36 bg-[#FFFDF9] rounded-full p-2 border-2 border-[#8E1B3A] shadow-xl flex items-center justify-center">
+        {/* Right Column: Hero Visual Graphic & Draggable Floating Avatar */}
+        <div className="relative w-full aspect-[16/11]">
+          {/* Framed Graphic */}
+          <div className="w-full h-full rounded-3xl overflow-hidden shadow-xl border border-[#D8C6B6] bg-white flex items-center justify-center p-2">
             <img
-              src={auntyAvatarUrl}
-              alt="Aunty Avatar with Raised Hands"
-              className="w-full h-full object-contain"
+              src={heroGatheringUrl}
+              alt="Bengali Family Gathering Illustration"
+              className="w-full h-full object-cover rounded-2xl"
             />
           </div>
+
+          {/* Draggable Floating Aunty Mascot that can be moved anywhere on screen */}
+          <DraggableAunty lang={lang} />
         </div>
       </section>
 
