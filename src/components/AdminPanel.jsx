@@ -14,18 +14,24 @@ import {
   getGA4MeasurementId,
   setGA4MeasurementId
 } from '../utils/analytics';
+import {
+  ADMIN_EMAIL,
+  getStoredAppPassword,
+  setStoredAppPassword,
+  hasStoredAppPassword,
+  sendAdminOtpEmail
+} from '../utils/emailService';
 import { OCCASIONS } from '../utils/phrases';
 import {
-  LockIcon,
   ShieldIcon,
-  CloseIcon,
   RotateLeftIcon,
   DownloadIcon,
+  OccasionIcon,
   ArrowLeftIcon,
-  OccasionIcon
+  LockIcon,
+  CloseIcon
 } from './FontAwesomeIcons';
 
-const ADMIN_EMAIL = 'sakibshourov001@gmail.com';
 const AUTH_SESSION_KEY = 'aunty_admin_auth_session';
 
 /**
@@ -43,6 +49,7 @@ const T = {
     authSubtitle: 'শুধুমাত্র অনুমোদিত অ্যাডমিন এই হাবটিতে প্রবেশ করতে পারবেন। ওটিপি (OTP) পেতে আপনার জিমেইল দিন:',
     emailLabel: 'রেজিস্টার্ড জিমেইল অ্যাড্রেস',
     sendOtpBtn: 'ওটিপি কোড পাঠান',
+    sendingOtpBtn: 'ওটিপি পাঠানো হচ্ছে...',
     otpTitle: '৬-সংখ্যার ওটিপি কোড দিন',
     otpSubtitle: 'আপনার sakibshourov001@gmail.com এ একটি ওটিপি কোড পাঠানো হয়েছে।',
     otpExpiresIn: 'কোডের মেয়াদ বাকি',
@@ -52,6 +59,28 @@ const T = {
     otpToastTitle: 'নিরাপদ ওটিপি কোড পাঠানো হয়েছে',
     otpToastBody: 'আপনার কোড: ',
     clickToCopy: 'ক্লিক করে কপি করুন',
+    otpSentInbox: 'আপনার sakibshourov001@gmail.com ইনবক্সে সফলভাবে ওটিপি পাঠানো হয়েছে! ইনবক্স অথবা স্প্যাম (Spam) ফোল্ডার চেক করুন।',
+    otpFallbackNotice: 'Gmail App Password কনফিগার করা নেই। তাই টেস্টিং কোড: ',
+    otpSmtpErrorNotice: 'জিমেইল সংযোগ ত্রুটি (অ্যাপ পাসওয়ার্ড চেক করুন)। টেস্টিং কোড: ',
+    emailSettingsBtn: 'ইমেইল সার্ভিস ও অ্যাপ পাসওয়ার্ড সেটিংস',
+    emailModalTitle: 'জিমেইল ওটিপি সংযোগ ও অ্যাপ পাসওয়ার্ড গাইড',
+    emailModalSubtitle: 'আপনার পার্সোনাল Gmail দিয়ে সরাসরি ইনবক্সে ওটিপি পাঠানোর নির্দেশিকা',
+    faqBusinessQ: 'আমার কি বিজনেস মেইল (@workspace) লাগবে?',
+    faqBusinessA: 'না! কোনো পেইড বা বিজনেস মেইল লাগবে না। আপনার সাধারণ sakibshourov001@gmail.com দিয়েই গুগল সম্পূর্ণ ফ্রিতে ১৬ অক্ষরের App Password সুবিধা দেয়।',
+    appPassInstructionsTitle: '১৬ অক্ষরের Google App Password পাওয়ার ৩টি সহজ ধাপ:',
+    step1: '১. ব্রাউজারে myaccount.google.com/apppasswords লিংকে যান (২-স্টেপ ভেরিফিকেশন অন থাকতে হবে)।',
+    step2: '২. App Name বক্সে "Aunty Bingo" লিখে Create বাটনে চাপুন।',
+    step3: '৩. গুগল ১৬ অক্ষরের যে পাসওয়ার্ড দেবে (যেমন: abcd efgh ijkl mnop), তা নিচের বক্সে দিয়ে সেভ করুন।',
+    appPasswordInputLabel: '১৬-অক্ষরের Gmail App Password',
+    appPasswordPlaceholder: 'যেমন: abcd efgh ijkl mnop',
+    savePassBtn: 'পাসওয়ার্ড সেভ করুন',
+    clearPassBtn: 'মুছে ফেলুন',
+    sendTestEmailBtn: 'টেস্ট ওটিপি পাঠান',
+    testingEmail: 'পাঠানো হচ্ছে...',
+    statusConnected: 'ইনবক্স ডেলিভারি সক্রিয় 🟢',
+    statusFallback: 'স্ক্রিন ফলব্যাক মোড (কনফিগ নেই) 🟡',
+    testEmailSuccess: 'টেস্ট ওটিপি সফলভাবে sakibshourov001@gmail.com ইনবক্সে পৌঁছেছে!',
+    testEmailFailed: 'ইমেইল পাঠাতে ব্যর্থ: ',
     searchPlaceholder: 'প্রশ্ন সার্চ করুন (বাংলা বা ইংরেজি)...',
     allOccasions: 'সকল আয়োজন',
     addQuestionBtn: 'নতুন প্রশ্ন যোগ করুন',
@@ -108,6 +137,7 @@ const T = {
     authSubtitle: 'Only authorized administrator can access this creator hub. Enter your registered Gmail:',
     emailLabel: 'Registered Gmail Address',
     sendOtpBtn: 'Send OTP Code',
+    sendingOtpBtn: 'Sending OTP...',
     otpTitle: 'Enter 6-Digit OTP Code',
     otpSubtitle: 'A one-time verification code was dispatched to sakibshourov001@gmail.com.',
     otpExpiresIn: 'Code expires in',
@@ -117,6 +147,28 @@ const T = {
     otpToastTitle: 'Secure OTP Code Dispatched',
     otpToastBody: 'Your verification code: ',
     clickToCopy: 'Click to copy code',
+    otpSentInbox: 'Verification OTP has been sent directly to sakibshourov001@gmail.com inbox! Please check inbox or spam folder.',
+    otpFallbackNotice: 'Gmail App Password not configured yet. Fallback OTP: ',
+    otpSmtpErrorNotice: 'Gmail connection error (check App Password). Fallback OTP: ',
+    emailSettingsBtn: 'Email Service & App Password Settings',
+    emailModalTitle: 'Gmail OTP Dispatch & App Password Guide',
+    emailModalSubtitle: 'Deliver real OTP emails straight to your personal Gmail inbox',
+    faqBusinessQ: 'Do I need a Google Workspace or Business Email?',
+    faqBusinessA: 'No! A standard personal Gmail account is 100% sufficient with a free 16-character Google App Password. No paid Workspace account required.',
+    appPassInstructionsTitle: '3 Easy Steps to Generate 16-Character App Password:',
+    step1: '1. Visit myaccount.google.com/apppasswords (2-Step Verification must be enabled).',
+    step2: '2. Type "Aunty Bingo" in App Name and click Create.',
+    step3: '3. Copy the 16-character code (e.g. abcd efgh ijkl mnop) and paste it below.',
+    appPasswordInputLabel: '16-Character Gmail App Password',
+    appPasswordPlaceholder: 'e.g. abcd efgh ijkl mnop',
+    savePassBtn: 'Save Password',
+    clearPassBtn: 'Remove Password',
+    sendTestEmailBtn: 'Send Test OTP',
+    testingEmail: 'Sending...',
+    statusConnected: 'Direct Inbox Dispatch Active 🟢',
+    statusFallback: 'Screen Fallback Mode 🟡',
+    testEmailSuccess: 'Test OTP sent directly to sakibshourov001@gmail.com inbox!',
+    testEmailFailed: 'Failed to send email: ',
     searchPlaceholder: 'Search questions by text...',
     allOccasions: 'All Occasions',
     addQuestionBtn: 'Add Question',
@@ -164,6 +216,155 @@ const T = {
   }
 };
 
+/**
+ * Reusable Modal for Gmail App Password Setup and Dispatch Guide
+ */
+function EmailSettingsModal({
+  isOpen,
+  onClose,
+  text,
+  appPasswordInput,
+  setAppPasswordInput,
+  showPasswordMask,
+  setShowPasswordMask,
+  handleSaveAppPassword,
+  handleTestEmail,
+  isTestingEmail,
+  hasAppPass,
+  handleClearAppPassword
+}) {
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-150">
+      <div className="w-full max-w-lg bg-[#FFFDF9] rounded-3xl border-2 border-[#D8C6B6] p-6 sm:p-7 shadow-2xl relative max-h-[92vh] overflow-y-auto animate-in zoom-in-95 duration-150 text-left">
+        {/* Close Button */}
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 w-9 h-9 rounded-full bg-[#FFF6E5] text-[#8E1B3A] font-bold flex items-center justify-center hover:bg-[#8E1B3A] hover:text-white transition-colors cursor-pointer"
+        >
+          ✕
+        </button>
+
+        <div className="flex items-center gap-3 mb-3">
+          <div className="w-11 h-11 rounded-2xl bg-[#8E1B3A]/10 text-[#8E1B3A] flex items-center justify-center text-xl">
+            ✉️
+          </div>
+          <div>
+            <h2 className="text-lg sm:text-xl font-bold text-[#8E1B3A]">
+              {text.emailModalTitle}
+            </h2>
+            <p className="text-xs text-[#6E554D]">
+              {text.emailModalSubtitle}
+            </p>
+          </div>
+        </div>
+
+        {/* Reassuring Highlight Box: Business Mail FAQ */}
+        <div className="mb-4 p-3.5 rounded-2xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-900 leading-relaxed shadow-xs">
+          <p className="font-bold flex items-center gap-1.5 text-emerald-800">
+            <span>💡</span> {text.faqBusinessQ}
+          </p>
+          <p className="mt-1 text-emerald-700 font-medium">
+            {text.faqBusinessA}
+          </p>
+        </div>
+
+        {/* 3 Step Guide Box */}
+        <div className="mb-4 p-3.5 rounded-2xl bg-[#FFF6E5] border border-[#D8C6B6] text-xs text-[#2B1B17] space-y-2">
+          <p className="font-bold text-[#8E1B3A] flex items-center gap-1">
+            <span>🔑</span> {text.appPassInstructionsTitle}
+          </p>
+          <p className="leading-relaxed">
+            {text.step1}{' '}
+            <a
+              href="https://myaccount.google.com/apppasswords"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-bold text-[#8E1B3A] underline hover:text-[#75142E]"
+            >
+              myaccount.google.com/apppasswords ↗
+            </a>
+          </p>
+          <p className="leading-relaxed">{text.step2}</p>
+          <p className="leading-relaxed">{text.step3}</p>
+        </div>
+
+        {/* Password Input Form */}
+        <form onSubmit={handleSaveAppPassword} className="space-y-3">
+          <div>
+            <label className="block text-xs font-bold text-[#6E554D] mb-1">
+              {text.appPasswordInputLabel}
+            </label>
+            <div className="relative">
+              <input
+                type={showPasswordMask ? 'text' : 'password'}
+                value={appPasswordInput}
+                onChange={(e) => setAppPasswordInput(e.target.value)}
+                placeholder={text.appPasswordPlaceholder}
+                className="w-full px-4 py-2.5 rounded-2xl border-2 border-[#D8C6B6] focus:border-[#8E1B3A] focus:outline-none text-sm font-mono bg-white text-[#2B1B17] pr-20"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPasswordMask(!showPasswordMask)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-bold text-[#6E554D] hover:text-[#8E1B3A] cursor-pointer"
+              >
+                {showPasswordMask ? 'লুকান' : 'দেখান'}
+              </button>
+            </div>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-2 pt-1">
+            <button
+              type="submit"
+              className="flex-1 py-2.5 px-4 rounded-xl bg-[#8E1B3A] hover:bg-[#75142E] text-white font-bold text-xs transition-colors shadow-xs cursor-pointer"
+            >
+              💾 {text.savePassBtn}
+            </button>
+
+            <button
+              type="button"
+              disabled={isTestingEmail}
+              onClick={handleTestEmail}
+              className="py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 disabled:opacity-60 text-white font-bold text-xs transition-colors shadow-xs cursor-pointer flex items-center gap-1.5"
+            >
+              {isTestingEmail ? (
+                <>
+                  <span className="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                  {text.testingEmail}
+                </>
+              ) : (
+                <>✉️ {text.sendTestEmailBtn}</>
+              )}
+            </button>
+
+            {hasAppPass && (
+              <button
+                type="button"
+                onClick={handleClearAppPassword}
+                className="py-2.5 px-3 rounded-xl bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold text-xs transition-colors cursor-pointer"
+              >
+                {text.clearPassBtn}
+              </button>
+            )}
+          </div>
+        </form>
+
+        <div className="mt-4 pt-3 border-t border-[#D8C6B6]/50 flex items-center justify-between text-[11px] text-[#8A7268]">
+          <span>রেজিস্টার্ড মেইল: sakibshourov001@gmail.com</span>
+          <button
+            type="button"
+            onClick={onClose}
+            className="font-bold text-[#8E1B3A] hover:underline cursor-pointer"
+          >
+            বন্ধ করুন ✕
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function AdminPanel({ lang = 'bn', onBackToGame }) {
   // Bilingual state inside admin
   const [adminLang, setAdminLang] = useState(lang);
@@ -184,6 +385,14 @@ export default function AdminPanel({ lang = 'bn', onBackToGame }) {
   const [otpExpiresAt, setOtpExpiresAt] = useState(0);
   const [secondsRemaining, setSecondsRemaining] = useState(0);
   const [resendCooldown, setResendCooldown] = useState(0);
+
+  // Email Service & App Password State
+  const [isSendingOtp, setIsSendingOtp] = useState(false);
+  const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
+  const [appPasswordInput, setAppPasswordInput] = useState(() => getStoredAppPassword());
+  const [hasAppPass, setHasAppPass] = useState(() => hasStoredAppPassword());
+  const [isTestingEmail, setIsTestingEmail] = useState(false);
+  const [showPasswordMask, setShowPasswordMask] = useState(false);
 
   // Alert Banner System (error | warning | success | info)
   const [alert, setAlert] = useState(null); // { type, message }
@@ -232,9 +441,59 @@ export default function AdminPanel({ lang = 'bn', onBackToGame }) {
     }
   };
 
-  // Step 1: Send OTP to ADMIN_EMAIL
-  const handleRequestOtp = (e) => {
-    e.preventDefault();
+  // Save App Password to localStorage
+  const handleSaveAppPassword = (e) => {
+    if (e && e.preventDefault) e.preventDefault();
+    const clean = appPasswordInput.trim();
+    if (!clean) {
+      showAlert('error', adminLang === 'bn' ? 'অনুগ্রহ করে ১৬-সংখ্যার অ্যাপ পাসওয়ার্ড লিখুন।' : 'Please enter the 16-character App Password.');
+      return;
+    }
+    setStoredAppPassword(clean);
+    setHasAppPass(true);
+    showAlert('success', text.savePassSuccess);
+  };
+
+  // Clear App Password
+  const handleClearAppPassword = () => {
+    setStoredAppPassword('');
+    setAppPasswordInput('');
+    setHasAppPass(false);
+    showAlert('info', text.passRemovedSuccess);
+  };
+
+  // Send Test OTP to verify email connection
+  const handleTestEmail = async () => {
+    const clean = appPasswordInput.trim();
+    if (!clean) {
+      showAlert('error', adminLang === 'bn' ? 'আগে ১৬-সংখ্যার পাসওয়ার্ড লিখুন বা সেভ করুন।' : 'Please enter or save the 16-character password first.');
+      return;
+    }
+    setIsTestingEmail(true);
+    const testOtp = Math.floor(100000 + Math.random() * 900000).toString();
+
+    try {
+      const res = await sendAdminOtpEmail({
+        email: ADMIN_EMAIL,
+        otp: testOtp,
+        appPassword: clean
+      });
+      setIsTestingEmail(false);
+
+      if (res.sent) {
+        showAlert('success', text.testEmailSuccess, 10000);
+      } else {
+        showAlert('error', `${text.testEmailFailed}${res.error || res.message || 'SMTP Authentication failed'}.`, 10000);
+      }
+    } catch (err) {
+      setIsTestingEmail(false);
+      showAlert('error', `${text.testEmailFailed}${err.message}`, 8000);
+    }
+  };
+
+  // Step 1: Request OTP and dispatch via Gmail SMTP (or fallback if unconfigured)
+  const handleRequestOtp = async (e) => {
+    if (e && e.preventDefault) e.preventDefault();
     const cleanEmail = enteredEmail.trim().toLowerCase();
 
     // Strict security check: only authorized admin email
@@ -252,19 +511,57 @@ export default function AdminPanel({ lang = 'bn', onBackToGame }) {
     const newOtp = Math.floor(100000 + Math.random() * 900000).toString();
     const expiry = Date.now() + 5 * 60 * 1000; // 5 minutes validity
 
+    setIsSendingOtp(true);
     setGeneratedOtp(newOtp);
     setOtpExpiresAt(expiry);
     setSecondsRemaining(300);
     setResendCooldown(45);
     setOtpDigits(['', '', '', '', '', '']);
-    setAuthStep('otp');
 
-    // Display high-visibility notification with copyable code
-    showAlert(
-      'info',
-      `${text.otpToastTitle}: ${newOtp} (${text.clickToCopy})`,
-      12000
-    );
+    try {
+      const result = await sendAdminOtpEmail({
+        email: cleanEmail,
+        otp: newOtp,
+        appPassword: appPasswordInput
+      });
+
+      setIsSendingOtp(false);
+      setAuthStep('otp');
+
+      if (result.sent) {
+        // Real email sent directly to Gmail inbox!
+        showAlert('success', text.otpSentInbox, 12000);
+      } else {
+        // Fallback: If App Password is missing or SMTP fails, provide the OTP with setup reminder
+        if (result.reason === 'NO_APP_PASSWORD') {
+          showAlert(
+            'info',
+            `${text.otpFallbackNotice}${newOtp} (${text.clickToCopy})`,
+            15000
+          );
+        } else if (result.reason === 'SMTP_ERROR') {
+          showAlert(
+            'error',
+            `${text.otpSmtpErrorNotice}${newOtp} (${text.clickToCopy})`,
+            15000
+          );
+        } else {
+          showAlert(
+            'info',
+            `${text.otpToastTitle}: ${newOtp} (${text.clickToCopy})`,
+            12000
+          );
+        }
+      }
+    } catch {
+      setIsSendingOtp(false);
+      setAuthStep('otp');
+      showAlert(
+        'info',
+        `${text.otpToastTitle}: ${newOtp} (${text.clickToCopy})`,
+        12000
+      );
+    }
 
     console.info(`[Aunty Bingo Auth] OTP Code for ${ADMIN_EMAIL}: ${newOtp}`);
   };
@@ -541,9 +838,17 @@ export default function AdminPanel({ lang = 'bn', onBackToGame }) {
 
               <button
                 type="submit"
-                className="w-full py-3.5 rounded-2xl bg-[#8E1B3A] hover:bg-[#75142E] text-white font-bold text-sm transition-all shadow-md active:scale-95 cursor-pointer mt-1"
+                disabled={isSendingOtp}
+                className="w-full py-3.5 rounded-2xl bg-[#8E1B3A] hover:bg-[#75142E] disabled:opacity-60 text-white font-bold text-sm transition-all shadow-md active:scale-95 cursor-pointer mt-1 flex items-center justify-center gap-2"
               >
-                {text.sendOtpBtn} →
+                {isSendingOtp ? (
+                  <>
+                    <span className="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                    {text.sendingOtpBtn}
+                  </>
+                ) : (
+                  <>{text.sendOtpBtn} →</>
+                )}
               </button>
 
               <button
@@ -553,6 +858,21 @@ export default function AdminPanel({ lang = 'bn', onBackToGame }) {
               >
                 ← {text.backToGame}
               </button>
+
+              {/* Email Delivery Status Badge & Settings Trigger */}
+              <div className="mt-2 pt-3 border-t border-[#D8C6B6]/60 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs">
+                <span className="text-[#6E554D] font-semibold flex items-center gap-1.5">
+                  <span className={`w-2.5 h-2.5 rounded-full ${hasAppPass ? 'bg-emerald-500 animate-pulse' : 'bg-amber-400'}`}></span>
+                  {hasAppPass ? text.statusConnected : text.statusFallback}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setIsEmailModalOpen(true)}
+                  className="text-[#8E1B3A] font-bold hover:underline cursor-pointer flex items-center gap-1"
+                >
+                  ⚙️ {text.emailSettingsBtn}
+                </button>
+              </div>
             </form>
           )}
 
@@ -587,15 +907,19 @@ export default function AdminPanel({ lang = 'bn', onBackToGame }) {
                 </span>
                 <button
                   type="button"
-                  disabled={resendCooldown > 0}
+                  disabled={resendCooldown > 0 || isSendingOtp}
                   onClick={handleRequestOtp}
                   className={`cursor-pointer ${
-                    resendCooldown > 0
+                    resendCooldown > 0 || isSendingOtp
                       ? 'text-[#8A7268] opacity-50 cursor-not-allowed'
                       : 'text-[#8E1B3A] hover:underline'
                   }`}
                 >
-                  {resendCooldown > 0 ? `${text.resendOtp} (${resendCooldown}s)` : text.resendOtp}
+                  {isSendingOtp
+                    ? text.sendingOtpBtn
+                    : resendCooldown > 0
+                    ? `${text.resendOtp} (${resendCooldown}s)`
+                    : text.resendOtp}
                 </button>
               </div>
 
@@ -613,9 +937,39 @@ export default function AdminPanel({ lang = 'bn', onBackToGame }) {
               >
                 ← {text.changeEmail}
               </button>
+
+              {/* Email Delivery Status Badge in Step 2 */}
+              <div className="mt-1 pt-3 border-t border-[#D8C6B6]/60 flex items-center justify-between text-xs">
+                <span className="text-[#6E554D] font-semibold">
+                  {hasAppPass ? text.statusConnected : text.statusFallback}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setIsEmailModalOpen(true)}
+                  className="text-[#8E1B3A] font-bold hover:underline cursor-pointer"
+                >
+                  ⚙️ {text.emailSettingsBtn}
+                </button>
+              </div>
             </form>
           )}
         </div>
+
+        {/* Email Settings Modal */}
+        <EmailSettingsModal
+          isOpen={isEmailModalOpen}
+          onClose={() => setIsEmailModalOpen(false)}
+          text={text}
+          appPasswordInput={appPasswordInput}
+          setAppPasswordInput={setAppPasswordInput}
+          showPasswordMask={showPasswordMask}
+          setShowPasswordMask={setShowPasswordMask}
+          handleSaveAppPassword={handleSaveAppPassword}
+          handleTestEmail={handleTestEmail}
+          isTestingEmail={isTestingEmail}
+          hasAppPass={hasAppPass}
+          handleClearAppPassword={handleClearAppPassword}
+        />
       </div>
     );
   }
@@ -703,6 +1057,15 @@ export default function AdminPanel({ lang = 'bn', onBackToGame }) {
               📊 {text.tabAnalytics}
             </button>
           </div>
+
+          {/* Email Settings & App Password Button */}
+          <button
+            onClick={() => setIsEmailModalOpen(true)}
+            className="px-2.5 py-1.5 rounded-xl border border-[#D8C6B6] bg-white text-xs font-bold text-[#8E1B3A] hover:bg-[#F4E8D9] transition-colors cursor-pointer shadow-xs flex items-center gap-1.5"
+            title={text.emailSettingsBtn}
+          >
+            ✉️ <span className="hidden md:inline">{text.emailSettingsBtn}</span>
+          </button>
 
           <button
             onClick={handleLogout}
@@ -1214,6 +1577,22 @@ export default function AdminPanel({ lang = 'bn', onBackToGame }) {
           </div>
         </div>
       )}
+
+      {/* Email Settings Modal for Authenticated Admin */}
+      <EmailSettingsModal
+        isOpen={isEmailModalOpen}
+        onClose={() => setIsEmailModalOpen(false)}
+        text={text}
+        appPasswordInput={appPasswordInput}
+        setAppPasswordInput={setAppPasswordInput}
+        showPasswordMask={showPasswordMask}
+        setShowPasswordMask={setShowPasswordMask}
+        handleSaveAppPassword={handleSaveAppPassword}
+        handleTestEmail={handleTestEmail}
+        isTestingEmail={isTestingEmail}
+        hasAppPass={hasAppPass}
+        handleClearAppPassword={handleClearAppPassword}
+      />
     </div>
   );
 }
