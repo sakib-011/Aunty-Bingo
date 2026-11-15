@@ -44,8 +44,7 @@ export default async function handler(req, res) {
       return res.status(200).json({
         sent: false,
         reason: 'NO_APP_PASSWORD',
-        message: 'Gmail App Password is not configured yet. Fallback OTP provided for testing.',
-        otp
+        message: 'Gmail App Password is not configured.'
       });
     }
 
@@ -72,7 +71,7 @@ export default async function handler(req, res) {
         <table role="presentation" width="100%" style="max-width: 480px; background-color: #FFFDF9; border: 2px solid #D8C6B6; border-radius: 20px; padding: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.06);">
           <tr>
             <td align="center" style="padding-bottom: 16px;">
-              <div style="font-size: 36px; margin-bottom: 8px;">👵</div>
+              <div style="width: 48px; height: 48px; border-radius: 14px; background-color: #8E1B3A; color: #FFF6E5; font-family: serif; font-weight: 800; line-height: 48px; font-size: 20px; text-align: center; margin-bottom: 10px;">AB</div>
               <h2 style="margin: 0; color: #8E1B3A; font-size: 22px;">আন্টি বিঙ্গো (Aunty Bingo)</h2>
               <p style="margin: 4px 0 0; color: #6E554D; font-size: 13px;">ক্রিয়েটর হাব অ্যাডমিন ভেরিফিকেশন ওটিপি</p>
             </td>
@@ -134,8 +133,7 @@ export default async function handler(req, res) {
     return res.status(200).json({
       sent: false,
       reason: 'SMTP_ERROR',
-      error: err.message,
-      otp: req.body?.otp
+      error: err.message
     });
   }
 }

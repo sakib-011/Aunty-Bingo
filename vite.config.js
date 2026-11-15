@@ -54,8 +54,7 @@ function devOtpPlugin(env = {}) {
               res.end(JSON.stringify({
                 sent: false,
                 reason: 'NO_APP_PASSWORD',
-                message: 'Gmail App Password is not configured. Fallback OTP provided.',
-                otp
+                message: 'Gmail App Password is not configured.'
               }));
               return;
             }
@@ -74,7 +73,10 @@ function devOtpPlugin(env = {}) {
               subject: `[Aunty Bingo] আপনার অ্যাডমিন লগইন ওটিপি কোড: ${otp}`,
               html: `
                 <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; padding: 24px; background: #FFF6E5; color: #2B1B17; border-radius: 16px; border: 2px solid #D8C6B6; max-width: 480px; margin: 0 auto;">
-                  <h2 style="color: #8E1B3A; margin: 0 0 8px;">👵 আন্টি বিঙ্গো (Aunty Bingo)</h2>
+                  <h2 style="color: #8E1B3A; margin: 0 0 8px; display: flex; align-items: center;">
+                    <span style="display:inline-block; width:28px; height:28px; border-radius:8px; background:#8E1B3A; color:#FFF6E5; font-weight:bold; text-align:center; line-height:28px; font-size:14px; margin-right:8px;">AB</span>
+                    আন্টি বিঙ্গো (Aunty Bingo)
+                  </h2>
                   <p style="color: #6E554D; font-size: 14px; margin: 0 0 16px;">ক্রিয়েটর হাব অ্যাডমিন ভেরিফিকেশন ওটিপি</p>
                   <p style="margin: 0 0 12px; font-size: 14px;">প্রিয় সাকিব ভাই, আপনার অ্যাডমিন প্যানেল লগইন ওটিপি কোড:</p>
                   <div style="font-size: 34px; font-weight: bold; font-family: monospace; letter-spacing: 6px; color: #8E1B3A; background: #FFFDF9; border: 2px solid #8E1B3A; border-radius: 12px; padding: 12px; text-align: center; margin: 16px 0;">
@@ -96,8 +98,7 @@ function devOtpPlugin(env = {}) {
             res.end(JSON.stringify({
               sent: false,
               reason: 'SMTP_ERROR',
-              error: err.message,
-              otp: JSON.parse(body || '{}').otp
+              error: err.message
             }));
           }
         });

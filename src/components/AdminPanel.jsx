@@ -596,44 +596,30 @@ export default function AdminPanel({
       });
 
       setIsSendingOtp(false);
-      setAuthStep('otp');
 
       if (result.sent) {
         // Real email sent directly to Gmail inbox!
+        setAuthStep('otp');
         showAlert('success', text.otpSentInbox, 12000);
       } else {
-        // Fallback: If App Password is missing or SMTP fails, provide the OTP with setup reminder
-        if (result.reason === 'NO_APP_PASSWORD') {
-          showAlert(
-            'info',
-            `${text.otpFallbackNotice}${newOtp} (${text.clickToCopy})`,
-            15000
-          );
-        } else if (result.reason === 'SMTP_ERROR') {
-          showAlert(
-            'error',
-            `${text.otpSmtpErrorNotice}${newOtp} (${text.clickToCopy})`,
-            15000
-          );
-        } else {
-          showAlert(
-            'info',
-            `${text.otpToastTitle}: ${newOtp} (${text.clickToCopy})`,
-            12000
-          );
-        }
+        showAlert(
+          'error',
+          adminLang === 'bn'
+            ? 'ইমেইলে ওটিপি পাঠানো সম্ভব হয়নি। অনুগ্রহ করে ইন্টারনেট সংযোগ চেক করুন বা অ্যাডমিনকে অবহিত করুন।'
+            : 'Failed to dispatch OTP to email. Please check your internet connection or email configuration.',
+          10000
+        );
       }
     } catch {
       setIsSendingOtp(false);
-      setAuthStep('otp');
       showAlert(
-        'info',
-        `${text.otpToastTitle}: ${newOtp} (${text.clickToCopy})`,
-        12000
+        'error',
+        adminLang === 'bn'
+          ? 'ইমেইল ডেলিভারি সার্ভিসে যোগাযোগ করতে ব্যর্থ হয়েছে।'
+          : 'Failed to communicate with email delivery service.',
+        8000
       );
     }
-
-    console.info(`[Aunty Bingo Auth] OTP Code for ${ADMIN_EMAIL}: ${newOtp}`);
   };
 
   // Step 2: Handle OTP digit input changes
@@ -869,13 +855,7 @@ export default function AdminPanel({
         {/* Floating Alert Banner */}
         {alert && (
           <div
-            onClick={() => {
-              if (alert.message.includes(generatedOtp)) {
-                navigator.clipboard.writeText(generatedOtp);
-                showAlert('success', adminLang === 'bn' ? 'ওটিপি ক্লিপবোর্ডে কপি হয়েছে!' : 'OTP copied to clipboard!');
-              }
-            }}
-            className={`w-full max-w-md mb-4 p-3.5 rounded-2xl border text-xs sm:text-sm font-semibold flex items-center justify-between gap-3 shadow-md animate-in slide-in-from-top-2 duration-200 cursor-pointer ${
+            className={`w-full max-w-md mb-4 p-3.5 rounded-2xl border text-xs sm:text-sm font-semibold flex items-center justify-between gap-3 shadow-md animate-in slide-in-from-top-2 duration-200 ${
               alert.type === 'error'
                 ? 'bg-red-50 dark:bg-red-950/40 border-red-300 dark:border-red-800 text-red-700 dark:text-red-300'
                 : alert.type === 'success'
@@ -893,7 +873,13 @@ export default function AdminPanel({
               )}
               <span>{alert.message}</span>
             </div>
-            <CloseIcon className="text-xs opacity-60 hover:opacity-100 shrink-0" />
+            <button
+              onClick={() => setAlert(null)}
+              className="cursor-pointer opacity-60 hover:opacity-100 transition-opacity p-1"
+              aria-label="Dismiss alert"
+            >
+              <CloseIcon className="text-xs shrink-0" />
+            </button>
           </div>
         )}
 
@@ -953,22 +939,6 @@ export default function AdminPanel({
                 <ArrowLeftIcon className="text-xs" />
                 <span>{text.backToGame}</span>
               </button>
-
-              {/* Email Delivery Status Badge & Settings Trigger */}
-              <div className="mt-2 pt-3 border-t border-[#D8C6B6]/60 dark:border-[#422530] flex flex-col sm:flex-row items-center justify-between gap-2 text-xs">
-                <span className="text-[#6E554D] dark:text-[#c7a9b3] font-semibold flex items-center gap-1.5">
-                  <CircleDotIcon className={`text-[10px] ${hasAppPass ? 'text-emerald-500 animate-pulse' : 'text-amber-400'}`} />
-                  <span>{hasAppPass ? text.statusConnected : text.statusFallback}</span>
-                </span>
-                <button
-                  type="button"
-                  onClick={() => setIsEmailModalOpen(true)}
-                  className="text-[#8E1B3A] dark:text-[#ff7597] font-bold hover:underline cursor-pointer flex items-center gap-1.5"
-                >
-                  <GearIcon className="text-xs" />
-                  <span>{text.emailSettingsBtn}</span>
-                </button>
-              </div>
             </form>
           )}
 
@@ -1039,42 +1009,9 @@ export default function AdminPanel({
                 <ArrowLeftIcon className="text-xs" />
                 <span>{text.changeEmail}</span>
               </button>
-
-              {/* Email Delivery Status Badge in Step 2 */}
-              <div className="mt-1 pt-3 border-t border-[#D8C6B6]/60 dark:border-[#422530] flex items-center justify-between text-xs">
-                <span className="text-[#6E554D] dark:text-[#c7a9b3] font-semibold flex items-center gap-1.5">
-                  <CircleDotIcon className={`text-[10px] ${hasAppPass ? 'text-emerald-500 animate-pulse' : 'text-amber-400'}`} />
-                  <span>{hasAppPass ? text.statusConnected : text.statusFallback}</span>
-                </span>
-                <button
-                  type="button"
-                  onClick={() => setIsEmailModalOpen(true)}
-                  className="text-[#8E1B3A] dark:text-[#ff7597] font-bold hover:underline cursor-pointer flex items-center gap-1.5"
-                >
-                  <GearIcon className="text-xs" />
-                  <span>{text.emailSettingsBtn}</span>
-                </button>
-              </div>
             </form>
           )}
         </div>
-
-        {/* Email Settings Modal */}
-        <EmailSettingsModal
-          isOpen={isEmailModalOpen}
-          onClose={() => setIsEmailModalOpen(false)}
-          text={text}
-          adminLang={adminLang}
-          appPasswordInput={appPasswordInput}
-          setAppPasswordInput={setAppPasswordInput}
-          showPasswordMask={showPasswordMask}
-          setShowPasswordMask={setShowPasswordMask}
-          handleSaveAppPassword={handleSaveAppPassword}
-          handleTestEmail={handleTestEmail}
-          isTestingEmail={isTestingEmail}
-          hasAppPass={hasAppPass}
-          handleClearAppPassword={handleClearAppPassword}
-        />
       </div>
     );
   }
