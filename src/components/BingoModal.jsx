@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import confetti from 'canvas-confetti';
-import mascotCelebratingUrl from '../assets/mascots/mascot_celebrating.png';
+import aunty3dMeltdownUrl from '../assets/mascots/aunty_3d_meltdown.png';
 import {
   InstagramIcon,
   FacebookIcon,
@@ -8,21 +8,24 @@ import {
   WhatsAppIcon,
   DownloadIcon,
   PlayIcon,
-  RotateLeftIcon,
+  ShuffleIcon,
   CheckIcon,
   CopyIcon,
   ShareIcon,
   ClockIcon,
-  TrophyIcon
+  TrophyIcon,
+  MagnifyingGlassIcon
 } from './FontAwesomeIcons';
 import { shareToSocial, toBengaliDigits } from '../utils/share';
 import { generateCardCanvas } from '../utils/canvasExport';
+import { getDynamicSurvivorBadge } from '../utils/survivorBadges';
 
 export default function BingoModal({
   isOpen,
   onClose,
   onExport,
   onReset,
+  onNextBoard,
   elapsedTime = '00:00',
   winTimeOfDay = '',
   lang = 'bn',
@@ -89,6 +92,11 @@ export default function BingoModal({
     };
   }, [isOpen, board, markedIndices, winningLines, occasionId, lang, elapsedTime, winTimeOfDay, gridSize]);
 
+  const currentBadge = useMemo(() => {
+    if (!isOpen) return null;
+    return getDynamicSurvivorBadge({ occasionId, elapsedTime, winningLines });
+  }, [isOpen, occasionId, elapsedTime, winningLines]);
+
   if (!isOpen) return null;
 
   const showToast = (msg) => {
@@ -139,14 +147,43 @@ export default function BingoModal({
           </span>
         </div>
 
-        {/* Celebrating Mascot with Clear Hands */}
-        <div className="w-24 h-24 sm:w-28 sm:h-28 mx-auto my-1 flex items-center justify-center">
+        {/* 3D Shocked / Meltdown Mascot */}
+        <div className="w-28 h-28 sm:w-32 sm:h-32 mx-auto my-1 flex items-center justify-center">
           <img
-            src={mascotCelebratingUrl}
-            alt="Celebrating Aunty Mascot"
+            src={aunty3dMeltdownUrl}
+            alt="3D Defeated Aunty Mascot"
             className="w-full h-full object-contain filter drop-shadow-md transition-transform hover:scale-105 duration-200"
           />
         </div>
+
+        {/* Aunty 007 Secret Agent License Dossier Card */}
+        {currentBadge && (
+          <div className="bg-[#FFF6E5] dark:bg-stone-800/90 border-2 border-purple-400 dark:border-purple-600/70 rounded-2xl p-2.5 my-2 shadow-sm text-left relative overflow-hidden">
+            {/* Classified watermark stamp */}
+            <div className="absolute -right-3 -bottom-2 text-[26px] font-black tracking-widest text-purple-900/10 dark:text-purple-300/10 uppercase rotate-12 pointer-events-none select-none">
+              {currentBadge.secretCode}
+            </div>
+
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-xl bg-purple-100 dark:bg-purple-950/70 text-purple-700 dark:text-purple-300 flex items-center justify-center shrink-0 border border-purple-300 dark:border-purple-700">
+                <MagnifyingGlassIcon className="text-xs" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center justify-between gap-1">
+                  <span className="font-bold text-xs text-purple-950 dark:text-purple-200 uppercase tracking-wider truncate">
+                    {lang === 'bn' ? currentBadge.titleBn : currentBadge.titleEn}
+                  </span>
+                  <span className="text-[9px] font-mono font-bold text-purple-700 dark:text-purple-300 shrink-0 bg-purple-200/70 dark:bg-purple-900/70 px-1.5 py-0.5 rounded">
+                    {currentBadge.iqText}
+                  </span>
+                </div>
+                <div className="text-[11px] font-medium text-[#6E554D] dark:text-stone-300 leading-tight mt-0.5 truncate">
+                  {lang === 'bn' ? currentBadge.descBn : currentBadge.descEn}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Stats Pill (Using FontAwesome ClockIcon instead of emoji) */}
         <div className="bg-[#F2EAE1] dark:bg-stone-800 rounded-2xl py-2 px-3 my-3 border border-[#D8C6B6] dark:border-stone-700 flex items-center justify-center gap-2">
@@ -250,16 +287,21 @@ export default function BingoModal({
               <span>{lang === 'bn' ? 'খেলা চালিয়ে যান' : 'Keep Playing'}</span>
             </button>
 
-            {/* Reset / Play Again */}
+            {/* Next Board with Fresh Unplayed Questions */}
             <button
               onClick={() => {
                 onClose();
-                if (onReset) onReset();
+                if (onNextBoard) {
+                  onNextBoard();
+                } else if (onReset) {
+                  onReset();
+                }
               }}
-              className="py-2 px-3 rounded-full border border-[#D8C6B6] dark:border-stone-700 bg-white dark:bg-stone-800 text-[#2B1B17] dark:text-stone-200 font-bold text-xs sm:text-sm hover:bg-[#F2EAE1] dark:hover:bg-stone-700 active:scale-[0.99] transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+              className="py-2 px-3 rounded-full border-2 border-[#8E1B3A] dark:border-rose-500 bg-[#8E1B3A] text-white font-bold text-xs sm:text-sm hover:bg-[#75142E] dark:hover:bg-rose-600 active:scale-[0.99] transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-sm"
+              title={lang === 'bn' ? 'আজকের বাকি নতুন প্রশ্ন দিয়ে পরবর্তী বোর্ড খেলুন' : 'Play next board with remaining questions'}
             >
-              <RotateLeftIcon className="text-xs" />
-              <span>{lang === 'bn' ? 'নতুন করে খেলুন' : 'Play Again'}</span>
+              <ShuffleIcon className="text-xs" />
+              <span>{lang === 'bn' ? 'পরবর্তী নতুন বোর্ড' : 'Next New Board'}</span>
             </button>
           </div>
         </div>

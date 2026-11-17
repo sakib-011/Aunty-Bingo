@@ -27,6 +27,12 @@ export default function OccasionsDirectory({ lang, onSelectAndPlay, onBack }) {
       { bn: 'একটু মোটা হয়ে গেছ না?', en: "Haven't you gotten a bit chubby?" },
       { bn: 'বাচ্চা কবে নিচ্ছ?', en: "When are you having a baby?" },
       { bn: 'আমাদের আমলে তো আমরা এমন ছিলাম না!', en: "In our days, we were never like this!" }
+    ],
+    aunty007: [
+      { bn: 'পাশের বাসার ছেলেটা কার সাথে রিকশায় গেল শুনি?', en: "Who was that boy next door riding a rickshaw with?" },
+      { bn: 'আমি কিন্তু সব জানি! গোপন খবর ফাঁস হবেই!', en: "Agent Aunty knows all! Secrets will be uncovered!" },
+      { bn: 'নতুন ফ্ল্যাটের টাকাটা তোমার ভাই কোথা থেকে জোগাড় করল?', en: "Where did your brother get the funds for that new apartment?" },
+      { bn: 'বিয়ের কাচ্চির মাংস কম পড়ল কার জন্য?', en: "Who was responsible for the kacchi meat running short?" }
     ]
   };
 
@@ -48,7 +54,7 @@ export default function OccasionsDirectory({ lang, onSelectAndPlay, onBack }) {
           {lang === 'bn' ? 'পারিবারিক আড্ডার ধরন' : 'Gathering Presets'}
         </span>
         <h1 className="text-3xl sm:text-4xl font-bold text-[#8E1B3A] dark:text-rose-400 mt-2">
-          {lang === 'bn' ? 'অনুষ্ঠান পরিচিতি ও বিশেষ আড্ডা' : 'Explore All 4 Occasions'}
+          {lang === 'bn' ? 'অনুষ্ঠান পরিচিতি ও গোয়েন্দা আড্ডা' : 'Explore All 5 Gathering Presets'}
         </h1>
         <p className="text-xs sm:text-sm text-[#6E554D] dark:text-stone-400 font-medium mt-2 max-w-lg mx-auto">
           {lang === 'bn'

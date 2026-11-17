@@ -3,6 +3,10 @@ import heroGatheringUrl from '../assets/images/hero-gathering.svg';
 import { OCCASIONS } from '../utils/phrases';
 import TaglineReveal from './TaglineReveal';
 import DraggableAunty from './DraggableAunty';
+import aunty3dChillUrl from '../assets/mascots/aunty_3d_chill.png';
+import aunty3dSuspiciousUrl from '../assets/mascots/aunty_3d_suspicious.png';
+import aunty3dInterrogationUrl from '../assets/mascots/aunty_3d_interrogation.png';
+import aunty3dMeltdownUrl from '../assets/mascots/aunty_3d_meltdown.png';
 import {
   SparklesIcon,
   GamepadIcon,
@@ -12,9 +16,14 @@ import {
   BoltIcon,
   ShieldIcon,
   CameraIcon,
-  CommentsIcon,
   StarIcon,
-  ChevronDownIcon
+  ChevronDownIcon,
+  FireIcon,
+  SmileIcon,
+  LaughIcon,
+  GaugeIcon,
+  AwardIcon,
+  CopyIcon
 } from './FontAwesomeIcons';
 
 export default function LandingPage({
@@ -25,6 +34,124 @@ export default function LandingPage({
   onOpenHowTo
 }) {
   const [openFaqIndex, setOpenFaqIndex] = useState(0);
+  const [selectedSampleIndex, setSelectedSampleIndex] = useState(0);
+  const [activeComebackStyle, setActiveComebackStyle] = useState('savage');
+  const [previewCopied, setPreviewCopied] = useState(false);
+  const [stressPreviewLevel, setStressPreviewLevel] = useState(65);
+
+  const sampleQuestions = [
+    {
+      id: 'marriage',
+      labelBn: 'কবে বিয়ে করবা?',
+      labelEn: 'When are you getting married?',
+      categoryBn: 'বিয়ে ও সংসার',
+      categoryEn: 'Marriage & Family',
+      comebacks: {
+        savage: {
+          bn: 'আপনার ছেলের বিয়েতে তো কাউকে ডাকেননি, নিজেরটায় ভাবছি কাউকে না জানিয়েই সারবো!',
+          en: 'You barely invited anyone to your son’s wedding, thinking of returning the favor!'
+        },
+        polite: {
+          bn: 'আল্লাহ যেদিন কপালে রেখেছেন খালাম্মা, অবশ্যই ভালো খবর পাবেন। দোয়া করবেন।',
+          en: 'When the time is right, you will surely be the first to know. Keep me in your prayers.'
+        },
+        funny: {
+          bn: 'কাচ্চির বিরিয়ানির বাজেট মেলাতে পারছি না খালাম্মা, স্পন্সর করলে কালকেই ডেট দিচ্ছি!',
+          en: 'Still negotiating the biryani budget. If you sponsor the caterer, I will set a date tomorrow!'
+        }
+      }
+    },
+    {
+      id: 'salary',
+      labelBn: 'বেতন কত পাও এখন?',
+      labelEn: 'What is your salary now?',
+      categoryBn: 'ক্যারিয়ার ও আয়',
+      categoryEn: 'Career & Income',
+      comebacks: {
+        savage: {
+          bn: 'যতটুকুই পাই খালাম্মা, আপনার থেকে ঋণ নেওয়ার তো দরকার পড়ছে না!',
+          en: 'Just enough that I do not need to ask anyone for financial bailouts.'
+        },
+        polite: {
+          bn: 'আলহামদুলিল্লাহ, দিনশেষে ডাল ভাত খাওয়ার মতো ব্যবস্থা আল্লাহ ভালোই রেখেছেন।',
+          en: 'By grace, it covers my needs and savings comfortably. Thank you for asking.'
+        },
+        funny: {
+          bn: 'ট্যাক্স অফিসার আর আত্মীয়দের কাছে স্যালারি ডিসক্লোজ করা কোম্পানি পলিসির বাইরে!',
+          en: 'Disclosing figures to tax officers and relatives breaches my employment NDA!'
+        }
+      }
+    },
+    {
+      id: 'weight',
+      labelBn: 'এত শুকিয়ে গেছ কেন?',
+      labelEn: 'Why did you lose so much weight?',
+      categoryBn: 'স্বাস্থ্য ও চেহারা',
+      categoryEn: 'Health & Appearance',
+      comebacks: {
+        savage: {
+          bn: 'আপনার মতো সবার চিন্তায় দিনরাত গলদঘর্ম হলে তো শুকিয়ে যাওয়াই স্বাভাবিক!',
+          en: 'Carrying the burden of pleasing every relative burns too many calories.'
+        },
+        polite: {
+          bn: 'নিয়মিত ব্যায়াম আর হালকা খাবার খাচ্ছি, শরীরটা বেশ ফিট আছে।',
+          en: 'I have been staying active and eating clean. Feeling very fit.'
+        },
+        funny: {
+          bn: 'ডাক্তার বলেছে ক্যালোরি পোড়াতে, আত্মীয়দের প্রশ্ন শুনে এমনিতেই ২০০ ক্যালোরি পুড়ে যায়!',
+          en: 'My doctor told me to burn calories. Dodging your questions burns 200 an hour!'
+        }
+      }
+    }
+  ];
+
+  const showcaseBadges = [
+    {
+      id: 'aunty007',
+      titleBn: 'আন্টি ০০৭ গোপন গোয়েন্দা লাইসেন্স',
+      titleEn: 'Aunty 007 Secret Agent License',
+      descBn: 'আমি কিন্তু সব জানি! পাড়ার সব রহস্য ফাঁস',
+      descEn: 'Cracked every neighborhood secret with Gossip IQ 98%'
+    },
+    {
+      id: 'wedding',
+      titleBn: 'অবিবাহিত যোদ্ধা পদক',
+      titleEn: 'Unmarried Crusader Medal',
+      descBn: 'বিয়ের সব প্রশ্ন সাহসের সাথে প্রতিহত',
+      descEn: 'Withstood every marriage inquiry'
+    },
+    {
+      id: 'eid',
+      titleBn: 'সালামি কূটনীতিক খেতাব',
+      titleEn: 'Salami Diplomat Title',
+      descBn: 'জেরা এড়িয়ে সালামি আদায় সম্পন্ন',
+      descEn: 'Dodged interrogation and secured Eidi'
+    },
+    {
+      id: 'exam',
+      titleBn: 'বিসিএস বর্ম পদক',
+      titleEn: 'Civil Service Shield',
+      descBn: 'সিজিপিএ অডিটরদের সফলভাবে পরাস্ত',
+      descEn: 'Conquered the family GPA inquest'
+    },
+    {
+      id: 'general',
+      titleBn: 'চা সিঙ্গাড়া চ্যাম্পিয়ন খেতাব',
+      titleEn: 'Tea & Shingara Champion',
+      descBn: 'পারিবারিক আড্ডায় অপ্রতিরোধ্য বিজয়ী',
+      descEn: 'Undefeated in family reunion banter'
+    }
+  ];
+
+  const handleCopyPreview = async (text) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setPreviewCopied(true);
+      setTimeout(() => setPreviewCopied(false), 2000);
+    } catch {
+      // Fallback
+    }
+  };
 
   const testimonials = [
     {
@@ -103,8 +230,22 @@ export default function LandingPage({
       q: lang === 'bn' ? 'সবগুলো প্রশ্ন কি বাঙালি সংস্কৃতির জন্য সত্য?' : 'Are all phrases tailored to authentic Bengali gatherings?',
       a:
         lang === 'bn'
-          ? 'হ্যাঁ। আমাদের প্রশ্নভাণ্ডারে রয়েছে ১৬৪টিরও বেশি খাঁটি বাঙালি ডায়ালগ যা ঈদ, বিয়ে, রেজাল্ট এবং পারিবারিক আড্ডায় আত্মীয়দের মুখ থেকে প্রায়শই শোনা যায়।'
-          : 'Yes. Our database contains over 164 authentic phrases curated specifically around common cultural tropes heard at Bengali family events.'
+          ? 'হ্যাঁ। আমাদের প্রশ্নভাণ্ডারে রয়েছে ১৭৪টিরও বেশি খাঁটি বাঙালি ডায়ালগ যা ঈদ, বিয়ে, রেজাল্ট, আন্টি ০০৭ এবং পারিবারিক আড্ডায় আত্মীয়দের মুখ থেকে প্রায়শই শোনা যায়।'
+          : 'Yes. Our database contains over 174 authentic phrases curated specifically around common cultural tropes heard at Bengali family events.'
+    },
+    {
+      q: lang === 'bn' ? 'আন্টির মোক্ষম জবাব ফিচারটি কীভাবে কাজ করে?' : 'How does the Savage Comebacks feature work?',
+      a:
+        lang === 'bn'
+          ? 'খেলার সময় প্রতিটি ঘরের কোণায় থাকা কমেন্ট আইকনে ক্লিক করলেই সেই প্রশ্নের বিপরীতে ৩ ধরনের জবাব (ভদ্র, মোক্ষম ও মজার) পাওয়া যায়। সেখান থেকে ১ ক্লিকে কপি করে সামাজিক যোগাযোগমাধ্যম বা সরাসরি আড্ডায় ব্যবহার করতে পারেন।'
+          : 'Click the message icon on any tile during gameplay to open three curated counter responses (Polite, Savage, and Funny) with one click clipboard copy.'
+    },
+    {
+      q: lang === 'bn' ? 'লাইভ স্ট্রেস মিটার ও পারিবারিক পদক কীভাবে অর্জন করা যায়?' : 'How do the live stress meter and survivor badges work?',
+      a:
+        lang === 'bn'
+          ? 'বোর্ডে দাগ পড়ার সাথে সাথে স্ট্রেস মিটার আন্টির জেরা লেভেল ট্র্যাক করে। বিঙ্গো পূর্ণ হলে আপনার অনুষ্ঠানের ধরন অনুযায়ী বিশেষ পারিবারিক পদক আনলক হবে যা কার্ড এক্সপোর্টে যুক্ত থাকে।'
+          : 'The stress meter updates live as you mark tiles, transitioning across four mood tiers. Hitting BINGO unlocks an event specific survivor medal integrated into your export card.'
     },
     {
       q: lang === 'bn' ? 'অফলাইনে বা দুর্বল ইন্টারনেটে কি এটি খেলা সম্ভব?' : 'Does the game work offline or with slow connectivity?',
@@ -181,7 +322,7 @@ export default function LandingPage({
           <div className="flex flex-wrap items-center gap-3 sm:gap-4 mt-6 pt-4 border-t border-[#E8DCD0] text-xs text-[#6E554D] font-medium">
             <div className="flex items-center gap-1.5">
               <CheckIcon className="text-green-600 text-xs" />
-              <span>{lang === 'bn' ? '১৬৪+ প্রামাণ্য বাঙালি ডায়ালগ' : '164+ Curated Prompts'}</span>
+              <span>{lang === 'bn' ? '১৭৪+ প্রামাণ্য বাঙালি ডায়ালগ' : '174+ Curated Prompts'}</span>
             </div>
             <span>•</span>
             <div className="flex items-center gap-1.5">
@@ -215,7 +356,306 @@ export default function LandingPage({
       {/* 2. TAGLINE REVEAL SECTION (Mandatory per B11) */}
       <TaglineReveal lang={lang} />
 
-      {/* 3. OCCASION PRESETS DIRECTORY (Mid-page) */}
+      {/* 3. NEW FEATURE 1: AUNTY SAVAGE & POLITE COMEBACKS SHOWCASE */}
+      <section className="bg-[#FFFDF9] dark:bg-[#1a1014] rounded-3xl p-6 sm:p-10 border border-[#D8C6B6] dark:border-[#3d232c] shadow-sm">
+        <div className="text-center mb-8 max-w-[680px] mx-auto">
+          <div className="text-xs font-semibold uppercase tracking-wider text-[#B84B12] dark:text-[#f39c12] mb-1">
+            {lang === 'bn' ? 'নতুন মোক্ষম ফিচার' : 'New Dynamic Feature'}
+          </div>
+          <h2 className="text-2xl sm:text-3xl font-bold text-[#8E1B3A] dark:text-[#ff7597] text-balance">
+            {lang === 'bn' ? 'আন্টিকে দেওয়ার মোক্ষম ও ভদ্র জবাব' : 'Aunty Savage & Polite Comebacks'}
+          </h2>
+          <p className="text-xs sm:text-sm text-[#6E554D] dark:text-[#c7a9b3] mt-1.5 font-normal text-pretty">
+            {lang === 'bn'
+              ? 'অস্বস্তিকর পারিবারিক প্রশ্নের মুখে আর চুপ করে থাকা নয়। প্রতিটি প্রশ্নের সাথে পেয়ে যান ৩ ধরনের প্রত্যুত্তর যা এক ক্লিকে কপি করা যায়।'
+              : 'Never freeze during family interrogations again. Every question includes three customized comebacks with one click clipboard copy.'}
+          </p>
+        </div>
+
+        {/* Interactive Comebacks Showcase */}
+        <div className="max-w-2xl mx-auto bg-white dark:bg-[#20151a] rounded-2xl border border-[#D8C6B6] dark:border-[#422530] p-4 sm:p-6 shadow-xs">
+          
+          {/* Question Selector Tabs */}
+          <div className="mb-4">
+            <span className="text-[11px] font-bold text-[#6E554D] dark:text-[#c7a9b3] uppercase tracking-wider block mb-2">
+              {lang === 'bn' ? '১. একটি চেনা প্রশ্ন বেছে নিন:' : '1. Select a common interrogation question:'}
+            </span>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+              {sampleQuestions.map((q, idx) => {
+                const isSelected = selectedSampleIndex === idx;
+                return (
+                  <button
+                    key={q.id}
+                    onClick={() => {
+                      setSelectedSampleIndex(idx);
+                      setPreviewCopied(false);
+                    }}
+                    className={`p-2.5 rounded-xl text-left border text-xs font-semibold transition-all duration-200 cursor-pointer ${
+                      isSelected
+                        ? 'bg-[#FFF6E5] dark:bg-[#341b25] border-[#8E1B3A] dark:border-[#ff7597] text-[#8E1B3A] dark:text-[#ff91ac] shadow-xs'
+                        : 'bg-white dark:bg-[#1a1014] border-[#D8C6B6]/60 dark:border-[#3d232c] text-[#2B1B17] dark:text-[#fbf5ef] hover:border-[#8E1B3A]/40'
+                    }`}
+                  >
+                    <div className="text-[10px] text-[#8A7268] dark:text-[#a08b93] font-normal mb-0.5">
+                      {lang === 'bn' ? q.categoryBn : q.categoryEn}
+                    </div>
+                    <div className="font-bold line-clamp-1">
+                      {lang === 'bn' ? q.labelBn : q.labelEn}
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Style Selector Tabs (Savage, Polite, Funny) */}
+          <div className="mb-3">
+            <span className="text-[11px] font-bold text-[#6E554D] dark:text-[#c7a9b3] uppercase tracking-wider block mb-2">
+              {lang === 'bn' ? '২. জবাবের ধরন নির্বাচন করুন:' : '2. Choose your response style:'}
+            </span>
+            <div className="grid grid-cols-3 gap-2 p-1 bg-[#F4E8D9] dark:bg-[#2c1720] rounded-xl">
+              <button
+                onClick={() => {
+                  setActiveComebackStyle('savage');
+                  setPreviewCopied(false);
+                }}
+                className={`py-2 px-2 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
+                  activeComebackStyle === 'savage'
+                    ? 'bg-white dark:bg-[#1a1014] text-rose-600 dark:text-rose-400 shadow-xs'
+                    : 'text-[#6E554D] dark:text-[#c7a9b3] hover:text-[#2B1B17]'
+                }`}
+              >
+                <FireIcon className="text-xs" />
+                <span>{lang === 'bn' ? 'স্যভেজ জবাব' : 'Savage'}</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  setActiveComebackStyle('polite');
+                  setPreviewCopied(false);
+                }}
+                className={`py-2 px-2 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
+                  activeComebackStyle === 'polite'
+                    ? 'bg-white dark:bg-[#1a1014] text-emerald-600 dark:text-emerald-400 shadow-xs'
+                    : 'text-[#6E554D] dark:text-[#c7a9b3] hover:text-[#2B1B17]'
+                }`}
+              >
+                <SmileIcon className="text-xs" />
+                <span>{lang === 'bn' ? 'ভদ্র জবাব' : 'Polite'}</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  setActiveComebackStyle('funny');
+                  setPreviewCopied(false);
+                }}
+                className={`py-2 px-2 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
+                  activeComebackStyle === 'funny'
+                    ? 'bg-white dark:bg-[#1a1014] text-amber-600 dark:text-amber-400 shadow-xs'
+                    : 'text-[#6E554D] dark:text-[#c7a9b3] hover:text-[#2B1B17]'
+                }`}
+              >
+                <LaughIcon className="text-xs" />
+                <span>{lang === 'bn' ? 'মজার জবাব' : 'Funny'}</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Active Comeback Display Box with 1-Click Copy */}
+          {(() => {
+            const currentQ = sampleQuestions[selectedSampleIndex];
+            const currentStyle = currentQ.comebacks[activeComebackStyle];
+            const textToCopy = lang === 'bn' ? currentStyle.bn : currentStyle.en;
+            return (
+              <div className="relative p-4 rounded-xl bg-[#FFFDF9] dark:bg-[#1a1014] border border-[#D8C6B6]/80 dark:border-[#3d232c] mt-3">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-[10px] font-bold text-[#8E1B3A] dark:text-[#ff7597] uppercase tracking-wider">
+                    {lang === 'bn' ? 'প্রস্তুত প্রত্যুত্তর:' : 'Ready Counter Answer:'}
+                  </span>
+                  <button
+                    onClick={() => handleCopyPreview(textToCopy)}
+                    className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#F4E8D9] dark:bg-[#2c1720] text-[#8E1B3A] dark:text-[#ff7597] hover:bg-[#8E1B3A] hover:text-white dark:hover:bg-[#ff7597] dark:hover:text-[#140d10] text-xs font-semibold transition-all cursor-pointer shadow-xs"
+                  >
+                    {previewCopied ? <CheckIcon className="text-xs text-green-600" /> : <CopyIcon className="text-xs" />}
+                    <span>{previewCopied ? (lang === 'bn' ? 'কপি হয়েছে!' : 'Copied!') : (lang === 'bn' ? 'কপি করুন' : 'Copy')}</span>
+                  </button>
+                </div>
+
+                <p className="text-sm font-semibold text-[#2B1B17] dark:text-[#fbf5ef] leading-relaxed text-pretty">
+                  "{textToCopy}"
+                </p>
+              </div>
+            );
+          })()}
+        </div>
+      </section>
+
+      {/* 4. NEW FEATURE 2: LIVE INTERROGATION STRESS METER & SURVIVOR BADGES */}
+      <section className="bg-white dark:bg-[#1f1318] rounded-3xl p-6 sm:p-10 border border-[#D8C6B6] dark:border-[#3d232c] shadow-sm">
+        <div className="text-center mb-8 max-w-[680px] mx-auto">
+          <div className="text-xs font-semibold uppercase tracking-wider text-[#B84B12] dark:text-[#f39c12] mb-1">
+            {lang === 'bn' ? 'লাইভ মিটার ও পদক' : 'Live Meter & Achievements'}
+          </div>
+          <h2 className="text-2xl sm:text-3xl font-bold text-[#8E1B3A] dark:text-[#ff7597] text-balance">
+            {lang === 'bn' ? 'আন্টির জেরা মিটার ও পারিবারিক পদক' : 'Interrogation Stress Meter & Survivor Badges'}
+          </h2>
+          <p className="text-xs sm:text-sm text-[#6E554D] dark:text-[#c7a9b3] mt-1.5 font-normal text-pretty">
+            {lang === 'bn'
+              ? 'বোর্ডে দাগ পড়ার সাথে সাথে আন্টির মুড পরিবর্তিত হয়। ৪টি রোমাঞ্চকর লেভেল পার করে বিঙ্গো জিতলেই পাবেন বিশেষ পারিবারিক খেতাব।'
+              : 'As tiles are marked, the interrogation stress meter tracks Aunty mood across four dynamic tiers, culminating in exclusive survivor medals.'}
+          </p>
+        </div>
+
+        {/* 2-Column Grid: Left is Stress Meter Interactive Preview, Right is Survivor Badges Showcase */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          
+          {/* Left: Stress Meter Mood Stages */}
+          <div className="bg-[#FFFDF9] dark:bg-[#1a1014] rounded-2xl p-5 border border-[#D8C6B6] dark:border-[#422530] flex flex-col justify-between shadow-xs">
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-xs font-bold text-[#8E1B3A] dark:text-[#ff7597] uppercase tracking-wider flex items-center gap-1.5">
+                  <GaugeIcon className="text-xs" />
+                  <span>{lang === 'bn' ? 'জেরা স্ট্রেস ট্র্যাকার' : 'Interrogation Stress Tracker'}</span>
+                </span>
+                <span className="text-xs font-mono font-bold text-[#6E554D] dark:text-[#c7a9b3]">
+                  {stressPreviewLevel}%
+                </span>
+              </div>
+
+              {/* Four Interactive Level Selector Pills */}
+              <div className="grid grid-cols-2 gap-2 mb-4">
+                {[
+                  { level: 15, labelBn: 'শান্ত আন্টি', labelEn: 'Chill (15%)', color: 'border-emerald-500 text-emerald-700 dark:text-emerald-400' },
+                  { level: 35, labelBn: 'সন্দেহজনক দৃষ্টি', labelEn: 'Suspicious (35%)', color: 'border-amber-500 text-amber-700 dark:text-amber-400' },
+                  { level: 65, labelBn: 'তীব্র জেরা', labelEn: 'Interrogation (65%)', color: 'border-orange-500 text-orange-700 dark:text-orange-400' },
+                  { level: 90, labelBn: 'রেড অ্যালার্ট', labelEn: 'Meltdown (90%)', color: 'border-rose-600 text-[#8E1B3A] dark:text-rose-400' }
+                ].map((tier) => (
+                  <button
+                    key={tier.level}
+                    onClick={() => setStressPreviewLevel(tier.level)}
+                    className={`py-1.5 px-2.5 rounded-xl text-xs font-semibold border transition-all cursor-pointer ${
+                      stressPreviewLevel === tier.level
+                        ? `bg-[#FFF6E5] dark:bg-[#2c1720] ${tier.color} font-bold shadow-xs`
+                        : 'bg-white dark:bg-[#20151a] border-[#D8C6B6]/60 dark:border-[#3d232c] text-[#6E554D] dark:text-[#c7a9b3]'
+                    }`}
+                  >
+                    {lang === 'bn' ? tier.labelBn : tier.labelEn}
+                  </button>
+                ))}
+              </div>
+
+              {/* Live Preview Display of StressMeter with 3D Avatar */}
+              <div className="p-3.5 rounded-xl bg-white dark:bg-[#20151a] border border-[#D8C6B6]/80 dark:border-[#3d232c] flex items-center gap-3">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 shrink-0 relative flex items-center justify-center">
+                  <img
+                    src={
+                      stressPreviewLevel >= 80
+                        ? aunty3dMeltdownUrl
+                        : stressPreviewLevel >= 50
+                        ? aunty3dInterrogationUrl
+                        : stressPreviewLevel >= 20
+                        ? aunty3dSuspiciousUrl
+                        : aunty3dChillUrl
+                    }
+                    alt="3D Aunty Mood Reaction"
+                    className="w-full h-full object-contain filter drop-shadow-md animate-in zoom-in-95 duration-300"
+                  />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center justify-between mb-1.5">
+                    <span className="text-xs font-bold text-[#2B1B17] dark:text-[#fbf5ef] truncate">
+                      {stressPreviewLevel >= 80
+                        ? (lang === 'bn' ? 'রেড অ্যালার্ট! আন্টি পরাস্ত!' : 'Red Alert! Aunty Defeated!')
+                        : stressPreviewLevel >= 50
+                        ? (lang === 'bn' ? 'তীব্র জেরা (ব্যক্তিগত আক্রমণ)' : 'Intense Interrogation')
+                        : stressPreviewLevel >= 20
+                        ? (lang === 'bn' ? 'সন্দেহজনক দৃষ্টি (চশমা ঠিক করছেন)' : 'Suspicious Glance')
+                        : (lang === 'bn' ? 'শান্ত আন্টি (চা খাচ্ছেন)' : 'Chill Aunty (Sipping Tea)')}
+                    </span>
+                    <ShieldIcon className="text-xs text-[#8E1B3A] dark:text-[#ff7597] shrink-0" />
+                  </div>
+
+                  <div className="w-full h-2 rounded-full bg-[#F4E8D9] dark:bg-[#2b1922] overflow-hidden mb-1.5">
+                    <div
+                      style={{ width: `${stressPreviewLevel}%` }}
+                      className={`h-full transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] rounded-full ${
+                        stressPreviewLevel >= 80
+                          ? 'bg-[#8E1B3A]'
+                          : stressPreviewLevel >= 50
+                          ? 'bg-orange-500'
+                          : stressPreviewLevel >= 20
+                          ? 'bg-amber-500'
+                          : 'bg-emerald-500'
+                      }`}
+                    />
+                  </div>
+
+                  <p className="text-[11px] text-[#6E554D] dark:text-[#c7a9b3] leading-relaxed text-pretty">
+                    {stressPreviewLevel >= 80
+                      ? (lang === 'bn' ? 'আপনি সফলভাবে সব প্রশ্নের জবাব দিয়ে টিকে গেছেন।' : 'You successfully survived the family trial.')
+                      : stressPreviewLevel >= 50
+                      ? (lang === 'bn' ? 'বিয়ে ও স্যালারির প্রশ্ন একের পর এক ধেয়ে আসছে।' : 'Salary and marriage questions incoming rapidly.')
+                      : stressPreviewLevel >= 20
+                      ? (lang === 'bn' ? 'কৌতূহল বাড়ছে, আত্মীয়দের চোখ এখন আপনার দিকে।' : 'Curiosity rising, brace yourself.')
+                      : (lang === 'bn' ? 'আড্ডা সবে শুরু, এখনো জেরা জমে ওঠেনি।' : 'Gathering just began, calm before the storm.')}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <p className="text-[11px] text-[#8A7268] dark:text-[#a08b93] font-medium mt-3 text-center">
+              {lang === 'bn'
+                ? 'বোর্ডের প্রতিটি ঘরে ট্যাপ করলেই রিয়েল টাইমে এই মিটারটি আপডেট হয়।'
+                : 'This meter updates in real time on every tile marked during gameplay.'}
+            </p>
+          </div>
+
+          {/* Right: Survivor Badges Showcase */}
+          <div className="bg-[#FFFDF9] dark:bg-[#1a1014] rounded-2xl p-5 border border-[#D8C6B6] dark:border-[#422530] flex flex-col justify-between shadow-xs">
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-xs font-bold text-[#8E1B3A] dark:text-[#ff7597] uppercase tracking-wider flex items-center gap-1.5">
+                  <AwardIcon className="text-xs" />
+                  <span>{lang === 'bn' ? 'পারিবারিক পদক ও খেতাব' : 'Survivor Badges & Medals'}</span>
+                </span>
+                <span className="text-xs font-semibold text-amber-700 dark:text-amber-400">
+                  {lang === 'bn' ? '৫টি বিশেষ খেতাব' : '5 Special Titles'}
+                </span>
+              </div>
+
+              <div className="space-y-2.5">
+                {showcaseBadges.map((b) => (
+                  <div
+                    key={b.id}
+                    className="p-2.5 rounded-xl bg-white dark:bg-[#20151a] border border-[#D8C6B6]/70 dark:border-[#3d232c] flex items-center gap-3"
+                  >
+                    <div className="w-8 h-8 rounded-lg bg-amber-100 dark:bg-amber-950/60 text-amber-700 dark:text-amber-400 flex items-center justify-center shrink-0">
+                      <AwardIcon className="text-sm" />
+                    </div>
+                    <div>
+                      <h4 className="text-xs font-bold text-[#2B1B17] dark:text-[#fbf5ef]">
+                        {lang === 'bn' ? b.titleBn : b.titleEn}
+                      </h4>
+                      <p className="text-[11px] text-[#6E554D] dark:text-[#c7a9b3] text-pretty">
+                        {lang === 'bn' ? b.descBn : b.descEn}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <p className="text-[11px] text-[#8A7268] dark:text-[#a08b93] font-medium mt-3 text-center">
+              {lang === 'bn'
+                ? 'বিঙ্গো জেতার পর ভিক্টরি স্ক্রিনে পদকটি প্রদর্শিত হয় এবং কার্ডে এক্সপোর্ট করা যায়।'
+                : 'Unlocked upon hitting BINGO and integrated directly into the shareable card.'}
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      {/* 5. OCCASION PRESETS DIRECTORY (Mid-page) */}
       <section className="flex flex-col items-center">
         <div className="text-center mb-6 sm:mb-8 max-w-[680px]">
           <div className="text-xs font-semibold uppercase tracking-wider text-[#B84B12] dark:text-[#f39c12] mb-1">
@@ -226,12 +666,12 @@ export default function LandingPage({
           </h2>
           <p className="text-xs sm:text-sm text-[#6E554D] dark:text-[#c7a9b3] mt-1.5 font-normal text-pretty">
             {lang === 'bn'
-              ? 'বাঙালি পরিবারের ৪টি জনপ্রিয় মিলনমেলার যেকোনো একটি সিলেক্ট করে খেলা শুরু করুন।'
-              : 'Select from four curated gathering presets tailored with authentic Bengali questions.'}
+              ? 'বাঙালি পরিবারের ৫টি জনপ্রিয় মিলনমেলা ও গোয়েন্দা আড্ডার যেকোনো একটি সিলেক্ট করে খেলা শুরু করুন।'
+              : 'Select from five curated gathering and neighborhood detective presets tailored with authentic Bengali questions.'}
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 w-full">
           {Object.values(OCCASIONS).map((occ) => {
             const isSelected = occ.id === activeOccasionId;
             return (
@@ -297,7 +737,7 @@ export default function LandingPage({
         </div>
       </section>
 
-      {/* 4. HOW IT WORKS (3 Steps per A2) */}
+      {/* 6. HOW IT WORKS (3 Steps per A2) */}
       <section className="bg-[#FFFDF9] dark:bg-[#1a1014] rounded-3xl p-6 sm:p-10 border border-[#D8C6B6] dark:border-[#3d232c] shadow-sm">
         <div className="text-center mb-8 max-w-[680px] mx-auto">
           <div className="text-xs font-semibold uppercase tracking-wider text-[#B84B12] dark:text-[#f39c12] mb-1">
@@ -361,7 +801,7 @@ export default function LandingPage({
         </div>
       </section>
 
-      {/* 5. BENEFITS SECTION (Outcome-driven per A2 & A5) */}
+      {/* 7. BENEFITS SECTION (Outcome-driven per A2 & A5) */}
       <section>
         <div className="text-center mb-8 max-w-[680px] mx-auto">
           <div className="text-xs font-semibold uppercase tracking-wider text-[#B84B12] dark:text-[#f39c12] mb-1">
@@ -393,16 +833,16 @@ export default function LandingPage({
           </div>
 
           <div className="p-5 rounded-2xl bg-white dark:bg-[#1f1318] border border-[#D8C6B6] dark:border-[#3d232c] shadow-xs">
-            <div className="w-10 h-10 rounded-xl bg-rose-50 dark:bg-rose-950/40 text-[#8E1B3A] dark:text-[#ff7597] flex items-center justify-center mb-3">
-              <CommentsIcon className="text-lg" />
+            <div className="w-10 h-10 rounded-xl bg-purple-50 dark:bg-purple-950/40 text-purple-700 dark:text-purple-300 flex items-center justify-center mb-3">
+              <SparklesIcon className="text-lg" />
             </div>
             <h3 className="font-bold text-base text-[#2B1B17] dark:text-[#fbf5ef]">
-              {lang === 'bn' ? '১৬৪+ খাঁটি প্রশ্ন' : '164+ Authentic Prompts'}
+              {lang === 'bn' ? 'প্রতিদিনের তাজা প্রশ্ন ও জবাব' : 'Daily Fresh Prompts & Comebacks'}
             </h3>
             <p className="text-xs text-[#6E554D] dark:text-[#c7a9b3] mt-1.5 leading-relaxed font-normal text-pretty">
               {lang === 'bn'
-                ? 'বাঙালি আড্ডায় শোনা যায় এমন সব চেনা এবং রসাত্মক প্রশ্নের সমৃদ্ধ ভাণ্ডার।'
-                : 'A comprehensive collection of culturally grounded questions tested across Bengali families.'}
+                ? 'একই প্রশ্ন বারবার নয়! প্রতিদিনের আড্ডায় উপভোগ করুন নিত্যনতুন প্রশ্ন ও ১০০% মিল থাকা মোক্ষম ও মজার জবাব।'
+                : 'Never play the same board twice! Enjoy fresh authentic questions with perfectly matched comebacks daily.'}
             </p>
           </div>
 
@@ -436,7 +876,7 @@ export default function LandingPage({
         </div>
       </section>
 
-      {/* 6. SOCIAL PROOF / TESTIMONIALS SECTION (Authentic quotes per B8) */}
+      {/* 8. SOCIAL PROOF / TESTIMONIALS SECTION (Authentic quotes per B8) */}
       <section className="bg-[#FFFDF9] dark:bg-[#1a1014] rounded-3xl p-6 sm:p-10 border border-[#D8C6B6] dark:border-[#3d232c] shadow-sm">
         <div className="text-center mb-8 max-w-[680px] mx-auto">
           <div className="text-xs font-semibold uppercase tracking-wider text-[#B84B12] dark:text-[#f39c12] mb-1">
@@ -485,7 +925,7 @@ export default function LandingPage({
         </div>
       </section>
 
-      {/* 7. FREQUENTLY ASKED QUESTIONS (Objection handling per A2 & A4) */}
+      {/* 9. FREQUENTLY ASKED QUESTIONS (Objection handling per A2 & A4) */}
       <section className="max-w-[760px] mx-auto w-full">
         <div className="text-center mb-8">
           <div className="text-xs font-semibold uppercase tracking-wider text-[#B84B12] dark:text-[#f39c12] mb-1">
@@ -534,7 +974,7 @@ export default function LandingPage({
         </div>
       </section>
 
-      {/* 8. FINAL CTA SECTION (Matches top CTA with risk reversal per A2) */}
+      {/* 10. FINAL CTA SECTION (Matches top CTA with risk reversal per A2) */}
       <section className="bg-white dark:bg-[#1a1014] rounded-3xl p-8 sm:p-12 border-2 border-[#D8C6B6] dark:border-[#3d232c] shadow-sm text-center max-w-[680px] mx-auto w-full">
         <h2 className="text-2xl sm:text-3xl font-bold text-[#8E1B3A] dark:text-[#ff7597] text-balance">
           {lang === 'bn' ? 'পরবর্তী পারিবারিক আড্ডার জন্য প্রস্তুত তো?' : 'Ready for Your Next Gathering?'}

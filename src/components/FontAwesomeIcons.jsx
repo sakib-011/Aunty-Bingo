@@ -68,7 +68,17 @@ import {
   faPaperPlane,
   faCircle,
   faHandPointUp,
-  faArrowsUpDownLeftRight
+  faArrowsUpDownLeftRight,
+  faFire,
+  faFaceSmile,
+  faFaceLaughSquint,
+  faGaugeHigh,
+  faAward,
+  faMedal,
+  faMagnifyingGlass,
+  faUserSecret,
+  faFingerprint,
+  faRobot
 } from '@fortawesome/free-solid-svg-icons';
 
 export function FaIcon({ icon, className = '', ...props }) {
@@ -92,13 +102,14 @@ export function WhatsAppIcon({ className = '', style, ...props }) {
   return <FontAwesomeIcon icon={faWhatsapp} className={className} style={style} {...props} />;
 }
 
-// Occasion Icons (Moon, Ring, Graduation Cap, Coffee)
+// Occasion Icons (Moon, Ring, Graduation Cap, Coffee, Magnifying Glass)
 export function OccasionIcon({ occasionId, className = '', style, ...props }) {
   let icon = faMugHot;
   if (occasionId === 'eid') icon = faMoon;
   else if (occasionId === 'wedding') icon = faRing;
   else if (occasionId === 'exam') icon = faGraduationCap;
   else if (occasionId === 'general') icon = faMugHot;
+  else if (occasionId === 'aunty007') icon = faMagnifyingGlass;
 
   return <FontAwesomeIcon icon={icon} className={className} style={style} {...props} />;
 }
@@ -165,3 +176,13 @@ export function PaperPlaneIcon(props) { return <FontAwesomeIcon icon={faPaperPla
 export function CircleDotIcon(props) { return <FontAwesomeIcon icon={faCircle} {...props} />; }
 export function HandPointIcon(props) { return <FontAwesomeIcon icon={faHandPointUp} {...props} />; }
 export function DragIcon(props) { return <FontAwesomeIcon icon={faArrowsUpDownLeftRight} {...props} />; }
+export function FireIcon(props) { return <FontAwesomeIcon icon={faFire} {...props} />; }
+export function SmileIcon(props) { return <FontAwesomeIcon icon={faFaceSmile} {...props} />; }
+export function LaughIcon(props) { return <FontAwesomeIcon icon={faFaceLaughSquint} {...props} />; }
+export function GaugeIcon(props) { return <FontAwesomeIcon icon={faGaugeHigh} {...props} />; }
+export function AwardIcon(props) { return <FontAwesomeIcon icon={faAward} {...props} />; }
+export function MedalIcon(props) { return <FontAwesomeIcon icon={faMedal} {...props} />; }
+export function MagnifyingGlassIcon(props) { return <FontAwesomeIcon icon={faMagnifyingGlass} {...props} />; }
+export function UserSecretIcon(props) { return <FontAwesomeIcon icon={faUserSecret} {...props} />; }
+export function FingerprintIcon(props) { return <FontAwesomeIcon icon={faFingerprint} {...props} />; }
+export function RobotIcon(props) { return <FontAwesomeIcon icon={faRobot} {...props} />; }
