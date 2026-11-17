@@ -6,7 +6,8 @@
     "occasions": [
       "eid",
       "wedding",
-      "general"
+      "general",
+      "aunty007"
     ]
   },
   {
@@ -17,7 +18,8 @@
       "eid",
       "wedding",
       "general",
-      "exam"
+      "exam",
+      "aunty007"
     ]
   },
   {
@@ -48,7 +50,8 @@
       "eid",
       "wedding",
       "exam",
-      "general"
+      "general",
+      "aunty007"
     ]
   },
   {
@@ -99,7 +102,8 @@
     "occasions": [
       "eid",
       "wedding",
-      "general"
+      "general",
+      "aunty007"
     ]
   },
   {
@@ -109,7 +113,8 @@
     "occasions": [
       "eid",
       "wedding",
-      "general"
+      "general",
+      "aunty007"
     ]
   },
   {
@@ -138,7 +143,8 @@
     "occasions": [
       "wedding",
       "eid",
-      "general"
+      "general",
+      "aunty007"
     ]
   },
   {
@@ -148,7 +154,8 @@
     "occasions": [
       "wedding",
       "general",
-      "eid"
+      "eid",
+      "aunty007"
     ]
   },
   {
@@ -157,7 +164,8 @@
     "bn": "পারিবারিক পছন্দে বিয়ে করতে কোনো আপত্তি আছে?",
     "occasions": [
       "wedding",
-      "general"
+      "general",
+      "aunty007"
     ]
   },
   {
@@ -176,7 +184,8 @@
     "bn": "পরিবারের পরের অনুষ্ঠানটা কিন্তু তোমার বিয়ে হতে হবে!",
     "occasions": [
       "wedding",
-      "eid"
+      "eid",
+      "aunty007"
     ]
   },
   {
@@ -185,7 +194,8 @@
     "bn": "বিয়ে করলেই দেখবা জীবনে সব দায়িত্ববোধ চলে আসবে।",
     "occasions": [
       "wedding",
-      "general"
+      "general",
+      "aunty007"
     ]
   },
   {
@@ -194,7 +204,8 @@
     "bn": "বিয়ে করার জন্য কি কোম্পানি প্রধান হওয়ার অপেক্ষা করছ?",
     "occasions": [
       "wedding",
-      "general"
+      "general",
+      "aunty007"
     ]
   },
   {
@@ -203,7 +214,8 @@
     "bn": "যে তোমারে বিয়ে করবে সে তোমার মেজাজ কেমনে সামলাবে!",
     "occasions": [
       "wedding",
-      "general"
+      "general",
+      "aunty007"
     ]
   },
   {
@@ -222,7 +234,8 @@
     "occasions": [
       "wedding",
       "eid",
-      "general"
+      "general",
+      "aunty007"
     ]
   },
   {
@@ -232,7 +245,8 @@
     "occasions": [
       "wedding",
       "eid",
-      "general"
+      "general",
+      "aunty007"
     ]
   },
   {
@@ -243,7 +257,8 @@
       "eid",
       "wedding",
       "general",
-      "exam"
+      "exam",
+      "aunty007"
     ]
   },
   {
@@ -311,7 +326,8 @@
     "occasions": [
       "eid",
       "general",
-      "exam"
+      "exam",
+      "aunty007"
     ]
   },
   {
@@ -340,7 +356,8 @@
     "occasions": [
       "general",
       "eid",
-      "wedding"
+      "wedding",
+      "aunty007"
     ]
   },
   {
@@ -424,7 +441,8 @@
     "bn": "প্রাইভেট বিশ্ববিদ্যালয়ে তো খালি টাকার শ্রাদ্ধ!",
     "occasions": [
       "exam",
-      "general"
+      "general",
+      "aunty007"
     ]
   },
   {
@@ -700,7 +718,8 @@
     "bn": "টাকা দিয়ে ছেঁড়া জিন্স কেনার কী বুদ্ধি? আমরা তো ফেলে দিতাম!",
     "occasions": [
       "general",
-      "eid"
+      "eid",
+      "aunty007"
     ]
   },
   {
@@ -737,7 +756,8 @@
     "bn": "পাশের বাসার মেয়েটাকে দেখো, সকাল ছয়টায় ঘুম থেকে ওঠে!",
     "occasions": [
       "general",
-      "exam"
+      "exam",
+      "aunty007"
     ]
   },
   {
@@ -784,7 +804,8 @@
     "bn": "দুনিয়ার খবর রাখো, অথচ নিজের খালাতো ভাই-বোনের খবর জানো না!",
     "occasions": [
       "eid",
-      "general"
+      "general",
+      "aunty007"
     ]
   },
   {
@@ -845,7 +866,8 @@
     "bn": "রাত দুইটার সময়ও গেম খেলা নিয়ে বসে আছো? সকালের খবর আছে!",
     "occasions": [
       "general",
-      "exam"
+      "exam",
+      "aunty007"
     ]
   },
   {
@@ -1032,7 +1054,8 @@
     "en": "You should have dressed up with a richer silk saree for this event!",
     "bn": "বিয়ের অনুষ্ঠানে আরেকটু কাতান বা সিল্কের শাড়ি পরে আসতে পারতে!",
     "occasions": [
-      "wedding"
+      "wedding",
+      "aunty007"
     ]
   },
   {
@@ -1048,7 +1071,8 @@
     "en": "Did you notice what heavy saree the groom's aunt is wearing?",
     "bn": "বরের খালাম্মা কী ভারী শাড়ি আর গয়না পরেছে দেখেছো?",
     "occasions": [
-      "wedding"
+      "wedding",
+      "aunty007"
     ]
   },
   {
@@ -1056,7 +1080,8 @@
     "en": "Catch the bride's flower garland, and your wedding will be next!",
     "bn": "মালাটা তোমার দিকেই যেন আসে, পরের বিয়ের সানাই তোমারই বাজবে!",
     "occasions": [
-      "wedding"
+      "wedding",
+      "aunty007"
     ]
   },
   {
@@ -1072,7 +1097,8 @@
     "en": "How did the bride and groom meet? Love or arranged match?",
     "bn": "পাত্র-পাত্রীর পরিচয় হলো কীভাবে? প্রেম নাকি দুই পরিবারের দেখাশোনা?",
     "occasions": [
-      "wedding"
+      "wedding",
+      "aunty007"
     ]
   },
   {
@@ -1080,7 +1106,8 @@
     "en": "Don't just eat salad, this is a wedding banquet, eat mutton!",
     "bn": "বিয়ের অনুষ্ঠানে এসে শুধু সালাদ খেলে চলবে? খাসির মাংস নাও!",
     "occasions": [
-      "wedding"
+      "wedding",
+      "aunty007"
     ]
   },
   {
@@ -1106,7 +1133,8 @@
     "en": "Did they arrange a proper gateway gate money negotiation ceremony?",
     "bn": "গেট ধরার সময় দুলাভাইয়ের কাছ থেকে কত টাকা আদায় করলা?",
     "occasions": [
-      "wedding"
+      "wedding",
+      "aunty007"
     ]
   },
   {
@@ -1138,7 +1166,8 @@
     "en": "Look at the groom smiling, he's so happy he finally got married!",
     "bn": "বরের মুখের হাসি দেখো, বিয়ে করে কী যে আনন্দ ওর!",
     "occasions": [
-      "wedding"
+      "wedding",
+      "aunty007"
     ]
   },
   {
@@ -1146,7 +1175,8 @@
     "en": "Are you attending all three days of Haldi, Wedding and Reception?",
     "bn": "গায়ে হলুদ, বিয়ে আর বৌভাত—তিন দিনই অনুষ্ঠানে আসবা তো?",
     "occasions": [
-      "wedding"
+      "wedding",
+      "aunty007"
     ]
   },
   {
@@ -1154,7 +1184,8 @@
     "en": "The wedding card box was so extravagant, full of dry fruits!",
     "bn": "বিয়ের কার্ডের বক্সটা তো দারুণ ছিল, সাথে ড্রাই ফ্রুটসও দিল!",
     "occasions": [
-      "wedding"
+      "wedding",
+      "aunty007"
     ]
   },
   {
@@ -1269,7 +1300,8 @@
     "occasions": [
       "wedding",
       "general",
-      "eid"
+      "eid",
+      "aunty007"
     ]
   },
   {
@@ -1288,7 +1320,8 @@
     "occasions": [
       "general",
       "exam",
-      "eid"
+      "eid",
+      "aunty007"
     ]
   },
   {
@@ -1317,7 +1350,8 @@
     "bn": "এত দাম দিয়ে দামি ফোন কেনার কী দরকার ছিল? টাকা জমানো শেখো!",
     "occasions": [
       "general",
-      "eid"
+      "eid",
+      "aunty007"
     ]
   },
   {
@@ -1363,7 +1397,8 @@
     "bn": "সব টাকা নিজের পেছনেই খরচ করো, বাপের হাতে কিছু তুলে দাও?",
     "occasions": [
       "general",
-      "eid"
+      "eid",
+      "aunty007"
     ]
   },
   {
@@ -1381,7 +1416,8 @@
     "bn": "বিয়েতে আমাদের দাওয়াত দিবা তো? নাকি চুপিচুপি কোর্টে করবা?",
     "occasions": [
       "wedding",
-      "general"
+      "general",
+      "aunty007"
     ]
   },
   {
@@ -1408,7 +1444,8 @@
     "bn": "এত বয়স হয়ে গেল, এখনও একটা গাড়ি চালানো শিখলে না?",
     "occasions": [
       "general",
-      "eid"
+      "eid",
+      "aunty007"
     ]
   },
   {
@@ -1425,7 +1462,8 @@
     "en": "You are earning now, how much total Eidi will you give us?",
     "bn": "এইবার ঈদে তুমি চাকরিজীবী হয়ে আমাদের কত টাকা সেলামি দিবা?",
     "occasions": [
-      "eid"
+      "eid",
+      "aunty007"
     ]
   },
   {
@@ -1445,7 +1483,8 @@
     "occasions": [
       "wedding",
       "eid",
-      "general"
+      "general",
+      "aunty007"
     ]
   },
   {
@@ -1454,7 +1493,8 @@
     "bn": "শুনলাম তোমার নাকি কার সাথে জানি তলে তলে সম্পর্ক আছে?",
     "occasions": [
       "wedding",
-      "general"
+      "general",
+      "aunty007"
     ]
   },
   {
@@ -1492,6 +1532,96 @@
     "occasions": [
       "general",
       "exam"
+    ]
+  },
+  {
+    "id": 9501,
+    "en": "Case 01: Who hid the giant mutton leg piece under their rice?",
+    "bn": "কেস ০১: কাচ্চির বড় খাসির পিসটা কে প্লেটে লুকালো?",
+    "occasions": [
+      "aunty007",
+      "wedding"
+    ]
+  },
+  {
+    "id": 9502,
+    "en": "Case 02: Who was the neighbor boy spotted in a rickshaw with?",
+    "bn": "কেস ০২: পাশের বাসার ছেলে কার সাথে রিকশায় ঘুরছিল?",
+    "occasions": [
+      "aunty007",
+      "general"
+    ]
+  },
+  {
+    "id": 9503,
+    "en": "Case 03: Where did the secret cash for that new flat come from?",
+    "bn": "কেস ০৩: নতুন ফ্ল্যাট কেনার টাকা আসল কোত্থেকে?",
+    "occasions": [
+      "aunty007",
+      "general"
+    ]
+  },
+  {
+    "id": 9504,
+    "en": "Whose names are coded in matchmaker aunty red secret dossier?",
+    "bn": "ঘটকালি আন্টির লাল ডায়রিতে কার কার নাম লেখা?",
+    "occasions": [
+      "aunty007",
+      "wedding"
+    ]
+  },
+  {
+    "id": 9505,
+    "en": "Who was secretly whispering behind the community center gate?",
+    "bn": "কমিউনিটি সেন্টারের পেছনের গেটে ফিসফিস করছিল কারা?",
+    "occasions": [
+      "aunty007",
+      "wedding"
+    ]
+  },
+  {
+    "id": 9506,
+    "en": "Who opened and audited the groom side gift box early?",
+    "bn": "বউভাতে বরপক্ষের উপহারের বাক্স কে খুলে দেখল?",
+    "occasions": [
+      "aunty007",
+      "wedding"
+    ]
+  },
+  {
+    "id": 9507,
+    "en": "Who quietly smuggled the extra Borhani bottle from the table?",
+    "bn": "দাওয়াতের টেবিল থেকে বোরহানির বোতল কে সরালো?",
+    "occasions": [
+      "aunty007",
+      "wedding"
+    ]
+  },
+  {
+    "id": 9508,
+    "en": "License to Gossip: I know everything you did last Eid!",
+    "bn": "লাইসেন্স টু গসিপ: গত ঈদে কী করেছিলা আমি কিন্তু সব জানি!",
+    "occasions": [
+      "aunty007",
+      "eid"
+    ]
+  },
+  {
+    "id": 9509,
+    "en": "Who were you secretly signaling to from the rooftop today?",
+    "bn": "আজ বিকেলে ছাদে দাঁড়িয়ে কাকে ইশারা করছিলা শুনি?",
+    "occasions": [
+      "aunty007",
+      "general"
+    ]
+  },
+  {
+    "id": 9510,
+    "en": "Who are you chatting with all night under the guise of freelancing?",
+    "bn": "ফ্রিল্যান্সিংয়ের নামে সারারাত কার সাথে চ্যাট করো?",
+    "occasions": [
+      "aunty007",
+      "general"
     ]
   }
 ]

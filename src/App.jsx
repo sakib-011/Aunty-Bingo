@@ -19,12 +19,13 @@ import DecorativeBorder from './components/DecorativeBorder';
 import { checkBingo, isOneAway } from './utils/bingo';
 import { generateBoardPhrases, OCCASIONS } from './utils/phrases';
 import { playStampSound, playUnstampSound, playBingoFanfare } from './utils/sound';
-import auntyAvatarUrl from './assets/mascots/aunty_avatar_perfect.png';
+import Reactive3DAunty from './components/Reactive3DAunty';
 import { ArrowLeftIcon, Grid3x3Icon, Grid5x5Icon } from './components/FontAwesomeIcons';
 import { shareToSocial } from './utils/share';
 import AdminPanel from './components/AdminPanel';
 import { trackEvent, initGA4 } from './utils/analytics';
 import { getStoredTheme, setStoredTheme, applyTheme } from './utils/theme';
+import { getDailyOrFreshQuestions } from './services/aiGenerator';
 
 function formatTimer(totalSeconds) {
   const mins = Math.floor(totalSeconds / 60);
@@ -49,12 +50,39 @@ function getTimeOfDay(lang) {
   return `${hours}:${minutes} ${isPM ? 'PM' : 'AM'}`;
 }
 
+const SAVED_GAME_KEY = 'aunty_bingo_saved_game_v1';
+const SAVED_VIEW_KEY = 'aunty_bingo_active_view';
+
+function loadSavedGame() {
+  if (typeof window === 'undefined') return null;
+  try {
+    const raw = localStorage.getItem(SAVED_GAME_KEY);
+    if (!raw) return null;
+    const data = JSON.parse(raw);
+    if (data && Array.isArray(data.board) && data.board.length > 0) {
+      return data;
+    }
+  } catch (e) {
+    console.warn('Failed to load saved game from localStorage:', e);
+  }
+  return null;
+}
+
 export default function App() {
+  const initialSavedGame = loadSavedGame();
+
   // Navigation View: 'home' | 'game' | 'occasions' | 'rules' | 'admin'
   const [activeView, setActiveView] = useState(() => {
     if (typeof window !== 'undefined') {
       if (window.location.search.includes('admin') || window.location.hash.includes('admin')) {
         return 'admin';
+      }
+      const savedView = localStorage.getItem(SAVED_VIEW_KEY);
+      if (savedView && ['home', 'game', 'occasions', 'rules'].includes(savedView)) {
+        return savedView;
+      }
+      if (initialSavedGame && initialSavedGame.board) {
+        return 'game';
       }
     }
     return 'home';
@@ -80,22 +108,33 @@ export default function App() {
   }, [theme]);
 
   // Grid Mode: 3 (3x3 Quick) or 5 (5x5 Classic)
-  const [gridSize, setGridSize] = useState(3);
+  const [gridSize, setGridSize] = useState(() => initialSavedGame?.gridSize || 3);
 
   // Occasion
-  const [occasionId, setOccasionId] = useState('eid');
+  const [occasionId, setOccasionId] = useState(() => initialSavedGame?.occasionId || 'eid');
 
   // Board Data
-  const [board, setBoard] = useState(() => generateBoardPhrases('eid', false, 3));
-  const [markedIndices, setMarkedIndices] = useState([]);
+  const [board, setBoard] = useState(() => {
+    if (initialSavedGame && Array.isArray(initialSavedGame.board) && initialSavedGame.board.length > 0) {
+      return initialSavedGame.board;
+    }
+    return generateBoardPhrases('eid', false, 3);
+  });
+
+  const [markedIndices, setMarkedIndices] = useState(() => {
+    if (initialSavedGame && Array.isArray(initialSavedGame.markedIndices)) {
+      return initialSavedGame.markedIndices;
+    }
+    return [];
+  });
 
   // Win State
-  const [hasCelebrated, setHasCelebrated] = useState(false);
-  const [winTime, setWinTime] = useState({ elapsed: '01:48', timeOfDay: '4:32 PM' });
+  const [hasCelebrated, setHasCelebrated] = useState(() => Boolean(initialSavedGame?.hasCelebrated));
+  const [winTime, setWinTime] = useState(() => initialSavedGame?.winTime || { elapsed: '01:48', timeOfDay: '4:32 PM' });
 
-  // Timer State (Auto-starts when playing)
-  const [seconds, setSeconds] = useState(0);
-  const [isTimerRunning, setIsTimerRunning] = useState(false);
+  // Timer State (Auto-starts / resumes from where user left off)
+  const [seconds, setSeconds] = useState(() => Number(initialSavedGame?.seconds) || 0);
+  const [isTimerRunning, setIsTimerRunning] = useState(() => initialSavedGame?.isTimerRunning !== false);
   const timerRef = useRef(null);
 
   // Sound Toggle
@@ -109,6 +148,48 @@ export default function App() {
 
   // Question Details Modal
   const [selectedQuestionTile, setSelectedQuestionTile] = useState(null);
+
+  // Today's daily questions pool per occasion (auto-persists for the entire day)
+  const [dailyPhrasesMap, setDailyPhrasesMap] = useState({});
+
+  // Auto-Save Active Game State and Active View to localStorage
+  useEffect(() => {
+    try {
+      if (board && board.length > 0) {
+        const payload = {
+          board,
+          markedIndices,
+          gridSize,
+          occasionId,
+          seconds,
+          isTimerRunning,
+          hasCelebrated,
+          winTime,
+          updatedAt: Date.now()
+        };
+        localStorage.setItem(SAVED_GAME_KEY, JSON.stringify(payload));
+      }
+      localStorage.setItem(SAVED_VIEW_KEY, activeView);
+    } catch (e) {
+      console.warn('Failed to auto-save game to localStorage:', e);
+    }
+  }, [board, markedIndices, gridSize, occasionId, seconds, isTimerRunning, hasCelebrated, winTime, activeView]);
+
+  // Silently ensure today's daily question drop is loaded in the background
+  useEffect(() => {
+    let isCancelled = false;
+    getDailyOrFreshQuestions({ occasionId, count: 25, forceRefresh: false })
+      .then((res) => {
+        if (!isCancelled && res && res.phrases && res.phrases.length > 0) {
+          setDailyPhrasesMap((prev) => ({ ...prev, [occasionId]: res.phrases }));
+        }
+      })
+      .catch((e) => console.warn('Silent daily questions sync:', e));
+
+    return () => {
+      isCancelled = true;
+    };
+  }, [occasionId]);
 
   // Save language preference
   useEffect(() => {
@@ -220,7 +301,8 @@ export default function App() {
   const handleSwitchGridSize = (newSize) => {
     if (newSize === gridSize) return;
     setGridSize(newSize);
-    setBoard(generateBoardPhrases(occasionId, false, newSize));
+    const customPool = dailyPhrasesMap[occasionId] || null;
+    setBoard(generateBoardPhrases(occasionId, false, newSize, customPool));
     setMarkedIndices(newSize === 5 ? [12] : []);
     setHasCelebrated(false);
     setSeconds(0);
@@ -230,7 +312,8 @@ export default function App() {
   // Change Occasion
   const handleSelectOccasion = (newOccasionId) => {
     setOccasionId(newOccasionId);
-    setBoard(generateBoardPhrases(newOccasionId, true, gridSize));
+    const customPool = dailyPhrasesMap[newOccasionId] || null;
+    setBoard(generateBoardPhrases(newOccasionId, true, gridSize, customPool));
     setMarkedIndices(gridSize === 5 ? [12] : []);
     setHasCelebrated(false);
     setSeconds(0);
@@ -245,10 +328,10 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Reset from Start: questions restart fresh from the beginning, timer resets and auto-starts!
+  // Reset from Start: restarts board
   const handleResetFromStart = () => {
-    // Generate fresh board starting from the beginning
-    setBoard(generateBoardPhrases(occasionId, false, gridSize));
+    const customPool = dailyPhrasesMap[occasionId] || null;
+    setBoard(generateBoardPhrases(occasionId, true, gridSize, customPool));
     setMarkedIndices(gridSize === 5 ? [12] : []);
     setHasCelebrated(false);
     setSeconds(0);
@@ -256,13 +339,29 @@ export default function App() {
     setShowResetConfirm(false);
   };
 
-  // Shuffle button click (prompts confirmation if tiles are marked)
+  // Next Board: proceeds to the next set of unplayed questions from today's pool
+  const handleNextBoard = () => {
+    const customPool = dailyPhrasesMap[occasionId] || null;
+    setBoard(generateBoardPhrases(occasionId, true, gridSize, customPool));
+    setMarkedIndices(gridSize === 5 ? [12] : []);
+    setHasCelebrated(false);
+    setSeconds(0);
+    setIsTimerRunning(true);
+    setShowBingoModal(false);
+  };
+
+  // Shuffle button click: shuffles within today's daily question set
   const handleShuffleClick = () => {
-    const activeMarks = gridSize === 5 ? markedIndices.filter(i => i !== 12) : markedIndices;
+    const activeMarks = gridSize === 5 ? markedIndices.filter((i) => i !== 12) : markedIndices;
     if (activeMarks.length > 0) {
       setShowResetConfirm(true);
     } else {
-      handleResetFromStart();
+      const customPool = dailyPhrasesMap[occasionId] || null;
+      setBoard(generateBoardPhrases(occasionId, true, gridSize, customPool));
+      setMarkedIndices(gridSize === 5 ? [12] : []);
+      setHasCelebrated(false);
+      setSeconds(0);
+      setIsTimerRunning(true);
     }
   };
 
@@ -359,7 +458,9 @@ export default function App() {
 
       {/* VIEW 4: MAIN GAME BOARD VIEW */}
       {activeView === 'game' && (
-        <main className="flex-1 w-full max-w-5xl mx-auto px-4 sm:px-6 py-4 flex flex-col justify-center">
+        <main className={`flex-1 w-full mx-auto px-2 sm:px-4 md:px-6 py-4 flex flex-col justify-center transition-all duration-300 relative ${
+          gridSize === 5 ? 'max-w-[1440px] 2xl:max-w-[1600px]' : 'max-w-5xl'
+        }`}>
           {/* Top Bar: Back to Home + Mode Switcher (3x3 vs 5x5) */}
           <div className="flex flex-wrap items-center justify-between gap-3 mb-3">
             <button
@@ -398,26 +499,23 @@ export default function App() {
           </div>
 
           {/* DESKTOP LAYOUT (3 Columns: Mascot Sidebar, Board, Controls Card) */}
-          <div className="hidden lg:grid grid-cols-[200px_1fr_280px] xl:grid-cols-[220px_1fr_310px] 2xl:grid-cols-[240px_1fr_330px] gap-6 items-start">
-            {/* Left Column: Mascot with Clear Hands */}
-            <div className="flex flex-col items-center text-center p-4">
-              <h3 className="font-serif font-black text-xl text-[#8E1B3A] mb-3 leading-snug">
-                {lang === 'bn' ? 'আন্টির অনেক প্রশ্ন।' : "Aunty's got questions."}
-              </h3>
-              <div className="w-44 h-44 my-2">
-                <img
-                  src={auntyAvatarUrl}
-                  alt="Aunty Avatar"
-                  className="w-full h-full object-contain filter drop-shadow-md"
-                />
-              </div>
-              <p className="text-xs font-bold text-[#8E1B3A] mt-2">
-                {lang === 'bn' ? 'আপনার আছে বিঙ্গো বোর্ড।' : "You've got a bingo board."}
-              </p>
-            </div>
+          <div className={`hidden lg:grid items-start transition-all duration-300 ${
+            gridSize === 5
+              ? 'gap-3 xl:gap-6 lg:grid-cols-[190px_minmax(0,1fr)_270px] xl:grid-cols-[220px_minmax(0,1fr)_300px] 2xl:grid-cols-[240px_minmax(0,1fr)_320px]'
+              : 'gap-6 grid-cols-[200px_1fr_280px] xl:grid-cols-[220px_1fr_310px] 2xl:grid-cols-[240px_1fr_330px]'
+          }`}>
+            {/* Left Column: Live Reactive 3D Character Mascot */}
+            <Reactive3DAunty
+              markedCount={markedIndices.length}
+              totalTiles={gridSize === 5 ? 25 : 9}
+              lang={lang}
+              hasWon={hasBingo}
+              isOneAway={oneAway}
+              occasionId={occasionId}
+            />
 
             {/* Center Column: Status Heading & Board */}
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center w-full">
               <StatusHeader
                 markedCount={markedIndices.length}
                 isOneAway={oneAway}
@@ -486,7 +584,9 @@ export default function App() {
           </div>
 
           {/* MOBILE & TABLET LAYOUT */}
-          <div className="lg:hidden flex flex-col items-center w-full max-w-sm sm:max-w-md mx-auto">
+          <div className={`lg:hidden flex flex-col items-center w-full mx-auto transition-all duration-300 ${
+            gridSize === 5 ? 'max-w-xl' : 'max-w-sm sm:max-w-md'
+          }`}>
             <OccasionPicker
               activeOccasionId={occasionId}
               onSelectOccasion={handleSelectOccasion}
@@ -499,6 +599,17 @@ export default function App() {
               hasWon={hasBingo}
               lang={lang}
               isDesktop={false}
+            />
+
+            {/* Mobile Compact 3D Reactive Aunty Reaction Bar */}
+            <Reactive3DAunty
+              markedCount={markedIndices.length}
+              totalTiles={gridSize === 5 ? 25 : 9}
+              lang={lang}
+              hasWon={hasBingo}
+              isOneAway={oneAway}
+              compact={true}
+              occasionId={occasionId}
             />
 
             <BingoBoard
@@ -557,6 +668,7 @@ export default function App() {
         onClose={() => setShowBingoModal(false)}
         onExport={() => setShowExportModal(true)}
         onReset={handleResetFromStart}
+        onNextBoard={handleNextBoard}
         elapsedTime={winTime.elapsed}
         winTimeOfDay={winTime.timeOfDay}
         lang={lang}
