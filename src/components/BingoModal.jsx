@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import confetti from 'canvas-confetti';
-import aunty3dMeltdownUrl from '../assets/mascots/aunty_3d_meltdown.png';
+import auntyCelebratingUrl from '../assets/mascots/aunty_avatar_perfect.png';
 import {
   InstagramIcon,
   FacebookIcon,
@@ -33,7 +33,9 @@ export default function BingoModal({
   markedIndices = [],
   winningLines = [],
   occasionId = 'eid',
-  gridSize = 3
+  gridSize = 3,
+  playerName = '',
+  hasBingo = true
 }) {
   const [toastMessage, setToastMessage] = useState('');
   const [dataUrl, setDataUrl] = useState('');
@@ -80,7 +82,9 @@ export default function BingoModal({
       lang,
       elapsedTime,
       winTimeOfDay,
-      gridSize
+      gridSize,
+      playerName,
+      hasBingo: true
     }).then((canvas) => {
       if (!cancelled) {
         setDataUrl(canvas.toDataURL('image/png'));
@@ -90,7 +94,7 @@ export default function BingoModal({
     return () => {
       cancelled = true;
     };
-  }, [isOpen, board, markedIndices, winningLines, occasionId, lang, elapsedTime, winTimeOfDay, gridSize]);
+  }, [isOpen, board, markedIndices, winningLines, occasionId, lang, elapsedTime, winTimeOfDay, gridSize, playerName, hasBingo]);
 
   const currentBadge = useMemo(() => {
     if (!isOpen) return null;
@@ -147,11 +151,21 @@ export default function BingoModal({
           </span>
         </div>
 
-        {/* 3D Shocked / Meltdown Mascot */}
+        {/* Prominently Displayed Player Name */}
+        {playerName && (
+          <div className="inline-flex items-center gap-2 bg-[#F4E8D9] dark:bg-[#28181f] border-2 border-[#8E1B3A]/40 dark:border-rose-500/50 px-4 py-1.5 rounded-full shadow-sm mb-2.5">
+            <TrophyIcon className="text-amber-500 text-sm" />
+            <span className="font-extrabold text-sm sm:text-base text-[#8E1B3A] dark:text-[#ff7597] tracking-wide">
+              {playerName}
+            </span>
+          </div>
+        )}
+
+        {/* 3D Happy / Laughing Celebrating Mascot */}
         <div className="w-28 h-28 sm:w-32 sm:h-32 mx-auto my-1 flex items-center justify-center">
           <img
-            src={aunty3dMeltdownUrl}
-            alt="3D Defeated Aunty Mascot"
+            src={auntyCelebratingUrl}
+            alt="Celebrating Happy Aunty Mascot"
             className="w-full h-full object-contain filter drop-shadow-md transition-transform hover:scale-105 duration-200"
           />
         </div>

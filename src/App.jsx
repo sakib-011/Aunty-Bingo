@@ -14,6 +14,7 @@ import BingoModal from './components/BingoModal';
 import ExportModal from './components/ExportModal';
 import ResetConfirmModal from './components/ResetConfirmModal';
 import QuestionModal from './components/QuestionModal';
+import PlayerNameModal from './components/PlayerNameModal';
 import DecorativeBorder from './components/DecorativeBorder';
 
 import { checkBingo, isOneAway } from './utils/bingo';
@@ -149,6 +150,14 @@ export default function App() {
   // Question Details Modal
   const [selectedQuestionTile, setSelectedQuestionTile] = useState(null);
 
+  // Player Name
+  const [playerName, setPlayerName] = useState(() => {
+    return localStorage.getItem('aunty_bingo_player_name') || '';
+  });
+  const [showPlayerNameModal, setShowPlayerNameModal] = useState(false);
+  // Track the pending action that triggered the name modal
+  const pendingPlayActionRef = useRef(null);
+
   // Today's daily questions pool per occasion (auto-persists for the entire day)
   const [dailyPhrasesMap, setDailyPhrasesMap] = useState({});
 
@@ -196,6 +205,11 @@ export default function App() {
     localStorage.setItem('aunty_bingo_lang', lang);
     document.documentElement.lang = lang;
   }, [lang]);
+
+  // Save player name
+  useEffect(() => {
+    localStorage.setItem('aunty_bingo_player_name', playerName);
+  }, [playerName]);
 
   // Analytics & Admin Shortcuts
   useEffect(() => {
@@ -426,9 +440,8 @@ export default function App() {
           activeOccasionId={occasionId}
           onSelectOccasion={handleSelectOccasion}
           onStartPlaying={() => {
-            setActiveView('game');
-            setIsTimerRunning(true);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            pendingPlayActionRef.current = 'home';
+            setShowPlayerNameModal(true);
           }}
           onOpenHowTo={() => setShowHowTo(true)}
         />
@@ -448,9 +461,8 @@ export default function App() {
         <RulesPage
           lang={lang}
           onStartPlaying={() => {
-            setActiveView('game');
-            setIsTimerRunning(true);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            pendingPlayActionRef.current = 'rules';
+            setShowPlayerNameModal(true);
           }}
           onBack={() => setActiveView('home')}
         />
@@ -677,6 +689,8 @@ export default function App() {
         winningLines={completedLines}
         occasionId={occasionId}
         gridSize={gridSize}
+        playerName={playerName}
+        hasBingo={hasBingo}
       />
 
       <ExportModal
@@ -687,9 +701,11 @@ export default function App() {
         winningLines={completedLines}
         occasionId={occasionId}
         lang={lang}
-        elapsedTime={timeFormatted}
-        winTimeOfDay={getTimeOfDay(lang)}
+        elapsedTime={hasBingo ? winTime.elapsed : timeFormatted}
+        winTimeOfDay={hasBingo ? winTime.timeOfDay : getTimeOfDay(lang)}
         gridSize={gridSize}
+        playerName={playerName}
+        hasBingo={hasBingo}
       />
 
       <ResetConfirmModal
@@ -710,6 +726,25 @@ export default function App() {
           occasionName={lang === 'bn' ? activeOccasion.nameBn : activeOccasion.nameEn}
         />
       )}
+
+      {/* Player Name Entry Modal */}
+      <PlayerNameModal
+        isOpen={showPlayerNameModal}
+        lang={lang}
+        onSubmit={(name) => {
+          setPlayerName(name);
+          setShowPlayerNameModal(false);
+          setActiveView('game');
+          setIsTimerRunning(true);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
+        onSkip={() => {
+          setShowPlayerNameModal(false);
+          setActiveView('game');
+          setIsTimerRunning(true);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
+      />
     </div>
   );
 }

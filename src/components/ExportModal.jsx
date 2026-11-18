@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import auntyLaughingUrl from '../assets/mascots/aunty_avatar_perfect.png';
+import auntyAngryUrl from '../assets/mascots/aunty_3d_interrogation.png';
 import {
   CloseIcon,
   DownloadIcon,
@@ -8,7 +10,9 @@ import {
   InstagramIcon,
   FacebookIcon,
   MessengerIcon,
-  WhatsAppIcon
+  WhatsAppIcon,
+  TrophyIcon,
+  ShieldIcon
 } from './FontAwesomeIcons';
 import { generateCardCanvas } from '../utils/canvasExport';
 import { shareToSocial } from '../utils/share';
@@ -17,18 +21,22 @@ export default function ExportModal({
   isOpen,
   onClose,
   board,
-  markedIndices,
-  winningLines,
-  occasionId,
-  lang,
-  elapsedTime,
-  winTimeOfDay,
-  gridSize = 3
+  markedIndices = [],
+  winningLines = [],
+  occasionId = 'eid',
+  lang = 'bn',
+  elapsedTime = '00:00',
+  winTimeOfDay = '',
+  gridSize = 3,
+  playerName = '',
+  hasBingo = false
 }) {
   const [dataUrl, setDataUrl] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
   const [copied, setCopied] = useState(false);
+
+  const isWon = Boolean(hasBingo ?? (winningLines && winningLines.length > 0));
 
   useEffect(() => {
     if (!isOpen) return;
@@ -42,7 +50,9 @@ export default function ExportModal({
       lang,
       elapsedTime,
       winTimeOfDay,
-      gridSize
+      gridSize,
+      playerName,
+      hasBingo: isWon
     }).then((canvas) => {
       if (!isCancelled) {
         setDataUrl(canvas.toDataURL('image/png'));
@@ -58,7 +68,7 @@ export default function ExportModal({
     return () => {
       isCancelled = true;
     };
-  }, [isOpen, board, markedIndices, winningLines, occasionId, lang, elapsedTime, winTimeOfDay, gridSize]);
+  }, [isOpen, board, markedIndices, winningLines, occasionId, lang, elapsedTime, winTimeOfDay, gridSize, playerName, isWon]);
 
   if (!isOpen) return null;
 
@@ -71,7 +81,8 @@ export default function ExportModal({
     if (!dataUrl) return;
     const a = document.createElement('a');
     a.href = dataUrl;
-    a.download = `aunty-bingo-${occasionId}-${Date.now()}.png`;
+    const prefix = isWon ? 'aunty-bingo-win' : 'aunty-bingo-survival';
+    a.download = `${prefix}-${occasionId}-${Date.now()}.png`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -96,20 +107,39 @@ export default function ExportModal({
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 w-8 h-8 rounded-full bg-[#F4E8D9] dark:bg-stone-800 text-[#8E1B3A] dark:text-rose-400 flex items-center justify-center hover:bg-[#EBDDCB] dark:hover:bg-stone-700 transition-colors cursor-pointer"
+          className="absolute top-4 right-4 w-8 h-8 rounded-full bg-[#F4E8D9] dark:bg-stone-800 text-[#8E1B3A] dark:text-rose-400 flex items-center justify-center hover:bg-[#EBDDCB] dark:hover:bg-stone-700 transition-colors cursor-pointer z-10"
           aria-label="Close"
         >
           <CloseIcon className="text-sm" />
         </button>
 
-        {/* Title */}
-        <div className="mb-3 pr-8">
-          <h2 className="text-xl sm:text-2xl font-bold text-[#8E1B3A] dark:text-rose-400">
-            {lang === 'bn' ? 'আপনার বিঙ্গো কার্ড' : 'Your Bingo Card'}
-          </h2>
-          <p className="text-xs font-semibold text-[#6E554D] dark:text-stone-400">
-            {lang === 'bn' ? 'সোশ্যাল মিডিয়ায় শেয়ার করার জন্য প্রস্তুত' : 'Ready to share with friends and family'}
-          </p>
+        {/* Header Block with Character Expression & Title */}
+        <div className="flex items-center gap-3.5 mb-3.5 pr-8">
+          <div className="w-16 h-16 sm:w-20 sm:h-20 shrink-0 flex items-center justify-center bg-[#FFF6E5] dark:bg-stone-800 rounded-2xl border-2 border-[#D8C6B6] dark:border-stone-700 p-1 overflow-hidden shadow-sm">
+            <img
+              src={isWon ? auntyLaughingUrl : auntyAngryUrl}
+              alt={isWon ? (lang === 'bn' ? 'হাস্যোজ্জ্বল আন্টি' : 'Laughing Aunty') : (lang === 'bn' ? 'রাগান্বিত আন্টি' : 'Frustrated Aunty')}
+              className="w-full h-full object-contain filter drop-shadow-sm transition-transform hover:scale-105 duration-200"
+            />
+          </div>
+          <div className="flex-1 min-w-0">
+            <h2 className="text-xl sm:text-2xl font-black text-[#8E1B3A] dark:text-rose-400 leading-tight">
+              {isWon
+                ? (lang === 'bn' ? 'অভিনন্দন! আপনার বিঙ্গো কার্ড' : 'BINGO! Victory Card')
+                : (lang === 'bn' ? 'আজকের জন্য বেঁচে গেলা' : 'You have survived for the day')}
+            </h2>
+            {playerName && (
+              <div className="inline-flex items-center gap-1.5 mt-1 bg-[#F4E8D9] dark:bg-[#28181f] border-2 border-[#8E1B3A]/40 dark:border-rose-500/50 px-3 py-0.5 rounded-full text-xs sm:text-sm font-extrabold text-[#8E1B3A] dark:text-[#ff7597] shadow-xs">
+                {isWon ? <TrophyIcon className="text-amber-500 text-xs" /> : <ShieldIcon className="text-emerald-600 dark:text-emerald-400 text-xs" />}
+                <span className="truncate">{playerName}</span>
+              </div>
+            )}
+            <p className="text-xs font-semibold text-[#6E554D] dark:text-stone-400 mt-1 leading-snug">
+              {isWon
+                ? (lang === 'bn' ? 'আপনার বিজয়ী কার্ড বন্ধুদের সাথে শেয়ারের জন্য প্রস্তুত' : 'Celebration card ready to share with friends and family')
+                : (lang === 'bn' ? 'আন্টির হাত থেকে বাঁচার স্বস্তির কার্ড বন্ধুদের সাথে শেয়ারের জন্য প্রস্তুত' : 'Relief & survival card ready to share with friends and family')}
+            </p>
+          </div>
         </div>
 
         {/* Card Preview Container */}
@@ -123,7 +153,7 @@ export default function ExportModal({
           ) : dataUrl ? (
             <img
               src={dataUrl}
-              alt="Generated Aunty Bingo Card"
+              alt={isWon ? "Generated Aunty Bingo Celebration Card" : "Generated Aunty Bingo Survival Card"}
               className="w-full h-full object-contain"
             />
           ) : (

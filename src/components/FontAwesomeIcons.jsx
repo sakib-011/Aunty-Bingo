@@ -78,7 +78,8 @@ import {
   faMagnifyingGlass,
   faUserSecret,
   faFingerprint,
-  faRobot
+  faRobot,
+  faUser
 } from '@fortawesome/free-solid-svg-icons';
 
 export function FaIcon({ icon, className = '', ...props }) {
@@ -186,3 +187,4 @@ export function MagnifyingGlassIcon(props) { return <FontAwesomeIcon icon={faMag
 export function UserSecretIcon(props) { return <FontAwesomeIcon icon={faUserSecret} {...props} />; }
 export function FingerprintIcon(props) { return <FontAwesomeIcon icon={faFingerprint} {...props} />; }
 export function RobotIcon(props) { return <FontAwesomeIcon icon={faRobot} {...props} />; }
+export function UserIcon(props) { return <FontAwesomeIcon icon={faUser} {...props} />; }
