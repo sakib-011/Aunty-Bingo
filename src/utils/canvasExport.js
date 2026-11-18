@@ -1,9 +1,10 @@
 /**
  * High-Resolution (1080x1350) HTML5 Canvas Card Exporter
- * Generates branded, social-ready PNG cards with the updated crystal-clear Aunty avatar.
+ * Generates branded, social-ready PNG cards with character reactions and prominent player identification.
  */
 
 import mascotCelebratingUrl from '../assets/mascots/aunty_avatar_perfect.png';
+import mascotAngryUrl from '../assets/mascots/aunty_3d_interrogation.png';
 import { OCCASIONS } from './phrases';
 
 function loadImage(src) {
@@ -38,14 +39,16 @@ function wrapText(ctx, text, maxWidth) {
 }
 
 export async function generateCardCanvas({
-  board,
-  markedIndices,
+  board = [],
+  markedIndices = [],
   winningLines = [],
   occasionId = 'eid',
   lang = 'bn',
   elapsedTime = '01:48',
   winTimeOfDay = '4:32 PM',
-  gridSize = 3
+  gridSize = 3,
+  playerName = '',
+  hasBingo
 }) {
   const canvas = document.createElement('canvas');
   canvas.width = 1080;
@@ -54,10 +57,15 @@ export async function generateCardCanvas({
 
   const occasion = OCCASIONS[occasionId] || OCCASIONS.eid;
   const themeColor = occasion.tagColor || '#0F7B5F';
-  const markedSet = new Set(markedIndices);
+  const markedSet = new Set(markedIndices || []);
 
-  // Load avatar with clear hands
-  const mascotImg = await loadImage(mascotCelebratingUrl);
+  const isBingo = typeof hasBingo === 'boolean'
+    ? hasBingo
+    : Boolean(winningLines && winningLines.length > 0);
+
+  // Load avatar: laughing for Bingo victory, angry for Non-Bingo survival
+  const mascotSrc = isBingo ? mascotCelebratingUrl : mascotAngryUrl;
+  const mascotImg = await loadImage(mascotSrc);
 
   // 1. Background
   ctx.fillStyle = '#FFF6E5';
@@ -125,43 +133,236 @@ export async function generateCardCanvas({
 
   // 4. Header Titles
   ctx.fillStyle = '#8E1B3A';
-  ctx.font = 'bold 54px "Noto Sans Bengali", "Plus Jakarta Sans", sans-serif';
-  ctx.fillText('Aunty Bingo', 100, 245);
+  ctx.font = 'bold 50px "Noto Sans Bengali", "Plus Jakarta Sans", sans-serif';
+  ctx.fillText('Aunty Bingo', 100, 238);
 
+  // Sub-row: Occasion badge & Language pill
+  const occasionText = (occasion.badgeTextEn || 'EID REUNION').toUpperCase();
   ctx.fillStyle = themeColor;
-  ctx.font = 'bold 24px "Plus Jakarta Sans", sans-serif';
+  ctx.font = 'bold 20px "Plus Jakarta Sans", sans-serif';
   ctx.letterSpacing = '2px';
-  ctx.fillText((occasion.badgeTextEn || 'EID REUNION').toUpperCase(), 100, 285);
+  ctx.fillText(occasionText, 100, 274);
+  const occMetrics = ctx.measureText(occasionText);
 
-  // Language pill tag
+  // Language pill tag (positioned cleanly after occasion badge)
+  const langPillX = Math.min(100 + occMetrics.width + 18, 480);
+  const langText = lang === 'bn' ? 'BN UI • বাংলা' : 'EN UI • English';
+  ctx.font = '600 13px "Noto Sans Bengali", "Plus Jakarta Sans", sans-serif';
+  const langTextMetrics = ctx.measureText(langText);
+  const langPillW = langTextMetrics.width + 24;
+
   ctx.fillStyle = '#EFE5D5';
   ctx.beginPath();
-  ctx.roundRect(100, 305, 180, 32, 16);
+  ctx.roundRect(langPillX, 256, langPillW, 26, 13);
   ctx.fill();
+
   ctx.fillStyle = '#6E554D';
-  ctx.font = '600 16px "Noto Sans Bengali", "Plus Jakarta Sans", sans-serif';
-  ctx.fillText(lang === 'bn' ? 'BN UI • বাংলা টেক্সট' : 'EN UI • English Text', 115, 327);
+  ctx.textAlign = 'left';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(langText, langPillX + 12, 270);
 
-  // 5. Tilted BINGO Banner
-  ctx.save();
-  ctx.translate(100, 360);
-  ctx.rotate((-2.5 * Math.PI) / 180);
-  ctx.fillStyle = '#8E1B3A';
-  ctx.beginPath();
-  ctx.roundRect(0, 0, 480, 84, 14);
-  ctx.fill();
-  ctx.strokeStyle = '#2B1B17';
-  ctx.lineWidth = 3;
-  ctx.stroke();
+  // Prominent Player Name Badge / Pill (for BOTH Bingo and Non-Bingo)
+  const hasPlayer = Boolean(playerName && playerName.trim());
+  const pName = hasPlayer ? playerName.trim() : '';
 
-  ctx.fillStyle = '#FFFFFF';
-  ctx.font = '900 52px "Plus Jakarta Sans", sans-serif';
-  ctx.letterSpacing = '4px';
-  ctx.textAlign = 'center';
-  ctx.fillText('BINGO!', 240, 60);
-  ctx.restore();
+  if (hasPlayer) {
+    ctx.save();
+    const pillX = 100;
+    const pillY = 296;
+    const pillH = 52;
+    const maxPillW = 590; // safely leaves buffer before mascot at X=740
+    const minPillW = 240;
 
-  // 6. Mascot Image with clearly visible hands
+    ctx.font = 'bold 26px "Noto Sans Bengali", "Plus Jakarta Sans", sans-serif';
+
+    // Ellipsize player name if necessary so it never overflows
+    let displayName = pName;
+    const maxTextWidth = maxPillW - 76;
+    if (ctx.measureText(displayName).width > maxTextWidth) {
+      while (displayName.length > 0 && ctx.measureText(displayName + '…').width > maxTextWidth) {
+        displayName = displayName.slice(0, -1);
+      }
+      displayName = displayName + '…';
+    }
+
+    const textWidth = ctx.measureText(displayName).width;
+    const pillW = Math.min(Math.max(textWidth + 76, minPillW), maxPillW);
+
+    // Pill drop shadow
+    ctx.shadowColor = 'rgba(43, 27, 23, 0.18)';
+    ctx.shadowBlur = 8;
+    ctx.shadowOffsetY = 3;
+
+    // Pill background: rich high-contrast brand maroon
+    ctx.fillStyle = '#8E1B3A';
+    ctx.beginPath();
+    ctx.roundRect(pillX, pillY, pillW, pillH, pillH / 2);
+    ctx.fill();
+
+    // Reset shadow for crisp borders
+    ctx.shadowColor = 'transparent';
+
+    // Golden decorative border
+    ctx.strokeStyle = '#F5C242';
+    ctx.lineWidth = 2.5;
+    ctx.stroke();
+
+    // Circular avatar icon badge on left
+    const iconX = pillX + 27;
+    const iconY = pillY + pillH / 2;
+    ctx.fillStyle = '#F5C242';
+    ctx.beginPath();
+    ctx.arc(iconX, iconY, 16, 0, Math.PI * 2);
+    ctx.fill();
+
+    // User silhouette inside avatar badge
+    ctx.fillStyle = '#8E1B3A';
+    // Head
+    ctx.beginPath();
+    ctx.arc(iconX, iconY - 4, 5, 0, Math.PI * 2);
+    ctx.fill();
+    // Shoulder contour
+    ctx.beginPath();
+    ctx.arc(iconX, iconY + 11, 9, Math.PI * 1.15, Math.PI * 1.85);
+    ctx.fill();
+
+    // Player name text (prominent 26px bold white)
+    ctx.fillStyle = '#FFFFFF';
+    ctx.font = 'bold 26px "Noto Sans Bengali", "Plus Jakarta Sans", sans-serif';
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(displayName, pillX + 54, iconY);
+
+    ctx.restore();
+  }
+
+  // 5. Result Banner: Tilted BINGO Celebration or Survival Banner
+  const bannerY = hasPlayer ? 366 : 344;
+
+  if (isBingo) {
+    // Tilted BINGO Celebration Banner
+    ctx.save();
+    ctx.translate(100, bannerY);
+    ctx.rotate((-2.5 * Math.PI) / 180);
+
+    // Banner Shadow
+    ctx.shadowColor = 'rgba(43, 27, 23, 0.22)';
+    ctx.shadowBlur = 10;
+    ctx.shadowOffsetY = 4;
+
+    ctx.fillStyle = '#8E1B3A';
+    ctx.beginPath();
+    ctx.roundRect(0, 0, 480, 84, 14);
+    ctx.fill();
+
+    ctx.shadowColor = 'transparent';
+    ctx.strokeStyle = '#2B1B17';
+    ctx.lineWidth = 3;
+    ctx.stroke();
+
+    // Golden accent inner border
+    ctx.strokeStyle = '#F5C242';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.roundRect(6, 6, 468, 72, 10);
+    ctx.stroke();
+
+    ctx.fillStyle = '#FFFFFF';
+    ctx.font = '900 52px "Plus Jakarta Sans", sans-serif';
+    ctx.letterSpacing = '4px';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('BINGO!', 240, 44);
+    ctx.restore();
+  } else {
+    // Distinct Survival Banner communicating relief and survival
+    ctx.save();
+    ctx.translate(100, bannerY);
+
+    // Banner Shadow
+    ctx.shadowColor = 'rgba(15, 123, 95, 0.25)';
+    ctx.shadowBlur = 10;
+    ctx.shadowOffsetY = 4;
+
+    // Deep survivor green background
+    ctx.fillStyle = '#0F7B5F';
+    ctx.beginPath();
+    ctx.roundRect(0, 0, 540, 84, 14);
+    ctx.fill();
+
+    ctx.shadowColor = 'transparent';
+    ctx.strokeStyle = '#083E30';
+    ctx.lineWidth = 3;
+    ctx.stroke();
+
+    // Golden accent inner border
+    ctx.strokeStyle = '#F5C242';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.roundRect(6, 6, 528, 72, 10);
+    ctx.stroke();
+
+    // Protective Shield / Survival Emblem on left
+    const shieldX = 44;
+    const shieldY = 42;
+    ctx.fillStyle = '#F5C242';
+    ctx.beginPath();
+    ctx.arc(shieldX, shieldY, 20, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Shield shape inside
+    ctx.fillStyle = '#0F7B5F';
+    ctx.beginPath();
+    ctx.moveTo(shieldX - 9, shieldY - 9);
+    ctx.lineTo(shieldX + 9, shieldY - 9);
+    ctx.lineTo(shieldX + 9, shieldY);
+    ctx.quadraticCurveTo(shieldX + 9, shieldY + 11, shieldX, shieldY + 13);
+    ctx.quadraticCurveTo(shieldX - 9, shieldY + 11, shieldX - 9, shieldY);
+    ctx.closePath();
+    ctx.fill();
+
+    // White checkmark inside shield
+    ctx.strokeStyle = '#FFFFFF';
+    ctx.lineWidth = 2.2;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.beginPath();
+    ctx.moveTo(shieldX - 4, shieldY);
+    ctx.lineTo(shieldX - 1, shieldY + 4);
+    ctx.lineTo(shieldX + 5, shieldY - 3);
+    ctx.stroke();
+
+    // Survival text lines
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'middle';
+
+    if (lang === 'bn') {
+      // Primary Bangla text: আজকের জন্য বেঁচে গেলা
+      ctx.fillStyle = '#FFFFFF';
+      ctx.font = 'bold 28px "Noto Sans Bengali", "Plus Jakarta Sans", sans-serif';
+      ctx.fillText('আজকের জন্য বেঁচে গেলা', 78, 30);
+
+      // Subtitle English text: You have survived for the day
+      ctx.fillStyle = '#FFE599';
+      ctx.font = 'bold 16px "Plus Jakarta Sans", sans-serif';
+      ctx.letterSpacing = '1px';
+      ctx.fillText('You have survived for the day', 78, 58);
+    } else {
+      // Primary English text: You have survived for the day
+      ctx.fillStyle = '#FFFFFF';
+      ctx.font = 'bold 25px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText('You have survived for the day', 78, 30);
+
+      // Subtitle Bangla text: আজকের জন্য বেঁচে গেলা
+      ctx.fillStyle = '#FFE599';
+      ctx.font = 'bold 18px "Noto Sans Bengali", sans-serif';
+      ctx.fillText('আজকের জন্য বেঁচে গেলা', 78, 58);
+    }
+
+    ctx.restore();
+  }
+
+  // 6. Mascot Image (laughing for Bingo, angry for Non-Bingo)
   if (mascotImg) {
     ctx.drawImage(mascotImg, canvas.width - 340, 200, 240, 240);
   }
@@ -178,7 +379,9 @@ export async function generateCardCanvas({
   const rowHeight = (gridHeight - (numRows - 1) * gap) / numRows;
 
   const winningIndices = new Set();
-  winningLines.forEach(l => l.indices.forEach(idx => winningIndices.add(idx)));
+  if (isBingo && winningLines && winningLines.length > 0) {
+    winningLines.forEach(l => l.indices.forEach(idx => winningIndices.add(idx)));
+  }
 
   board.forEach((tile, index) => {
     const row = Math.floor(index / numCols);
@@ -187,34 +390,51 @@ export async function generateCardCanvas({
     const ty = gridY + row * (rowHeight + gap);
 
     const isMarked = markedSet.has(index);
-    const isWinning = winningIndices.has(index);
-    const isFree = tile.isFree;
+    const isWinning = isBingo && winningIndices.has(index);
+    const isFree = Boolean(tile.isFree);
 
     // Tile Background
     ctx.beginPath();
     ctx.roundRect(tx, ty, colWidth, rowHeight, gridSize === 5 ? 12 : 18);
-    ctx.fillStyle = isFree ? '#FFF9E6' : isWinning ? '#E2EEE1' : isMarked ? '#FBE9DF' : '#FFFFFF';
+    ctx.fillStyle = isFree
+      ? '#FFF9E6'
+      : isWinning
+      ? '#E2EEE1'
+      : isMarked
+      ? '#FCEAE1'
+      : '#FFFFFF';
     ctx.fill();
 
     // Tile Border
-    ctx.strokeStyle = isFree ? '#E69C24' : isWinning ? '#0F7B5F' : '#8E1B3A';
-    ctx.lineWidth = isWinning ? 3.5 : 2;
+    ctx.strokeStyle = isFree
+      ? '#E69C24'
+      : isWinning
+      ? '#0F7B5F'
+      : isMarked
+      ? '#CB3C3B'
+      : '#D8C6B6';
+    ctx.lineWidth = isWinning ? 3.5 : isMarked ? 2.5 : 1.5;
     ctx.stroke();
 
-    // Checkmark stamp badge
+    // Checkmark stamp badge for marked tiles
     if (isMarked && !isFree) {
-      const stampRadius = gridSize === 5 ? 11 : 16;
-      const stampX = tx + colWidth - (gridSize === 5 ? 20 : 32);
-      const stampY = ty + (gridSize === 5 ? 18 : 30);
+      const stampRadius = gridSize === 5 ? 12 : 16;
+      const stampX = tx + colWidth - (gridSize === 5 ? 20 : 30);
+      const stampY = ty + (gridSize === 5 ? 18 : 28);
       const stampColor = isWinning ? '#0F7B5F' : '#CB3C3B';
 
       ctx.save();
-      ctx.strokeStyle = stampColor;
-      ctx.lineWidth = 2;
+      // Filled circle badge
+      ctx.fillStyle = stampColor;
       ctx.beginPath();
       ctx.arc(stampX, stampY, stampRadius, 0, Math.PI * 2);
-      ctx.stroke();
+      ctx.fill();
 
+      // High-contrast white checkmark
+      ctx.strokeStyle = '#FFFFFF';
+      ctx.lineWidth = gridSize === 5 ? 2 : 2.5;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
       ctx.beginPath();
       ctx.moveTo(stampX - stampRadius * 0.45, stampY);
       ctx.lineTo(stampX - stampRadius * 0.1, stampY + stampRadius * 0.35);
@@ -223,9 +443,22 @@ export async function generateCardCanvas({
       ctx.restore();
     }
 
+    // Free space star badge
+    if (isFree) {
+      const starX = tx + colWidth - (gridSize === 5 ? 18 : 26);
+      const starY = ty + (gridSize === 5 ? 16 : 24);
+      ctx.save();
+      ctx.fillStyle = '#E69C24';
+      ctx.font = `${gridSize === 5 ? 14 : 18}px sans-serif`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('★', starX, starY);
+      ctx.restore();
+    }
+
     // Tile text
     ctx.save();
-    ctx.fillStyle = isFree ? '#B84B12' : '#2B1B17';
+    ctx.fillStyle = isFree ? '#B84B12' : isMarked ? '#2B1B17' : '#5A4842';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.font = isFree
@@ -245,62 +478,68 @@ export async function generateCardCanvas({
     ctx.restore();
   });
 
-  // Draw Strikethrough for Completed Winning Lines
-  winningLines.forEach(line => {
-    ctx.save();
-    ctx.strokeStyle = themeColor;
-    ctx.lineWidth = 7;
-    ctx.lineCap = 'round';
+  // Draw Strikethrough for Completed Winning Lines (ONLY for Bingo victory)
+  if (isBingo && winningLines && winningLines.length > 0) {
+    winningLines.forEach(line => {
+      ctx.save();
+      ctx.strokeStyle = themeColor;
+      ctx.lineWidth = 7;
+      ctx.lineCap = 'round';
 
-    if (line.type === 'row') {
-      const cy = gridY + line.index * (rowHeight + gap) + rowHeight / 2;
-      ctx.beginPath();
-      ctx.moveTo(gridX + 15, cy);
-      ctx.lineTo(gridX + gridWidth - 15, cy);
-      ctx.stroke();
-    } else if (line.type === 'col') {
-      const cx = gridX + line.index * (colWidth + gap) + colWidth / 2;
-      ctx.beginPath();
-      ctx.moveTo(cx, gridY + 15);
-      ctx.lineTo(cx, gridY + gridHeight - 15);
-      ctx.stroke();
-    } else if (line.type === 'diag' && line.index === 0) {
-      ctx.beginPath();
-      ctx.moveTo(gridX + 25, gridY + 25);
-      ctx.lineTo(gridX + gridWidth - 25, gridY + gridHeight - 25);
-      ctx.stroke();
-    } else if (line.type === 'diag' && line.index === 1) {
-      ctx.beginPath();
-      ctx.moveTo(gridX + gridWidth - 25, gridY + 25);
-      ctx.lineTo(gridX + 25, gridY + gridHeight - 25);
-      ctx.stroke();
-    }
-    ctx.restore();
-  });
+      if (line.type === 'row') {
+        const cy = gridY + line.index * (rowHeight + gap) + rowHeight / 2;
+        ctx.beginPath();
+        ctx.moveTo(gridX + 15, cy);
+        ctx.lineTo(gridX + gridWidth - 15, cy);
+        ctx.stroke();
+      } else if (line.type === 'col') {
+        const cx = gridX + line.index * (colWidth + gap) + colWidth / 2;
+        ctx.beginPath();
+        ctx.moveTo(cx, gridY + 15);
+        ctx.lineTo(cx, gridY + gridHeight - 15);
+        ctx.stroke();
+      } else if (line.type === 'diag' && line.index === 0) {
+        ctx.beginPath();
+        ctx.moveTo(gridX + 25, gridY + 25);
+        ctx.lineTo(gridX + gridWidth - 25, gridY + gridHeight - 25);
+        ctx.stroke();
+      } else if (line.type === 'diag' && line.index === 1) {
+        ctx.beginPath();
+        ctx.moveTo(gridX + gridWidth - 25, gridY + 25);
+        ctx.lineTo(gridX + 25, gridY + gridHeight - 25);
+        ctx.stroke();
+      }
+      ctx.restore();
+    });
+  }
 
   // 8. Bottom Status Pill
   const pillY = 1040;
-  ctx.fillStyle = themeColor;
+  ctx.fillStyle = isBingo ? themeColor : '#0F7B5F';
   ctx.beginPath();
   ctx.roundRect(100, pillY, gridWidth, 54, 27);
   ctx.fill();
 
   ctx.fillStyle = '#FFFFFF';
-  ctx.font = 'bold 22px "Plus Jakarta Sans", sans-serif';
+  ctx.font = 'bold 22px "Noto Sans Bengali", "Plus Jakarta Sans", sans-serif';
   ctx.textAlign = 'left';
-  ctx.fillText(
-    lang === 'bn' ? `বিঙ্গো হয়েছে ${elapsedTime} মিনিটে` : `Got BINGO in ${elapsedTime}`,
-    130,
-    pillY + 34
-  );
+  ctx.textBaseline = 'middle';
+  const statusLeft = isBingo
+    ? (lang === 'bn' ? `বিঙ্গো হয়েছে ${elapsedTime} মিনিটে` : `Got BINGO in ${elapsedTime}`)
+    : (lang === 'bn' ? `আজকের জন্য বেঁচে গেলা • সময়: ${elapsedTime}` : `Survived for ${elapsedTime} today`);
+  ctx.fillText(statusLeft, 130, pillY + 27);
 
-  ctx.textAlign = 'right';
-  ctx.fillText(`at ${winTimeOfDay}`, 100 + gridWidth - 30, pillY + 34);
+  if (winTimeOfDay) {
+    ctx.textAlign = 'right';
+    ctx.font = 'bold 20px "Plus Jakarta Sans", sans-serif';
+    ctx.fillText(`at ${winTimeOfDay}`, 100 + gridWidth - 30, pillY + 27);
+  }
 
   // 9. Sub-footer
   ctx.fillStyle = '#8E1B3A';
   ctx.font = 'bold 20px "Noto Sans Bengali", sans-serif';
   ctx.textAlign = 'left';
+  ctx.textBaseline = 'alphabetic';
   ctx.fillText('আত্মীয়তার এক আস্বাদ', 100, 1140);
 
   ctx.fillStyle = '#6E554D';
