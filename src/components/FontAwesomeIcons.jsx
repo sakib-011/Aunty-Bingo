@@ -25,6 +25,7 @@ import {
   faTableCells,
   faArrowLeft,
   faArrowRight,
+  faArrowUpRightFromSquare,
   faChevronDown,
   faXmark,
   faMoon,
@@ -134,6 +135,7 @@ export function Grid3x3Icon(props) { return <FontAwesomeIcon icon={faTableCellsL
 export function Grid5x5Icon(props) { return <FontAwesomeIcon icon={faTableCells} {...props} />; }
 export function ArrowLeftIcon(props) { return <FontAwesomeIcon icon={faArrowLeft} {...props} />; }
 export function ArrowRightIcon(props) { return <FontAwesomeIcon icon={faArrowRight} {...props} />; }
+export function ExternalLinkIcon(props) { return <FontAwesomeIcon icon={faArrowUpRightFromSquare} {...props} />; }
 export function ChevronDownIcon(props) { return <FontAwesomeIcon icon={faChevronDown} {...props} />; }
 export function CloseIcon(props) { return <FontAwesomeIcon icon={faXmark} {...props} />; }
 export function SparklesIcon(props) { return <FontAwesomeIcon icon={faWandMagicSparkles} {...props} />; }
